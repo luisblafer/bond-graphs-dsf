@@ -1,0 +1,11 @@
+Description,Min,Max,Units
+Tensión de armadura,-48,48,V
+Torque de carga,0,0,N m
+Corriente de armadura,-211.023386075432,0.293240658733484,A
+Velocidad angular,-389.37657546502,389.374957220679,rad/s
+Variable de estado eléctrica,-0.0339747651581445,4.7211746056091e-05,Wb
+Variable de estado mecánica,-0.0521764611123127,0.052176244267571,N m s
+Perfil de tensión de armadura,-1,1,
+Perfil de torque de carga,0,0,
+Fuerza contraelectromotriz,-47.8933187821975,47.8931197381435,V
+Torque electromagnético,-25.9558764872781,0.0360686010242186,N m
