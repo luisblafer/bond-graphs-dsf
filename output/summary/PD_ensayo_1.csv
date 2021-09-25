@@ -1,0 +1,15 @@
+Description,Min,Max,Units
+Torque de excitación - Link 1,-3.91734363498064,39.2699081698724,N m
+Torque de excitación - Link 2,-0.166438855596286,1.30591160307716,N m
+Posición angular - Link 1,0,0.785394776142256,rad
+Posición angular - Link 2,-0.00302430120655201,0.000771731812553068,rad
+Velocidad angular - Link 1,0,3.08755163590591,rad/s
+Velocidad angular - Link 2,-0.12848455794686,0.0249378461519743,rad/s
+Coordenada X del CM - Link 1,0.0695088320335936,0.0983,m
+Coordenada Y del CM - Link 1,0,0.0695083611468841,m
+Coordenada X del CM - Link 2,0.206748385846729,0.2829,m
+Coordenada Y del CM - Link 2,0,0.183847160414602,m
+Coordenada X del Efector Final,0.443848385846638,0.52,m
+Coordenada Y del Efector Final,0,0.18384736796971,m
+Variable de estado mecánica - Link 1,0,0.374520013435387,N m s
+Variable de estado mecánica - Link 2,-0.00149042087218358,0.000289279015362902,N m s
