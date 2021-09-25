@@ -1,0 +1,655 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Document>
+ <Icons>
+  <Icon size="256" bpp="32" format="png"><![CDATA[89504e470d0a1a0a0000000d49484452000001000000010008060000005c72a86600000006624b474400ff00ff00ffa0bda793000000097048597300000ec400000ec401952b0e1b0000160e49444154789ceddd5d4c1467df06f0cb374fc22624c613916ea4807000d1f845635bb4c9129b8a6d1a684a52b1492b12d2626d2aae4d89c600212a7d222dfd306b0f948603894f30626aeb6a6dd9a4665552229a5a3152c04a08d283125a1338f23d587676667666d98f99ddd5fff54b4cd8d9ddfb9e1977aeb93f6667173d7efc184424d3ffa57a05882875180044823100880463001009c60020128c0140241803804830060091600c0022c1180044823100880463001009c60020128c0140241803804830060091600c0022c1180044823100880463001009c60020128c0140241803804830060091600c0022c1180044823100880463001009c60020128c0140241803804830060091600c0022c1180044823100880463001009c60020128c0140241803804830060091600c0022c1180044823100880463001009c60020128c0140241803804830060091600c0022c1180044823100880463001009c60020128c0140241803804830060091600c0022c1180044823100880463001009c60020128c0140241803804830060091600c0022c1180044823100880463001009c60020128c0140241803804830060091600c0022c1180044823100880463001009c60020128c0140241803804830060091600c0022c1180044823100880463001009b608c0e354af0411a5065b004482fd27f8c7c4c4442ad7838892cce974b20540241903804830060091600c0022c1180044823100880463001009c60020128c01402418038048b0ff2cfc92e4191e1e465f5f1fc6c7c771fbf66d00c0c0c000e6e6e634af2b2d2d050014161662e9d2a570b95c28292949fafa123de9946f03a6eabb007d7d7df0f97cf07abd78f0e041dce5646565a1acac0c2e970b65656558bc78b1856b49f4f4713a9da909809999197cfdf5d7e8eaeac2cccc8c2d7554545460fffefdc8c9c9b1a57ca2275d4a02a0abab0b9f7df619a6a6a622beaea8a808d9d9d970381c78fef9e795e5376fdec4f4f434a6a7a731383818b18c8c8c0cd4d5d561f7eedd6c1110e9243500fafafad0d4d484e1e161c3e7f3f2f2505959898a8a0ab85caea8cb1d1c1c446f6f2fce9d3b671a088b172f86dbed465d5d5d3cab6e999191111c3a74c8f0b9dada5a656c239ef71f3870002b56ac886a3d6eddba858181015cb9724559b666cd1a14151561e3c68dc8cccc4c6a39941a490980b9b939343535a1abab2becb9ecec6cbcf7de7bd8b66d1b8a8a8a12ae6b727212bdbdbdf8e69b6f0cc3a0a4a404274e9c40565656c275c5e3d6ad5b282f2f377caebebe1e070f1e8cf8fe3367cee0c30f3f347cceebf562f5ead511df3f323282bd7bf7a2bfbf3fe2ebeaebebb177ef5ed303d8aa7228b56cbf1fc0d4d414aaaaaac20e7e87c381a6a626dcb97307cdcdcd961cfc402050de7fff7ddcb871039d9d9dc8ceced63c3f303080575e790503030396d46725afd7bbe06bfc7e7fdce55fba74099b366d5af0a005008fc7637b39941e6c0b00bfdf6f78b0edd8b103a3a3a3686e6ec692254becaa5ea9a7a9a949538f5928a5dae8e82846464622bea6bbbb3baeb2474646b063c78ea85f5f5d5d6d78d6b6aa1c4a1fb604c0e9d3a7515555a519e873381ce8eeee363c33dbc5e170a0b9b919376edcd0b432e6e6e6d0d8d888c6c6c6a4ac47b46edcb861fa5c2267ffbd7bf71a2effeaabafe0f57ae1f57a35fb62cb962db69643e9c3f20b81fc7e3f1a1a1a34cbf2f2f270f6ec59ac5dbbd6eaeaa292979787ab57afa2a6a606bdbdbdcaf2aeae2e141414a47c7030e8871f7ec09b6fbe69f8dcafbffe1a5799972e5d326caedfbb774f73765ebd7a356a6b6bf1bffffd0f1b376eb4ad1c4a2f96b6001e3c78805dbb766996b95c2edcb8712365077fd092254b70f6ecd9b0b37e5353534267d744e5e7e72b7f5fb870c1f475a74f9f367ccf42d4ef0bf27abd864df3cccc4cd4d4d4183e675539945e2c0b80b9b939ecdab54bd3ec2f2f2f475f5f9fad7dfd581d397204478e1cd12cdbb9736742572126423f2b6014460f1f3ec4e8e8a8e97bcc3c7af4282c54f2f3f3179c2db0ab1c4a3f9605406363a366c02f2f2f2fee412bbb35363662dbb66dcae3999919ecdcb933ec3b07c9b079f366cd63a3a6be7a9edde83d666edebc19b6ecadb7de8a61edac2d87d28f2501e0f57a354d4487c3810b172ea4d5995fafb3b3132fbcf082f2f8f6eddb387cf870d2d763cd9a359ac7464d6d7dab40ff1e3377efde0d5b16cf94ab55e550fa493800e6e6e6c20e9ceeeeeeb4ff80046725d433125d5d5d0b5ea26cb5870f1f62c3860dcae3d1d1513c7cf850f31a754b6aebd6ad51f7adfff9e79fb065f1ccc058550ea59f8403a0abab4b7379ef9e3d7b5059599968b149919797a7b95825383d984cfffefb2f2a2a2a34cbd44d6efdd9ffd5575f8dba6ca3a67b3cac2a87d24f42013035358563c78e298f1d0e073ef9e49384572a992a2b2b3533145eaf57b91741b2e8ef6570f1e245e56ffd98c0ba75eb92b24e2443420170ecd8314d93b9a9a9e9896c1a363535457c6c37fd68babac9fff3cf3f2b7fe7e7e747fd851f00968dc1a4f3580e2526ee00989b9bd35c4e9b9d9d8d3d7bf6c45e90ef632c5ab4c8e0dfc7f0457c9bd17b1661d1c791de65acb2b252d36df1fbfd496f055457576b1edfba750b0f1f3ed45c7c13edf45fd0aa55ab2c5937abcaa1f4137700f4f5f569a6cd3efae823381c0e4b562ae028bef7993d771f7ffc66615508acbf5a345fceb192feb2d9818181b0be77b4d37f91dcbb772fe132ac2c87522bee0050f7530168e6d5adf2db1ff78d9fb87f193d161f9f2e974bd3d4f5f97cd656b000fdd4deb973e7c2f671b4d37f4146f749fcfdf7df635e37abcaa1f493500b20a8a8a80879797956ac8f86b7e7328c22e0fee51ed8717e567703060606923a25b86cd932cd25befdfdfd714fff05151414842df3783c78f4e8514acaa1f4135700e80f0edbae0af3f6e0b241028c0ed9d33cd737c3d521970c91f6632cd37f4199999961630b0070e2c489949443e927ae00d0378f631d9c8aac1cfbf605cbf3626854ffbc0fdf1f0dfebd0ffbf65957736565a5661c43df04b7db73cf3d67fa5cbcd37fefbefb6ed8b2b6b636747676862d1f1919c1975f7e893367ced8560ea597b802407de14f7676b6e692dac4adc26baf85469d8fea47027ddf4339fecb8b60e5f5860e8743b32d66f72fb48bd93d01639dfe535bbd7a35b66edd1ab6fcc08103703a9da8adad456d6d2d9c4e27366dda84b6b636c33b355b550ea597b802e0afbffe52feb665de3fbf084a9be2e8f79ae9c0fbaae1fff2aa9711de3b4d8c7a2c23d9970503303cc8126d6145fa8ec3850b17227e0dd98e72287dc41500eaafceda1200b92fa32a9400aae9c0fbb8ac1afe5f55908bfc222bbb1f406e6eaef2f7cccc4cd2bf2168d4d757df163d1ecb962dc3952b5762ba8f809de550fa882b00d467467baefccb4581eada13653a5033fdb70fafb9acaf59bf3dc9be4f80515fdf8a3bebac58b102972e5dc2a143874c0fe0fcfc7c343636461c70b4aa1c4a0f31df124c7f56549f31ade47a6d1f7034d0dbf7f65cc6fdda5ae48e0e85a6ffca8b60c779481f00535353282c2cb4a4ec828282b00b8cf4536c2b56ac087b8dd1f4df42e51809dea9a7a6a6068f1e3dc21f7ffca1797fb4d38c569543a9177300e8fbc596b7008207f6fc388017989f0eac454168f81fe5552f231730bc4e2011faebdead6c016466664675171dab5e63c5ba24ab1c4a8d98bb00fa9fd89a9e9eb66c6534720b10ea05783134aa9efe0bf4ffed303b3bab799caa1f11214a869803407f40e86f5e611d175e53cdf11ffdf453a8c6ff5134dffecf2db0f68b2a9393939ac70c007a9ac53508a8fec55dfd016325cd08bfd7abeaff57e1657b1a00181b1bd33ce6af0bd3d32cae00509f15ed0c80dc97ab6038c9b7aa00361dff9a164d4646067f55989e6a7105c0d2a54b95bff567cc84a90f6ecd3840c83e3be6ffe6a9038dcd7f7ada25dc02181b1bb33e0414da71808050ffdf0ed7ae5d53feb66afa8f285dc515002e974bf3d8ce9b67845de9a7efffab2f1b4ed0b56bd7342d80f5ebd75b5432517a8a2b00cacaca909191a13c3e77ee9c652ba41736ca6f63ff5fbf1dd67ecb9128fd2c02f01800262626627ae3db6fbfad7c5fdee170e0efbfffb6f89660c9575c5c8ca1a1210081d1ffebd7afa7788d88ece3743ae3bf2390fae619b3b3b39a5fdd7d128d8d8d29073f1068e53c6dfcad4e389d4e38b777633cd52b436921ee00d01f20463f69f524f9e28b2f348fedfc6dfbf1eeed810351f7afd5ce1f29f6b7a2ca03a0be0713a7aab1dccab2c7bbb13dd9db4396883b007272723437b0e8eded7d625b01939393387efcb8f2382b2bcbf4e61c9678e9bf9898e847bb0b005c68ef9fc0c4c4040eda55e57837b6577900573bfaeda8e4cf61c35bb87baa9cd8decdb68635fc68755abf3f13fa6190969696888f9f149f7efaa9e63b007bf7eed50c725a6df9f2e500fec4b00f008a916be9e958cf8fd60d6ef85cede8b7facc1face1a7c0cfabb9dafb31311108b3fe40bac1e7ee041b0216f0ff040f5c78fd256bff07130a80952b576a7ed76e70705073268d96f10f83c4ff2f16838383e8e8e8d06cd33befbc13f336c4ccff133c0050bf1936b6350094e2e0c484f5cd7ec538eedf01a0fb702eafde8d7a00c01ddc672320618190b5fe6491f08f83b6b4b468ce962d2d2df67d43d062b3b3b3686868d02c73bbdd49a97b3c70d4c055f8acee89407f3ad0d40b34fb027dead6d099d4df1aea6b4718d0d38c35cc77c8030381aab24ceb8bb60f6fd692791685ae28d6cba859ab5e27d5f882f2ba27601fc5b48d0b94e96f7506c66fe04195d309a7733bd4c52d585704090740565616eaeaea94c793939378e38d37c2be561bc9e3c78f2dfd17ad868606cd1d8e4b4b4b9336f7ff67e0a841b13ed2e7fbd3c5b97fa2d55985d06f177b50d5ea0ffc67578596c2e7c606834fa1bfd5890d6e5f6881a70adbbbbbf19307da5687697d80a7aa75e1e6bb694bc63818c2d60b80cfbd41fba157afd306f7fcf882aa8591e6fb28e66d342d731cdddb8307bf8aeb750477455475459070000081b3a6fab2599fcf1776664d371d1d1d9aee4a464606dadada92547bb0d95c8fcdbaf67fb03feda9aac29d609fbabf1daec0426c704319349ce80934b271e7bee60c37debd7dfe43e3d2bcd6e776c3036dab435d9fa7be67be0fdf1375f3ddac2533defd75583028ebe56a47bf6eace08eaaa2c03ab970e76bd53e983885eae5eae7d3731fc5b68d0b95b91cd5a742efafef995fcff9ee5cb47545624900646464e0e4c9939a6fce1d3f7e3caef18064f07abd6101d5d1d191bc6bffc77fc1773e00ae42e80e9bf9600050df8353c14ffcf25c142b8b4307029e2d0c7ce88b7355fd7b3f3ae7cf089ad796d6cccf3aa85b1ddafa26941902f3e6bb5ea025a3edff87ce4a2eb4d704cb9c5f2f93c1c8f075f2c157acda078a74de47b16e63346586f6b13663a3ad2bb2986f0966a6b0b0101d1d1dd8b973a7b2aca1a1014b962cb1e57703e3e5f3f9c27ee566f7eedd9ac14cdb05a7cd341f4a20d46c561f3800c6ef2330ced60ef5e260399ab3afd224ef31995654b73a4cea8b7a862274b0ba3738a11f3d511f5cc11641fdeed08735d4b78d669d16783e0df651e2db68b4dffd812e89eeff22faba22b32c0080c0b5f36eb71bededed0002836cd5d5d5b87efd3a3efffc732bab8acbf1e3c7515f5faf59565e5e8efdfbf727753dcc0700831fe2501f0f806960049b91eab40f2eab0ffb04cc7fb8d4ad8ee081a0af4f590f7d0b45bf21f32d193dcd590d00c6f1cbfc0b3d554e4d7f37d0043f18ea6f9bed83859e4ff93e8a611b63d9efc1659a319618ea5a80a5010004c6036edfbeadf98660474707c6c6c6d0d9d91976d3cd64a9afaf0feb92ac5cb9523305981cc1ffbcf039ddf15fbe0b9cad5e7f09dacf452030b41f58a37184e0d9c2e00c10fcd0a90e10258874f529674dfd72bde0411776c087bd70fecca6e56aef0f6be29bed83859e4ffd3e8a611b63d9ef462d9818ea5a882563007a274f9ed4cc0c00812b055f7cf1c5a4ffecf6d8d818cacacac20efef2f2729c3973260577fc316f5e1bcf0c840243db6030385b4538731bb53acc66228cce9a468c0f3ac317ce9fc57a940b852626260c3faca6b323119f4f837d64c136466aad685e1b435d0bb1250080c0f5001e8f47738dc0d0d010cacacab075eb560c0e0eda553580c07464434303f2f3f3c342a7aeae2e6cd032694c3f80a10b6a0c3fc4fac030385b29c2960507bdd4ad0eb3facc96876d88c94167c0e45261a33223d79dc6fb28e16d345a6e325b14755d0bb32d0000a0a2a202e7cf9f0fbbb1a6d7ebc5ba75eb505353a3f9069e15262727d1dcdc8ce2e2e2b0e67d4646063c1e4f6a2f595e6800d0ac5fa89b67371c4708961d36e5353f25a73e409499087d5f3bda01c0182e650e8ec4ebd6cbb44cb3fe7f3aefa368b731a6fd6ed08289a5ae28d81a0040a09ffde38f3f1a8eb27ffbedb7282e2e467e7e7ed84539b1181a1a425b5b1bd6ad5b87679e79c6f06ac49292129c3f7f3eb9a3fd064c07a04cce564a9f57774a349a7e533e18beeff08b72d1dcf6d08522ea0f925910457b8972b4038540688acee746a7e60295717477ab16443a6347783e2df651b4db184b99c17dac176d5d51b07c10d0c8e2c58be1f178b07bf76e343535c1efd7aee4d8d8183a3a3ad0d1d181254b96c0e57261cd9a350080b56bd76a060e67676795fbf6ddbd7b17d7ae5d8b784fc29c9c1cb4b4b4a4c9dd7dcc9bb8663303667ddec0cb7567dfe52fe1755760aa33342de7427b4f3bbeab72c36734b8a5bf80c76c8642cfb42563a4149beb018fc760d4babe07c149d985ea4eef7d94d83646dc769f1b1b9c6ed59c7f74754523290110b472e54af4f4f4c0ebf5e2f0e1c3181e1e0e7bcdf4f4b4255f2dcecacac2071f7c103618991a7edde59ef31f3ee53f3434ada3fd109b8c589b5e48b41cd5a77a30acd4e5427bff2954ffd90a37d4ad0eb3facc961b6c91e9549ab1d28313e82fdcaebd6c55f3f564f3d991c8eb963efb28fa6d8cb2cce5d5f86ffb776197fa46575774e2be259815fafafa70f1e245f4f5f559f21b7c595959282b2b83cbe5427979b9ad5fe9257ad2399dced40680daf0f030bc5e2f7c3e1f7efbed37cccccc44f5bed2d252ac5fbf1e5bb66c41494989cd6b49f4f448ab0030323535a57413ae5ebd8af5ebd723232303393939fcc92ea204a57d0010917d12ba2b30113df9180044823100880463001009c60020128c0140241803804830060091600c0022c1180044823100880453be0b4044f2b0054024d8a2587e4c93889e2e6c011009c60020128c0140241803804830060091600c0022c1180044823100880463001009c60020128c0140241803804830060091600c0022c1180044823100880463001009c60020128c0140241803804830060091600c0022c1180044823100880463001009c60020128c0140241803804830060091600c0022c1180044823100880463001009c60020128c0140241803804830060091600c0022c1180044823100880463001009c60020128c0140241803804830060091600c0022c1180044823100880463001009c60020128c0140241803804830060091600c0022c1180044823100880463001009c60020128c0140241803804830060091600c0022c1180044823100880463001009c60020128c0140241803804830060091600c0022c1180044823100880463001009c60020128c0140241803804830060091600c0022c1180044823100880463001009c60020128c014024d8ff037d038ab9b3e006430000000049454e44ae426082]]>
+</Icon>
+ </Icons>
+ <Model version="4.4" build="4.4.2.5077">
+  <Sidops><![CDATA[MCC_IP 128 184
+ description '<Information>
+ <Description>
+    <Version>4.4</Version>
+<IsMainModel>1</IsMainModel>
+  <KeepParameterValues>False</KeepParameterValues>
+    <LibraryPath>MCC_IP.emx</LibraryPath>
+  <TimeStamp>2021-1-25 22:34:03</TimeStamp>
+<AllowLibraryUpdate>True</AllowLibraryUpdate>
+  <Configuration>
+   <struct>
+    <member>
+     <name>DocumentationMask</name>
+     <value>
+      <struct></struct>
+     </value>
+    </member>
+   </struct>
+  </Configuration>
+ </Description>
+ <Attributes>
+  <GlobalRelations>parameters
+	real La = 0.161m {H};			//Inductancia de armadura
+	real Ra = 0.365 {ohm};			//Impedancia de armadura
+	real J  = 0.134m {kg.m2};		//Inercia rotorica
+	real b  = 0.0000925 {N.m.s/rad};	//Coef. friccion rotacional
+	real Km = 0.123 {N.m/A};		//Constante del motor</GlobalRelations>
+ </Attributes>
+</Information>';
+ type MCC_IP
+  ports
+   electric in U;
+   rotation out T;
+   signal out Ia {A} ; "Corriente de armadura"
+   signal out Omega {rad/s} ; "Velocidad angular"
+ end;
+ icon bg shadow 11776947
+  figures
+   rectangle 56 160 200 208 fill 15132390;
+   group
+    ellipse 63.7 167.8 95.7 199.8 fill 16777215 width 2;
+    line 74 191.8 85.4 191.8;
+    text 'M' 79.7 183.8 21 bold;
+   end;
+   text 'MCC' 124.3 177.3 'Noto Sans Cond' 25 bold;
+   text 'Imán Permanente' 152 195 'Noto Sans Cond' 18 italic;
+  terminals
+   U 48 184 fixed;
+   T 208 184 fixed;
+ end;
+ implementation bg
+  submodels
+   b 480 224
+    description '<Information><Description><Version>4.2</Version><IsMainModel>1</IsMainModel><KeepParameterValues>False</KeepParameterValues><LibraryPath>Bond Graph\R.emx</LibraryPath><TimeStamp>2011-11-29 16:35:37</TimeStamp><AllowLibraryUpdate>True</AllowLibraryUpdate><Configuration><struct><member><name>DocumentationMask</name><value><struct></struct></value></member></struct></Configuration></Description></Information>';
+    type R
+     ports
+      rotation in p;
+    end;
+    icon bg right
+     figures
+      text 'R' 480 224 18 bold;
+    end;
+    implementation eq
+parameters
+	real global b {N.m.s/rad};
+equations
+	p.e = b * p.f;
+implementation_end;
+   J 480 64
+    description '<Information><Description><Version>4.2</Version><IsMainModel>1</IsMainModel><KeepParameterValues>False</KeepParameterValues><LibraryPath>Bond Graph\I.emx</LibraryPath><TimeStamp>2011-11-29 15:55:55</TimeStamp><AllowLibraryUpdate>True</AllowLibraryUpdate><Configuration><struct><member><name>DocumentationMask</name><value><struct></struct></value></member></struct></Configuration></Description></Information>';
+    type I
+     ports
+      rotation in p;
+      signal out state;
+     restrictions
+      causality preferred in p;
+    end;
+    icon bg right
+     figures
+      text 'I' 480 64 18 bold;
+    end;
+    implementation eq
+parameters
+	real global J {kg.m2};
+equations
+    state = int(p.e);
+    p.f = state / J;
+implementation_end;
+   Km 368 144
+    description '<Information><Description><Version>4.2</Version><IsMainModel>1</IsMainModel><KeepParameterValues>False</KeepParameterValues><LibraryPath>Bond Graph\GY.emx</LibraryPath><TimeStamp>2011-11-29 15:53:45</TimeStamp><AllowLibraryUpdate>True</AllowLibraryUpdate><Configuration><struct><member><name>DocumentationMask</name><value><struct></struct></value></member></struct></Configuration></Description></Information>';
+    type GY
+     ports
+      electric in p1;
+      rotation out p2;
+     restrictions
+      causality constraint equal p1 p2;
+    end;
+    icon bg bottom
+     figures
+      text 'GY' 368 144 18 bold;
+    end;
+    implementation eq
+parameters
+	real global Km {N.m/A};
+equations
+	p1.e = Km * p2.f;
+	p2.e = Km * p1.f;
+implementation_end;
+   La 256 64
+    description '<Information><Description><Version>4.2</Version><IsMainModel>1</IsMainModel><KeepParameterValues>False</KeepParameterValues><LibraryPath>Bond Graph\I.emx</LibraryPath><TimeStamp>2011-11-29 15:55:55</TimeStamp><AllowLibraryUpdate>True</AllowLibraryUpdate><Configuration><struct><member><name>DocumentationMask</name><value><struct></struct></value></member></struct></Configuration></Description></Information>';
+    type I
+     ports
+      electric in p;
+      signal out state;
+     restrictions
+      causality preferred in p;
+    end;
+    icon bg right
+     figures
+      text 'I' 256 64 18 bold;
+    end;
+    implementation eq
+parameters
+	real global La {H};
+equations
+    state = int(p.e);
+    p.f = state / La;
+implementation_end;
+   plug T 647.8 143.9;
+   plug Ia 336 64.1;
+   plug Omega 568 64.1;
+   plug U 87.9 143.9;
+   OneJunction 256 144
+    description '<Information>
+ <Description>
+    <Version>4.2</Version>
+<IsMainModel>1</IsMainModel>
+  <KeepParameterValues>False</KeepParameterValues>
+    <LibraryPath>Bond Graph\OneJunction.emx</LibraryPath>
+  <TimeStamp>2011-11-29 16:17:51</TimeStamp>
+</Description>
+</Information>';
+    knot OneJunction
+     ports
+      electric knot duplicatable none p [1];
+      signal knot out flow [1];
+     restrictions
+      causality constraint one_out p;
+    end;
+    icon bg
+     figures
+      text '1' 256 144 18 bold;
+    end;
+    implementation eq
+equations
+	sum (direct (p.e)) = 0;
+	equal (collect (p.f));
+	flow = first (p.f);
+implementation_end;
+   OneJunction2 480 144
+    description '<Information>
+ <Description>
+    <Version>4.2</Version>
+<IsMainModel>1</IsMainModel>
+  <KeepParameterValues>False</KeepParameterValues>
+    <LibraryPath>Bond Graph\OneJunction.emx</LibraryPath>
+  <TimeStamp>2011-11-29 16:17:51</TimeStamp>
+</Description>
+</Information>';
+    knot OneJunction
+     ports
+      rotation knot duplicatable none p [1];
+      signal knot out flow [1];
+     restrictions
+      causality constraint one_out p;
+    end;
+    icon bg
+     figures
+      text '1' 480 144 18 bold;
+    end;
+    implementation eq
+equations
+	sum (direct (p.e)) = 0;
+	equal (collect (p.f));
+	flow = first (p.f);
+implementation_end;
+   Ra 256 224
+    description '<Information><Description><Version>4.2</Version><IsMainModel>1</IsMainModel><KeepParameterValues>False</KeepParameterValues><LibraryPath>Bond Graph\R.emx</LibraryPath><TimeStamp>2011-11-29 16:35:37</TimeStamp><AllowLibraryUpdate>True</AllowLibraryUpdate><Configuration><struct><member><name>DocumentationMask</name><value><struct></struct></value></member></struct></Configuration></Description></Information>';
+    type R
+     ports
+      electric in p;
+    end;
+    icon bg right
+     figures
+      text 'R' 256 224 18 bold;
+    end;
+    implementation eq
+parameters
+	real global Ra {ohm};
+equations
+	p.e = Ra * p.f;
+implementation_end;
+   ZeroJunction 160 144
+    description '<Information>
+ <Description>
+    <Version>4.2</Version>
+<IsMainModel>1</IsMainModel>
+  <KeepParameterValues>False</KeepParameterValues>
+    <LibraryPath>Bond Graph\ZeroJunction.emx</LibraryPath>
+  <TimeStamp>2011-11-29 16:45:16</TimeStamp>
+</Description>
+</Information>';
+    knot ZeroJunction
+     ports
+      electric knot duplicatable none p [1];
+      signal knot out effort [1];
+     restrictions
+      causality constraint one_in p;
+    end;
+    icon bg
+     figures
+      text '0' 160 144 18 bold;
+    end;
+    implementation eq
+equations
+	sum (direct (p.f)) = 0;
+	equal (collect (p.e));
+	effort = first (p.e);
+implementation_end;
+   ZeroJunction1 576 144
+    description '<Information>
+ <Description>
+    <Version>4.2</Version>
+<IsMainModel>1</IsMainModel>
+  <KeepParameterValues>False</KeepParameterValues>
+    <LibraryPath>Bond Graph\ZeroJunction.emx</LibraryPath>
+  <TimeStamp>2011-11-29 16:45:16</TimeStamp>
+</Description>
+</Information>';
+    knot ZeroJunction
+     ports
+      rotation knot duplicatable none p [1];
+      signal knot out effort [1];
+     restrictions
+      causality constraint one_in p;
+    end;
+    icon bg
+     figures
+      text '0' 576 144 18 bold;
+    end;
+    implementation eq
+equations
+	sum (direct (p.f)) = 0;
+	equal (collect (p.e));
+	effort = first (p.e);
+implementation_end;
+  end;
+  connections
+   ZeroJunction\p => OneJunction\p '1';
+   OneJunction\p => La\p '2';
+   OneJunction\p => Ra\p '3';
+   OneJunction\p => Km\p1 '4';
+   Km\p2 => OneJunction2\p '5';
+   OneJunction2\p => J\p '6';
+   OneJunction2\p => b\p '7';
+   OneJunction2\p => ZeroJunction1\p '8';
+   U => ZeroJunction\p;
+   ZeroJunction1\p => T;
+   OneJunction\flow -> Ia;
+   OneJunction2\flow -> Omega;
+  end;
+ implementation_end;
+]]>
+</Sidops>
+ </Model>
+ <Experiments>
+     <DefaultExperiment><![CDATA[Experiment 1]]>
+</DefaultExperiment>
+  <Experiment>
+    <Name>Experiment 1</Name>
+    <CreatedBy></CreatedBy>
+    <Info></Info>
+<ExpData>
+  <VersionNumber>4.4</VersionNumber>
+  <ModelProperties>
+    <ModelProperty section="MatlabCodeDialog" entry="TargetName" value="Whole 20-sim model to Simulink"/>
+  </ModelProperties>
+  <Variables>
+   <Parameters>
+    <Variable>
+     <Name>b</Name>
+     <Value>0</Value>
+    </Variable>
+    <Variable>
+     <Name>J</Name>
+     <Value>0</Value>
+    </Variable>
+    <Variable>
+     <Name>Km</Name>
+     <Value>0</Value>
+    </Variable>
+    <Variable>
+     <Name>La</Name>
+     <Value>0</Value>
+    </Variable>
+    <Variable>
+     <Name>Ra</Name>
+     <Unit>ohm</Unit>
+     <Value>0</Value>
+    </Variable>
+   </Parameters>
+   <Initials>
+    <Variable>
+     <Name>J\state_initial</Name>
+     <Value>0</Value>
+    </Variable>
+    <Variable>
+     <Name>La\state_initial</Name>
+     <Value>0</Value>
+    </Variable>
+   </Initials>
+  </Variables>
+  <PlotSpecs>
+   <VarNames>
+    <VarName>time</VarName>
+    <VarName>Ia\plot</VarName>
+    <VarName>Ie\plot</VarName>
+    <VarName>w\plot</VarName>
+   </VarNames>
+   <Plots>
+    <Plot>
+     <PlotType>GraphPlot</PlotType>
+     <BasePlot>
+       <PlotId>1</PlotId>
+       <UseWindowsBGColor>true</UseWindowsBGColor>
+       <BGColor>15790320</BGColor>
+       <PlotIsVisible>true</PlotIsVisible>
+     </BasePlot>
+     <Grid>
+      <DrawGrid>true</DrawGrid>
+      <GridColor>15780518</GridColor>
+      <XTicks>10</XTicks>
+      <YTicks>10</YTicks>
+      <ZTicks>10</ZTicks>
+      <Use3DLook>false</Use3DLook>
+     </Grid>
+     <PlotBGColor>16777215</PlotBGColor>
+     <ShowPlotTitle>true</ShowPlotTitle>
+     <TitlePosition>1</TitlePosition>
+     <PlotTitle>model</PlotTitle>
+     <ShowXValues>true</ShowXValues>
+     <Fonts>
+      <TitleFont>
+       <Name>Arial</Name>
+       <Height>12</Height>
+       <PitchFamily>34</PitchFamily>
+       <Weight>400</Weight>
+       <Italic>0</Italic>
+       <UnderLine>0</UnderLine>
+       <StrikeOut>0</StrikeOut>
+       <Color>0</Color>
+      </TitleFont>
+      <LabelFont>
+       <Name>Arial</Name>
+       <Height>12</Height>
+       <PitchFamily>34</PitchFamily>
+       <Weight>400</Weight>
+       <Italic>0</Italic>
+       <UnderLine>0</UnderLine>
+       <StrikeOut>0</StrikeOut>
+       <Color>0</Color>
+      </LabelFont>
+      <ValuesFont>
+       <Name>Arial</Name>
+       <Height>10</Height>
+       <PitchFamily>34</PitchFamily>
+       <Weight>400</Weight>
+       <Italic>0</Italic>
+       <UnderLine>0</UnderLine>
+       <StrikeOut>0</StrikeOut>
+       <Color>0</Color>
+      </ValuesFont>
+     </Fonts>
+     <SharedXAxis>true</SharedXAxis>
+     <SharedYAxis>true</SharedYAxis>
+     <SharedZAxis>false</SharedZAxis>
+     <XAxes>
+      <Axis>
+       <Minimum>0</Minimum>
+       <Maximum>10</Maximum>
+       <Linear>true</Linear>
+       <Scaling>3</Scaling>
+       <Label>time</Label>
+      </Axis>
+     </XAxes>
+     <YAxes>
+      <Axis>
+       <Minimum>-6000</Minimum>
+       <Maximum>14000</Maximum>
+       <Linear>true</Linear>
+       <Scaling>1</Scaling>
+       <Label>Ia</Label>
+      </Axis>
+      <Axis>
+       <Minimum>0</Minimum>
+       <Maximum>10</Maximum>
+       <Linear>true</Linear>
+       <Scaling>1</Scaling>
+       <Label>Ie</Label>
+      </Axis>
+      <Axis>
+       <Minimum>0</Minimum>
+       <Maximum>10</Maximum>
+       <Linear>true</Linear>
+       <Scaling>1</Scaling>
+       <Label>w</Label>
+      </Axis>
+     </YAxes>
+     <ZAxes>
+     </ZAxes>
+     <Curves>
+      <Curve>
+       <LineColor>16711680</LineColor>
+       <LineStyle>1</LineStyle>
+       <TickColor>16711680</TickColor>
+       <TickStyle>0</TickStyle>
+       <CurveVisible>true</CurveVisible>
+       <PixelThresshold>1</PixelThresshold>
+       <LineThickness>1</LineThickness>
+       <LineOrder>1</LineOrder>
+       <ShowYValues>true</ShowYValues>
+       <XCurveData>
+        <ShowUnit>true</ShowUnit>
+        <VarName>time</VarName>
+       </XCurveData>
+       <YCurveData>
+        <ShowUnit>true</ShowUnit>
+        <VarName>Ia\plot</VarName>
+       </YCurveData>
+      </Curve>
+      <Curve>
+       <LineColor>16711935</LineColor>
+       <LineStyle>1</LineStyle>
+       <TickColor>16711935</TickColor>
+       <TickStyle>0</TickStyle>
+       <CurveVisible>true</CurveVisible>
+       <PixelThresshold>1</PixelThresshold>
+       <LineThickness>1</LineThickness>
+       <LineOrder>1</LineOrder>
+       <ShowYValues>true</ShowYValues>
+       <XCurveData>
+        <ShowUnit>true</ShowUnit>
+        <VarName>time</VarName>
+       </XCurveData>
+       <YCurveData>
+        <ShowUnit>true</ShowUnit>
+        <VarName>Ie\plot</VarName>
+       </YCurveData>
+      </Curve>
+      <Curve>
+       <LineColor>255</LineColor>
+       <LineStyle>1</LineStyle>
+       <TickColor>255</TickColor>
+       <TickStyle>0</TickStyle>
+       <CurveVisible>true</CurveVisible>
+       <PixelThresshold>1</PixelThresshold>
+       <LineThickness>1</LineThickness>
+       <LineOrder>1</LineOrder>
+       <ShowYValues>true</ShowYValues>
+       <XCurveData>
+        <ShowUnit>true</ShowUnit>
+        <VarName>time</VarName>
+       </XCurveData>
+       <YCurveData>
+        <ShowUnit>true</ShowUnit>
+        <VarName>w\plot</VarName>
+       </YCurveData>
+      </Curve>
+     </Curves>
+     <Legenda>
+      <ShowLegenda>true</ShowLegenda>
+     </Legenda>
+    </Plot>
+   </Plots>
+   <PlotPanels>
+    <PlotPanel>
+     <PlotPanelId>1</PlotPanelId>
+     <PlotPanelVisible>true</PlotPanelVisible>
+     <Name>Window 1</Name>
+     <Tiling>2</Tiling>
+     <PlotIds>
+       <PlotId>1</PlotId>
+     </PlotIds>
+     <ToggleState>StripChart</ToggleState>
+    </PlotPanel>
+   </PlotPanels>
+   <WindowRectangles virtualDesktopWidth="2646" virtualDesktopHeight="1073">
+     <WindowRectangle monitor="0" left="0" top="0" right="1280" bottom="720" plotpanelid="1">
+0 0 1 0.968056
+     </WindowRectangle>
+   </WindowRectangles>
+  </PlotSpecs>
+  <RunSpecs>
+   <SimulatorSettings>
+    <StartTime>0</StartTime>
+    <FinishTime>10</FinishTime>
+    <Warp>false</Warp>
+    <UseOutputAfterEach>false</UseOutputAfterEach>
+    <OutputAfterEach>0.1</OutputAfterEach>
+    <EventEpsilon>1e-006</EventEpsilon>
+    <AlgebraicTolerance>1e-007</AlgebraicTolerance>
+    <SteadyStateAnalysis>false</SteadyStateAnalysis>
+    <UpdateHoldInstructions>true</UpdateHoldInstructions>
+   </SimulatorSettings>
+   <IntegrationMethods>
+    <IntegrationMethod>
+     <Name>Euler</Name>
+     <StepSize>0.01</StepSize>
+     <AutoStepSize>false</AutoStepSize>
+    </IntegrationMethod>
+    <IntegrationMethod>
+     <Name>BackwardEuler</Name>
+     <AbsoluteTolerance>1e-005</AbsoluteTolerance>
+     <RelativeTolerance>1e-005</RelativeTolerance>
+     <AlgebraicAbsoluteTolerance>1e-005</AlgebraicAbsoluteTolerance>
+     <AlgebraicRelativeTolerance>1e-005</AlgebraicRelativeTolerance>
+     <StepSize>0.01</StepSize>
+     <Alpha>1</Alpha>
+    </IntegrationMethod>
+    <IntegrationMethod>
+     <Name>AdamsBashforth</Name>
+     <StepSize>0.01</StepSize>
+     <AutoStepSize>false</AutoStepSize>
+    </IntegrationMethod>
+    <IntegrationMethod>
+     <Name>RungeKutta2</Name>
+     <StepSize>0.01</StepSize>
+     <AutoStepSize>false</AutoStepSize>
+    </IntegrationMethod>
+    <IntegrationMethod>
+     <Name>RungeKutta4</Name>
+     <StepSize>0.01</StepSize>
+     <AutoStepSize>false</AutoStepSize>
+    </IntegrationMethod>
+    <IntegrationMethod>
+     <Name>RungeKutta8</Name>
+     <UseInitialStepSize>false</UseInitialStepSize>
+     <InitialStepSize>0</InitialStepSize>
+     <UseMaximumStepSize>false</UseMaximumStepSize>
+     <MaximumStepSize>0</MaximumStepSize>
+     <AbsoluteTolerance>1e-006</AbsoluteTolerance>
+     <RelativeTolerance>1e-006</RelativeTolerance>
+     <SafetyFactor>0.9</SafetyFactor>
+     <Factor1>0.33</Factor1>
+     <Factor2>6</Factor2>
+     <Beta>0</Beta>
+     <UseMaxNrSteps>false</UseMaxNrSteps>
+     <MaxNrSteps>100000</MaxNrSteps>
+     <UseStiffDetection>false</UseStiffDetection>
+     <MaxNrStiffnessSteps>1000</MaxNrStiffnessSteps>
+    </IntegrationMethod>
+    <IntegrationMethod>
+     <Name>RungeKuttaFehlberg</Name>
+     <UseInitialStepSize>false</UseInitialStepSize>
+     <InitialStepSize>0</InitialStepSize>
+     <UseMaximumStepSize>false</UseMaximumStepSize>
+     <MaximumStepSize>0</MaximumStepSize>
+     <AbsoluteTolerance>1e-006</AbsoluteTolerance>
+     <RelativeTolerance>1e-006</RelativeTolerance>
+    </IntegrationMethod>
+    <IntegrationMethod>
+     <Name>VodeAdams</Name>
+     <UseInitialStepSize>false</UseInitialStepSize>
+     <InitialStepSize>0</InitialStepSize>
+     <UseMaximumStepSize>false</UseMaximumStepSize>
+     <MaximumStepSize>0</MaximumStepSize>
+     <AbsoluteTolerance>1e-006</AbsoluteTolerance>
+     <RelativeTolerance>1e-006</RelativeTolerance>
+     <VodeUseBDF>true</VodeUseBDF>
+     <VodeUseNewton>true</VodeUseNewton>
+    </IntegrationMethod>
+    <IntegrationMethod>
+     <Name>BDFMethod</Name>
+     <AbsoluteTolerance>1e-005</AbsoluteTolerance>
+     <RelativeTolerance>1e-005</RelativeTolerance>
+     <AlgebraicAbsoluteTolerance>1e-005</AlgebraicAbsoluteTolerance>
+     <AlgebraicRelativeTolerance>1e-005</AlgebraicRelativeTolerance>
+     <UseInitialStepSize>false</UseInitialStepSize>
+     <InitialStepSize>0</InitialStepSize>
+     <UseMaximumStepSize>false</UseMaximumStepSize>
+     <MaximumStepSize>0</MaximumStepSize>
+     <UseFixedStepSize>false</UseFixedStepSize>
+     <FixedStepSize>0</FixedStepSize>
+    </IntegrationMethod>
+    <IntegrationMethod>
+     <Name>MeBDFiMethod</Name>
+     <AbsoluteTolerance>1e-005</AbsoluteTolerance>
+     <RelativeTolerance>1e-005</RelativeTolerance>
+     <AlgebraicAbsoluteTolerance>1e-005</AlgebraicAbsoluteTolerance>
+     <AlgebraicRelativeTolerance>1e-005</AlgebraicRelativeTolerance>
+     <UseInitialStepSize>false</UseInitialStepSize>
+     <InitialStepSize>0</InitialStepSize>
+     <UseMaximumStepSize>false</UseMaximumStepSize>
+     <MaximumStepSize>0</MaximumStepSize>
+     <UseFixedStepSize>false</UseFixedStepSize>
+     <FixedStepSize>0</FixedStepSize>
+    </IntegrationMethod>
+    <SelectedIntegrationMethod>8</SelectedIntegrationMethod>
+   </IntegrationMethods>
+  </RunSpecs>
+  <MultipleRun>
+   <NrSteps>10</NrSteps>
+   <CopyFromStates>false</CopyFromStates>
+   <JoinParameterVariation>true</JoinParameterVariation>
+   <ClearAfterRun>true</ClearAfterRun>
+   <RedrawAfterRun>false</RedrawAfterRun>
+   <DrawDuringSimulation>true</DrawDuringSimulation>
+   <ActionBeforeOptimization>0</ActionBeforeOptimization>
+   <CompareValue>0</CompareValue>
+   <UseCompareValue>true</UseCompareValue>
+   <MultipleRunType>MultipleRun</MultipleRunType>
+   <Minimize>true</Minimize>
+   <OptimizationVariable></OptimizationVariable>
+   <ResulVarUsage>UseEndValue</ResulVarUsage>
+   <Tolerance>0.001</Tolerance>
+   <OptimizationMethod>BroydonFletcherGoldfarbShanno</OptimizationMethod>
+   <MultipleRunVariables>
+   </MultipleRunVariables>
+  </MultipleRun>
+  <ExportData>
+   <WriteAsText>true</WriteAsText>
+   <ReadAsText>true</ReadAsText>
+   <WriteHeader>true</WriteHeader>
+   <ReadHeader>true</ReadHeader>
+   <ReadFilename></ReadFilename>
+   <WriteFilename></WriteFilename>
+   <DoWrite>false</DoWrite>
+   <ExportVariables>
+   </ExportVariables>
+   <ImportVariables>
+   </ImportVariables>
+  </ExportData>
+  <BreakPoints>
+  </BreakPoints>
+</ExpData>
+  </Experiment>
+</Experiments>
+</Document>
