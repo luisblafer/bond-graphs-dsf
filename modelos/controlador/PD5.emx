@@ -1,0 +1,4814 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Document>
+ <Model version="4.4" build="4.4.2.5077">
+  <Sidops><![CDATA[model 128 184
+ description '<Information>
+ <Description>
+    <Version>4.4</Version>
+<IsMainModel>0</IsMainModel>
+  <KeepParameterValues>False</KeepParameterValues>
+    <LibraryPath>C:\Users\la.fernandez\Desktop\TP_BG\PD5.emx</LibraryPath>
+  <TimeStamp>2021-9-23 22:47:33</TimeStamp>
+<AllowLibraryUpdate>True</AllowLibraryUpdate>
+  <Configuration>
+   <struct>
+    <member>
+     <name>DocumentationMask</name>
+     <value>
+      <struct></struct>
+     </value>
+    </member>
+   </struct>
+  </Configuration>
+ </Description>
+</Information>';
+ type 'Mainmodel-40D3'
+ end;
+ implementation bg
+  submodels
+   Constant1 32 144
+    description '<Information><Description><Version>4.0</Version><IsMainModel>1</IsMainModel><KeepParameterValues>False</KeepParameterValues><LibraryPath>Signal\Sources\Constant.emx</LibraryPath><TimeStamp>2007-10-19 14:48:44</TimeStamp><AllowLibraryUpdate>True</AllowLibraryUpdate><Configuration><struct><member><name>DocumentationMask</name><value><struct></struct></value></member></struct></Configuration></Description></Information>';
+    type Constant
+     ports
+      signal out output {rad} ;
+    end;
+    icon bg bottom
+     figures
+      rectangle 16.1 128 47.9 160 fill 15132390;
+      line 20.9 139.6 42.9 139.6 color 16711680 width 2;
+      line 18.2 150.7 43.9 150.7;
+      line 20.5 134.7 20.5 153;
+    end;
+    implementation eq
+parameters
+	real Kt = 0.25;
+variables
+	real C;
+initialequations
+	C = pi*Kt;
+equations
+	output = C;
+     implementation_end;
+   Constant2 32 288
+    description '<Information><Description><Version>4.0</Version><IsMainModel>1</IsMainModel><KeepParameterValues>False</KeepParameterValues><LibraryPath>Signal\Sources\Constant.emx</LibraryPath><TimeStamp>2007-10-19 14:48:44</TimeStamp><AllowLibraryUpdate>True</AllowLibraryUpdate><Configuration><struct><member><name>DocumentationMask</name><value><struct></struct></value></member></struct></Configuration></Description></Information>';
+    type Constant
+     ports
+      signal out output {rad} ;
+    end;
+    icon bg bottom
+     figures
+      rectangle 16.1 272 47.9 304 fill 15132390;
+      line 20.9 283.6 42.9 283.6 color 16711680 width 2;
+      line 18.2 294.7 43.9 294.7;
+      line 20.5 278.7 20.5 297;
+    end;
+    implementation eq
+parameters
+	real Kt = 0;
+variables
+	real C;
+initialequations
+	C = pi*Kt;
+equations
+	output = C;
+     implementation_end;
+   G1 136 192
+    description '<Information><Description><Version>4.0</Version><LibraryPath>Template\Submodel-Equation.emx</LibraryPath><IsMainModel>1</IsMainModel><KeepParameterValues>False</KeepParameterValues><TimeStamp>2007-11-1 22:32:1</TimeStamp><AllowLibraryUpdate>False</AllowLibraryUpdate></Description><Attributes><GlobalRelations>parameters
+	real l1  = 0.26 {m};				//Largo del eslabon 1
+	real l2  = 0.26 {m};				//Largo del eslabon 2
+	real lc1 = 0.0983 {m};			//Distancia a CM eslabon 1
+	real lc2 = 0.0229 {m};			//Distancia a CM eslabon
+	real m1  = 6.5225 {mass,kg};	//masa del eslabon 1
+	real m2  = 2.0458 {mass,kg};	//masa del eslabon 2</GlobalRelations></Attributes></Information>';
+    type 'CompensadorFeedForward-Equation'
+     ports
+      signal in input {rad} ;
+      signal out output;
+    end;
+    icon bg
+     figures
+      rectangle 112 175.6 160 208.4 fill 15132390;
+      text 'name' 136 192 color 16711680 18 bold;
+     terminals
+      input 112 192 fixed;
+      output 160 192 fixed;
+    end;
+    implementation eq
+/* Equation Submodel
+Enter you equations here. You can use the Toolbar buttons at the left ( Add , f(x) etc. ).
+*/
+constants
+	real g   = 9.81 {acceleration,m/s2};
+parameters
+	real global l1 {m};			//Largo del eslabon 1
+	real global lc1 {m};			//Distancia al centro de masa del eslabon 1
+	real global l2 {m};			//Largo del eslabon 1
+	real global lc2 {m};			//Distancia al centro de masa del eslabon 2
+	real global m1 {kg};			//Masa del eslabon 1
+	real global m2 {kg};			//Masa del eslabon 2
+equations
+  // start typing here
+	output = (m1*lc1 + m2*l1) * g * cos(input);implementation_end;
+   G2 136 240
+    description '<Information><Description><Version>4.0</Version><LibraryPath>Template\Submodel-Equation.emx</LibraryPath><IsMainModel>1</IsMainModel><KeepParameterValues>False</KeepParameterValues><TimeStamp>2007-11-1 22:32:1</TimeStamp><AllowLibraryUpdate>False</AllowLibraryUpdate></Description><Attributes><GlobalRelations>parameters
+	real l1  = 0.26 {m};				//Largo del eslabon 1
+	real l2  = 0.26 {m};				//Largo del eslabon 2
+	real lc1 = 0.0983 {m};			//Distancia a CM eslabon 1
+	real lc2 = 0.0229 {m};			//Distancia a CM eslabon
+	real m1  = 6.5225 {mass,kg};	//masa del eslabon 1
+	real m2  = 2.0458 {mass,kg};	//masa del eslabon 2</GlobalRelations></Attributes></Information>';
+    type 'CompensadorFeedForward-Equation'
+     ports
+      signal in input {rad} ;
+      signal out output {N.m} ;
+    end;
+    icon bg
+     figures
+      rectangle 112 223.6 160 256.4 fill 15132390;
+      text 'name' 136 240 color 16711680 18 bold;
+     terminals
+      input 112 240 fixed;
+      output 160 240 fixed;
+    end;
+    implementation eq
+/* Equation Submodel
+Enter you equations here. You can use the Toolbar buttons at the left ( Add , f(x) etc. ).
+*/
+constants
+	real g   = 9.81 {acceleration,m/s2};
+parameters
+	real global l1 {m};			//Largo del eslabon 1
+	real global lc1 {m};			//Distancia al centro de masa del eslabon 1
+	real global l2 {m};			//Largo del eslabon 1
+	real global lc2 {m};			//Distancia al centro de masa del eslabon 2
+	real global m1 {kg};			//Masa del eslabon 1
+	real global m2 {kg};			//Masa del eslabon 2
+equations
+  // start typing here
+	output = lc2 * m2 * g * cos(input);implementation_end;
+   Kd1 360 192
+    description '<Information><Description><Version>4.0</Version><IsMainModel>1</IsMainModel><KeepParameterValues>False</KeepParameterValues><LibraryPath>Signal\Block Diagram\Gain.emx</LibraryPath><TimeStamp>2007-9-26 12:15:12</TimeStamp><AllowLibraryUpdate>True</AllowLibraryUpdate><Configuration><struct><member><name>DocumentationMask</name><value><struct></struct></value></member></struct></Configuration></Description></Information>';
+    type Gain
+     ports
+      signal in input;
+      signal out output;
+    end;
+    icon bg
+     figures
+      rectangle 344.1 176 375.9 208 fill 15132390;
+      text 'Kd' 360 192 color 16711680 16 bold;
+    end;
+    implementation eq
+parameters
+	real Kd = 10;		// gain
+equations
+	output = Kd * input;
+    implementation_end;
+   Kd2 424 240
+    description '<Information><Description><Version>4.0</Version><IsMainModel>1</IsMainModel><KeepParameterValues>False</KeepParameterValues><LibraryPath>Signal\Block Diagram\Gain.emx</LibraryPath><TimeStamp>2007-9-26 12:15:12</TimeStamp><AllowLibraryUpdate>True</AllowLibraryUpdate><Configuration><struct><member><name>DocumentationMask</name><value><struct></struct></value></member></struct></Configuration></Description></Information>';
+    type Gain
+     ports
+      signal in input;
+      signal out output;
+    end;
+    icon bg
+     figures
+      rectangle 408.1 224 439.9 256 fill 15132390;
+      text 'Kd' 424 240 color 16711680 16 bold;
+    end;
+    implementation eq
+parameters
+	real Kd = 10;		// gain
+equations
+	output = Kd * input;
+    implementation_end;
+   Kp1 200 144
+    description '<Information><Description><Version>4.0</Version><IsMainModel>1</IsMainModel><KeepParameterValues>False</KeepParameterValues><LibraryPath>Signal\Block Diagram\Gain.emx</LibraryPath><TimeStamp>2007-9-26 12:15:12</TimeStamp><AllowLibraryUpdate>True</AllowLibraryUpdate><Configuration><struct><member><name>DocumentationMask</name><value><struct></struct></value></member></struct></Configuration></Description></Information>';
+    type Gain
+     ports
+      signal in input;
+      signal out output;
+    end;
+    icon bg
+     figures
+      rectangle 184.1 128 215.9 160 fill 15132390;
+      text 'Kp' 200 144 color 16711680 16 bold;
+    end;
+    implementation eq
+parameters
+	real Kp = 50;		// gain
+equations
+	output = Kp * input;
+    implementation_end;
+   Kp2 200 288
+    description '<Information><Description><Version>4.0</Version><IsMainModel>1</IsMainModel><KeepParameterValues>False</KeepParameterValues><LibraryPath>Signal\Block Diagram\Gain.emx</LibraryPath><TimeStamp>2007-9-26 12:15:12</TimeStamp><AllowLibraryUpdate>True</AllowLibraryUpdate><Configuration><struct><member><name>DocumentationMask</name><value><struct></struct></value></member></struct></Configuration></Description></Information>';
+    type Gain
+     ports
+      signal in input;
+      signal out output;
+    end;
+    icon bg
+     figures
+      rectangle 184.1 272 215.9 304 fill 15132390;
+      text 'Kp' 200 288 color 16711680 16 bold;
+    end;
+    implementation eq
+parameters
+	real Kp = 50;		// gain
+equations
+	output = Kp * input;
+    implementation_end;
+   KRPE1 292 15.7
+    description '<Information><Description><Version>4.0</Version><LibraryPath>Template\Submodel-Equation.emx</LibraryPath><IsMainModel>1</IsMainModel><KeepParameterValues>False</KeepParameterValues><TimeStamp>2007-11-1 22:32:1</TimeStamp><AllowLibraryUpdate>False</AllowLibraryUpdate></Description><Attributes><GlobalRelations>parameters
+	real La = 0.161m {H};			//Inductancia de armadura
+	real Ra = 0.365 {ohm};			//Impedancia de armadura
+	real J  = 0.134m {kg.m2};		//Inercia rotorica
+	real b  = 0.0000925 {N.m.s/rad};	//Coef. friccion rotacional
+	real Km = 0.123 {N.m/A};		//Constante del motor</GlobalRelations></Attributes></Information>';
+    type 'AjusteGananciaMCC-Equation'
+     ports
+      signal in input {N.m} ;
+      signal out output {V} ;
+    end;
+    icon bg
+     figures
+      rectangle 240 0 344 30.9 fill 15132390;
+      text 'K' 253.5 16.4 color 16711680 'Noto Sans' 28 bold;
+      text 'RPE' 270.5 22.4 color 16711680 'Noto Sans Cond' 16;
+      text 'Tm → Ua' 307.5 17.4 color 8421376 'Noto Sans Cond' 16 bold italic;
+     terminals
+      input 256 31.9 fixed;
+      output 320 31.9 fixed;
+    end;
+    implementation eq
+/* Equation Submodel
+Enter you equations here. You can use the Toolbar buttons at the left ( Add , f(x) etc. ).
+*/
+parameters
+	real global La {H};			//Inductancia de armadura
+	real global Ra {ohm};		//Impedancia de armadura
+	real global J  {kg.m2};		//Inercia rotorica
+	real global b  {N.m.s/rad};//Coef. friccion rotacional
+	real global Km {N.m/A};		//Constante del motor
+equations
+  // start typing here
+	output = (Ra / Km) * input;implementation_end;
+   KRPE2 292 416
+    description '<Information><Description><Version>4.0</Version><LibraryPath>Template\Submodel-Equation.emx</LibraryPath><IsMainModel>1</IsMainModel><KeepParameterValues>False</KeepParameterValues><TimeStamp>2007-11-1 22:32:1</TimeStamp><AllowLibraryUpdate>False</AllowLibraryUpdate></Description><Attributes><GlobalRelations>parameters
+	real La = 0.161m {H};			//Inductancia de armadura
+	real Ra = 0.365 {ohm};			//Impedancia de armadura
+	real J  = 0.134m {kg.m2};		//Inercia rotorica
+	real b  = 0.0000925 {N.m.s/rad};	//Coef. friccion rotacional
+	real Km = 0.123 {N.m/A};		//Constante del motor</GlobalRelations></Attributes></Information>';
+    type 'AjusteGananciaMCC-Equation'
+     ports
+      signal in input {N.m} ;
+      signal out output {V} ;
+    end;
+    icon bg
+     figures
+      rectangle 240 400 344 432 fill 15132390;
+      text 'K' 253.5 416.5 color 16711680 'Noto Sans' 28 bold;
+      text 'RPE' 270.5 422.5 color 16711680 'Noto Sans Cond' 16;
+      text 'Tm → Ua' 307.5 417.5 color 8421376 'Noto Sans Cond' 16 bold italic;
+     terminals
+      input 256 400 fixed;
+      output 320 400 fixed;
+    end;
+    implementation eq
+/* Equation Submodel
+Enter you equations here. You can use the Toolbar buttons at the left ( Add , f(x) etc. ).
+*/
+parameters
+	real global La {H};			//Inductancia de armadura
+	real global Ra {ohm};		//Impedancia de armadura
+	real global J  {kg.m2};		//Inercia rotorica
+	real global b  {N.m.s/rad};//Coef. friccion rotacional
+	real global Km {N.m/A};		//Constante del motor
+equations
+  // start typing here
+	output = (Ra / Km) * input;implementation_end;
+   MCC_IP1 464 8
+    description '<Information><Description><Version>4.4</Version><IsMainModel>1</IsMainModel><KeepParameterValues>False</KeepParameterValues><LibraryPath>MCC_IP.emx</LibraryPath><TimeStamp>2021-1-10 20:42:00</TimeStamp><AllowLibraryUpdate>True</AllowLibraryUpdate><Configuration><struct><member><name>DocumentationMask</name><value><struct></struct></value></member></struct></Configuration></Description><Attributes><GlobalRelations>parameters
+	real La = 0.161m {H};			//Inductancia de armadura
+	real Ra = 0.365 {ohm};			//Impedancia de armadura
+	real J  = 0.134m {kg.m2};		//Inercia rotorica
+	real b  = 0.0000925 {N.m.s/rad};	//Coef. friccion rotacional
+	real Km = 0.123 {N.m/A};		//Constante del motor</GlobalRelations></Attributes></Information>';
+    type MCC_IP
+     ports
+      electric in U;
+      rotation out T;
+      signal out Ia {A} ; "Corriente de armadura"
+      signal out Omega {rad/s} ; "Velocidad angular"
+    end;
+    icon bg shadow 11776947
+     figures
+      rectangle 384 -16 544 32 fill 15132390;
+      group
+       ellipse 391.7 -8.2 423.7 23.8 fill 16777215 width 2;
+       line 402 15.8 413.4 15.8;
+       text 'M' 407.7 7.8 21 bold;
+      end;
+      text 'MCC' 452.3 1.3 'Noto Sans Cond' 25 bold;
+      text 'Imán Permanente' 480 19 'Noto Sans Cond' 18 italic;
+     terminals
+      U 400 40 fixed;
+      T 432 40 fixed;
+    end;
+    implementation bg
+     submodels
+      b 480 224
+       description '<Information><Description><Version>4.2</Version><IsMainModel>1</IsMainModel><KeepParameterValues>False</KeepParameterValues><LibraryPath>Bond Graph\R.emx</LibraryPath><TimeStamp>2011-11-29 16:35:37</TimeStamp><AllowLibraryUpdate>True</AllowLibraryUpdate><Configuration><struct><member><name>DocumentationMask</name><value><struct></struct></value></member></struct></Configuration></Description></Information>';
+       type R
+        ports
+         rotation in p;
+       end;
+       icon bg right
+        figures
+         text 'R' 480 224 18 bold;
+       end;
+       implementation eq
+parameters
+	real global b {N.m.s/rad};
+equations
+	p.e = b * p.f;
+implementation_end;
+      J 480 64
+       description '<Information><Description><Version>4.2</Version><IsMainModel>1</IsMainModel><KeepParameterValues>False</KeepParameterValues><LibraryPath>Bond Graph\I.emx</LibraryPath><TimeStamp>2011-11-29 15:55:55</TimeStamp><AllowLibraryUpdate>True</AllowLibraryUpdate><Configuration><struct><member><name>DocumentationMask</name><value><struct></struct></value></member></struct></Configuration></Description></Information>';
+       type I
+        ports
+         rotation in p;
+         signal out state;
+        restrictions
+         causality preferred in p;
+       end;
+       icon bg right
+        figures
+         text 'I' 480 64 18 bold;
+       end;
+       implementation eq
+parameters
+	real global J {kg.m2};
+equations
+    state = int(p.e);
+    p.f = state / J;
+implementation_end;
+      Km 368 144
+       description '<Information><Description><Version>4.2</Version><IsMainModel>1</IsMainModel><KeepParameterValues>False</KeepParameterValues><LibraryPath>Bond Graph\GY.emx</LibraryPath><TimeStamp>2011-11-29 15:53:45</TimeStamp><AllowLibraryUpdate>True</AllowLibraryUpdate><Configuration><struct><member><name>DocumentationMask</name><value><struct></struct></value></member></struct></Configuration></Description></Information>';
+       type GY
+        ports
+         electric in p1;
+         rotation out p2;
+        restrictions
+         causality constraint equal p1 p2;
+       end;
+       icon bg bottom
+        figures
+         text 'GY' 368 144 18 bold;
+       end;
+       implementation eq
+parameters
+	real global Km {N.m/A};
+equations
+	p1.e = Km * p2.f;
+	p2.e = Km * p1.f;
+implementation_end;
+      La 256 64
+       description '<Information><Description><Version>4.2</Version><IsMainModel>1</IsMainModel><KeepParameterValues>False</KeepParameterValues><LibraryPath>Bond Graph\I.emx</LibraryPath><TimeStamp>2011-11-29 15:55:55</TimeStamp><AllowLibraryUpdate>True</AllowLibraryUpdate><Configuration><struct><member><name>DocumentationMask</name><value><struct></struct></value></member></struct></Configuration></Description></Information>';
+       type I
+        ports
+         electric in p;
+         signal out state;
+        restrictions
+         causality preferred in p;
+       end;
+       icon bg right
+        figures
+         text 'I' 256 64 18 bold;
+       end;
+       implementation eq
+parameters
+	real global La {H};
+equations
+    state = int(p.e);
+    p.f = state / La;
+implementation_end;
+      plug T 647.8 143.8;
+      plug Ia 336 64;
+      plug Omega 568 64;
+      plug U 87.9 143.8;
+      OneJunction 256 144
+       description '<Information>
+ <Description>
+    <Version>4.2</Version>
+<IsMainModel>1</IsMainModel>
+  <KeepParameterValues>False</KeepParameterValues>
+    <LibraryPath>Bond Graph\OneJunction.emx</LibraryPath>
+  <TimeStamp>2011-11-29 16:17:51</TimeStamp>
+</Description>
+</Information>';
+       knot OneJunction
+        ports
+         electric knot duplicatable none p [1];
+         signal knot out flow [1];
+        restrictions
+         causality constraint one_out p;
+       end;
+       icon bg
+        figures
+         text '1' 256 144 18 bold;
+       end;
+       implementation eq
+equations
+	sum (direct (p.e)) = 0;
+	equal (collect (p.f));
+	flow = first (p.f);
+implementation_end;
+      OneJunction2 480 144
+       description '<Information>
+ <Description>
+    <Version>4.2</Version>
+<IsMainModel>1</IsMainModel>
+  <KeepParameterValues>False</KeepParameterValues>
+    <LibraryPath>Bond Graph\OneJunction.emx</LibraryPath>
+  <TimeStamp>2011-11-29 16:17:51</TimeStamp>
+</Description>
+</Information>';
+       knot OneJunction
+        ports
+         rotation knot duplicatable none p [1];
+         signal knot out flow [1];
+        restrictions
+         causality constraint one_out p;
+       end;
+       icon bg
+        figures
+         text '1' 480 144 18 bold;
+       end;
+       implementation eq
+equations
+	sum (direct (p.e)) = 0;
+	equal (collect (p.f));
+	flow = first (p.f);
+implementation_end;
+      Ra 256 224
+       description '<Information><Description><Version>4.2</Version><IsMainModel>1</IsMainModel><KeepParameterValues>False</KeepParameterValues><LibraryPath>Bond Graph\R.emx</LibraryPath><TimeStamp>2011-11-29 16:35:37</TimeStamp><AllowLibraryUpdate>True</AllowLibraryUpdate><Configuration><struct><member><name>DocumentationMask</name><value><struct></struct></value></member></struct></Configuration></Description></Information>';
+       type R
+        ports
+         electric in p;
+       end;
+       icon bg right
+        figures
+         text 'R' 256 224 18 bold;
+       end;
+       implementation eq
+parameters
+	real global Ra {ohm};
+equations
+	p.e = Ra * p.f;
+implementation_end;
+      ZeroJunction 160 144
+       description '<Information>
+ <Description>
+    <Version>4.2</Version>
+<IsMainModel>1</IsMainModel>
+  <KeepParameterValues>False</KeepParameterValues>
+    <LibraryPath>Bond Graph\ZeroJunction.emx</LibraryPath>
+  <TimeStamp>2011-11-29 16:45:16</TimeStamp>
+</Description>
+</Information>';
+       knot ZeroJunction
+        ports
+         electric knot duplicatable none p [1];
+         signal knot out effort [1];
+        restrictions
+         causality constraint one_in p;
+       end;
+       icon bg
+        figures
+         text '0' 160 144 18 bold;
+       end;
+       implementation eq
+equations
+	sum (direct (p.f)) = 0;
+	equal (collect (p.e));
+	effort = first (p.e);
+implementation_end;
+      ZeroJunction1 576 144
+       description '<Information>
+ <Description>
+    <Version>4.2</Version>
+<IsMainModel>1</IsMainModel>
+  <KeepParameterValues>False</KeepParameterValues>
+    <LibraryPath>Bond Graph\ZeroJunction.emx</LibraryPath>
+  <TimeStamp>2011-11-29 16:45:16</TimeStamp>
+</Description>
+</Information>';
+       knot ZeroJunction
+        ports
+         rotation knot duplicatable none p [1];
+         signal knot out effort [1];
+        restrictions
+         causality constraint one_in p;
+       end;
+       icon bg
+        figures
+         text '0' 576 144 18 bold;
+       end;
+       implementation eq
+equations
+	sum (direct (p.f)) = 0;
+	equal (collect (p.e));
+	effort = first (p.e);
+implementation_end;
+     end;
+     connections
+      ZeroJunction\p => OneJunction\p '1';
+      OneJunction\p => La\p '2';
+      OneJunction\p => Ra\p '3';
+      OneJunction\p => Km\p1 '4';
+      Km\p2 => OneJunction2\p '5';
+      OneJunction2\p => J\p '6';
+      OneJunction2\p => b\p '7';
+      OneJunction2\p => ZeroJunction1\p '8';
+      ZeroJunction1\p => T;
+      U => ZeroJunction\p;
+      OneJunction\flow -> Ia;
+      OneJunction2\flow -> Omega;
+     end;
+    implementation_end;
+   MCC_IP2 464 424
+    description '<Information><Description><Version>4.4</Version><IsMainModel>1</IsMainModel><KeepParameterValues>False</KeepParameterValues><LibraryPath>MCC_IP.emx</LibraryPath><TimeStamp>2021-1-10 20:42:00</TimeStamp><AllowLibraryUpdate>True</AllowLibraryUpdate><Configuration><struct><member><name>DocumentationMask</name><value><struct></struct></value></member></struct></Configuration></Description><Attributes><GlobalRelations>parameters
+	real La = 0.161m {H};			//Inductancia de armadura
+	real Ra = 0.365 {ohm};			//Impedancia de armadura
+	real J  = 0.134m {kg.m2};		//Inercia rotorica
+	real b  = 0.0000925 {N.m.s/rad};	//Coef. friccion rotacional
+	real Km = 0.123 {N.m/A};		//Constante del motor</GlobalRelations></Attributes></Information>';
+    type MCC_IP
+     ports
+      electric in U;
+      rotation out T;
+      signal out Ia {A} ; "Corriente de armadura"
+      signal out Omega {rad/s} ; "Velocidad angular"
+    end;
+    icon bg shadow 11776947
+     figures
+      rectangle 384 400 544 448 fill 15132390;
+      group
+       ellipse 391.7 407.8 423.7 439.8 fill 16777215 width 2;
+       line 402 431.8 413.4 431.8;
+       text 'M' 407.7 423.8 21 bold;
+      end;
+      text 'MCC' 452.3 417.3 'Noto Sans Cond' 25 bold;
+      text 'Imán Permanente' 480 435 'Noto Sans Cond' 18 italic;
+     terminals
+      U 400 392 fixed;
+      T 432 392 fixed;
+    end;
+    implementation bg
+     submodels
+      b 480 224
+       description '<Information><Description><Version>4.2</Version><IsMainModel>1</IsMainModel><KeepParameterValues>False</KeepParameterValues><LibraryPath>Bond Graph\R.emx</LibraryPath><TimeStamp>2011-11-29 16:35:37</TimeStamp><AllowLibraryUpdate>True</AllowLibraryUpdate><Configuration><struct><member><name>DocumentationMask</name><value><struct></struct></value></member></struct></Configuration></Description></Information>';
+       type R
+        ports
+         rotation in p;
+       end;
+       icon bg right
+        figures
+         text 'R' 480 224 18 bold;
+       end;
+       implementation eq
+parameters
+	real global b {N.m.s/rad};
+equations
+	p.e = b * p.f;
+implementation_end;
+      J 480 64
+       description '<Information><Description><Version>4.2</Version><IsMainModel>1</IsMainModel><KeepParameterValues>False</KeepParameterValues><LibraryPath>Bond Graph\I.emx</LibraryPath><TimeStamp>2011-11-29 15:55:55</TimeStamp><AllowLibraryUpdate>True</AllowLibraryUpdate><Configuration><struct><member><name>DocumentationMask</name><value><struct></struct></value></member></struct></Configuration></Description></Information>';
+       type I
+        ports
+         rotation in p;
+         signal out state;
+        restrictions
+         causality preferred in p;
+       end;
+       icon bg right
+        figures
+         text 'I' 480 64 18 bold;
+       end;
+       implementation eq
+parameters
+	real global J {kg.m2};
+equations
+    state = int(p.e);
+    p.f = state / J;
+implementation_end;
+      Km 368 144
+       description '<Information><Description><Version>4.2</Version><IsMainModel>1</IsMainModel><KeepParameterValues>False</KeepParameterValues><LibraryPath>Bond Graph\GY.emx</LibraryPath><TimeStamp>2011-11-29 15:53:45</TimeStamp><AllowLibraryUpdate>True</AllowLibraryUpdate><Configuration><struct><member><name>DocumentationMask</name><value><struct></struct></value></member></struct></Configuration></Description></Information>';
+       type GY
+        ports
+         electric in p1;
+         rotation out p2;
+        restrictions
+         causality constraint equal p1 p2;
+       end;
+       icon bg bottom
+        figures
+         text 'GY' 368 144 18 bold;
+       end;
+       implementation eq
+parameters
+	real global Km {N.m/A};
+equations
+	p1.e = Km * p2.f;
+	p2.e = Km * p1.f;
+implementation_end;
+      La 256 64
+       description '<Information><Description><Version>4.2</Version><IsMainModel>1</IsMainModel><KeepParameterValues>False</KeepParameterValues><LibraryPath>Bond Graph\I.emx</LibraryPath><TimeStamp>2011-11-29 15:55:55</TimeStamp><AllowLibraryUpdate>True</AllowLibraryUpdate><Configuration><struct><member><name>DocumentationMask</name><value><struct></struct></value></member></struct></Configuration></Description></Information>';
+       type I
+        ports
+         electric in p;
+         signal out state;
+        restrictions
+         causality preferred in p;
+       end;
+       icon bg right
+        figures
+         text 'I' 256 64 18 bold;
+       end;
+       implementation eq
+parameters
+	real global La {H};
+equations
+    state = int(p.e);
+    p.f = state / La;
+implementation_end;
+      plug T 647.8 143.9;
+      plug Ia 336 64.1;
+      plug Omega 568 64.1;
+      plug U 87.9 143.9;
+      OneJunction 256 144
+       description '<Information>
+ <Description>
+    <Version>4.2</Version>
+<IsMainModel>1</IsMainModel>
+  <KeepParameterValues>False</KeepParameterValues>
+    <LibraryPath>Bond Graph\OneJunction.emx</LibraryPath>
+  <TimeStamp>2011-11-29 16:17:51</TimeStamp>
+</Description>
+</Information>';
+       knot OneJunction
+        ports
+         electric knot duplicatable none p [1];
+         signal knot out flow [1];
+        restrictions
+         causality constraint one_out p;
+       end;
+       icon bg
+        figures
+         text '1' 256 144 18 bold;
+       end;
+       implementation eq
+equations
+	sum (direct (p.e)) = 0;
+	equal (collect (p.f));
+	flow = first (p.f);
+implementation_end;
+      OneJunction2 480 144
+       description '<Information>
+ <Description>
+    <Version>4.2</Version>
+<IsMainModel>1</IsMainModel>
+  <KeepParameterValues>False</KeepParameterValues>
+    <LibraryPath>Bond Graph\OneJunction.emx</LibraryPath>
+  <TimeStamp>2011-11-29 16:17:51</TimeStamp>
+</Description>
+</Information>';
+       knot OneJunction
+        ports
+         rotation knot duplicatable none p [1];
+         signal knot out flow [1];
+        restrictions
+         causality constraint one_out p;
+       end;
+       icon bg
+        figures
+         text '1' 480 144 18 bold;
+       end;
+       implementation eq
+equations
+	sum (direct (p.e)) = 0;
+	equal (collect (p.f));
+	flow = first (p.f);
+implementation_end;
+      Ra 256 224
+       description '<Information><Description><Version>4.2</Version><IsMainModel>1</IsMainModel><KeepParameterValues>False</KeepParameterValues><LibraryPath>Bond Graph\R.emx</LibraryPath><TimeStamp>2011-11-29 16:35:37</TimeStamp><AllowLibraryUpdate>True</AllowLibraryUpdate><Configuration><struct><member><name>DocumentationMask</name><value><struct></struct></value></member></struct></Configuration></Description></Information>';
+       type R
+        ports
+         electric in p;
+       end;
+       icon bg right
+        figures
+         text 'R' 256 224 18 bold;
+       end;
+       implementation eq
+parameters
+	real global Ra {ohm};
+equations
+	p.e = Ra * p.f;
+implementation_end;
+      ZeroJunction 160 144
+       description '<Information>
+ <Description>
+    <Version>4.2</Version>
+<IsMainModel>1</IsMainModel>
+  <KeepParameterValues>False</KeepParameterValues>
+    <LibraryPath>Bond Graph\ZeroJunction.emx</LibraryPath>
+  <TimeStamp>2011-11-29 16:45:16</TimeStamp>
+</Description>
+</Information>';
+       knot ZeroJunction
+        ports
+         electric knot duplicatable none p [1];
+         signal knot out effort [1];
+        restrictions
+         causality constraint one_in p;
+       end;
+       icon bg
+        figures
+         text '0' 160 144 18 bold;
+       end;
+       implementation eq
+equations
+	sum (direct (p.f)) = 0;
+	equal (collect (p.e));
+	effort = first (p.e);
+implementation_end;
+      ZeroJunction1 576 144
+       description '<Information>
+ <Description>
+    <Version>4.2</Version>
+<IsMainModel>1</IsMainModel>
+  <KeepParameterValues>False</KeepParameterValues>
+    <LibraryPath>Bond Graph\ZeroJunction.emx</LibraryPath>
+  <TimeStamp>2011-11-29 16:45:16</TimeStamp>
+</Description>
+</Information>';
+       knot ZeroJunction
+        ports
+         rotation knot duplicatable none p [1];
+         signal knot out effort [1];
+        restrictions
+         causality constraint one_in p;
+       end;
+       icon bg
+        figures
+         text '0' 576 144 18 bold;
+       end;
+       implementation eq
+equations
+	sum (direct (p.f)) = 0;
+	equal (collect (p.e));
+	effort = first (p.e);
+implementation_end;
+     end;
+     connections
+      ZeroJunction\p => OneJunction\p '1';
+      OneJunction\p => La\p '2';
+      OneJunction\p => Ra\p '3';
+      OneJunction\p => Km\p1 '4';
+      Km\p2 => OneJunction2\p '5';
+      OneJunction2\p => J\p '6';
+      OneJunction2\p => b\p '7';
+      OneJunction2\p => ZeroJunction1\p '8';
+      U => ZeroJunction\p;
+      ZeroJunction1\p => T;
+      OneJunction\flow -> Ia;
+      OneJunction2\flow -> Omega;
+     end;
+    implementation_end;
+   MSe1 360 144
+    description '<Information><Description><Version>4.2</Version><IsMainModel>1</IsMainModel><KeepParameterValues>False</KeepParameterValues><LibraryPath>Bond Graph\MSe.emx</LibraryPath><TimeStamp>2011-11-29 16:12:33</TimeStamp><AllowLibraryUpdate>True</AllowLibraryUpdate><Configuration><struct><member><name>DocumentationMask</name><value><struct></struct></value></member></struct></Configuration></Description></Information>';
+    type MSe
+     ports
+      power out p;
+      signal in effort;
+     restrictions
+      causality fixed out p;
+    end;
+    icon bg
+     figures
+      text 'MSe' 360 144 18 bold;
+    end;
+    implementation eq
+variables
+	real flow;
+equations
+	p.e = effort;
+	flow = p.f;
+implementation_end;
+   MSe2 360 288
+    description '<Information><Description><Version>4.2</Version><IsMainModel>1</IsMainModel><KeepParameterValues>False</KeepParameterValues><LibraryPath>Bond Graph\MSe.emx</LibraryPath><TimeStamp>2011-11-29 16:12:33</TimeStamp><AllowLibraryUpdate>True</AllowLibraryUpdate><Configuration><struct><member><name>DocumentationMask</name><value><struct></struct></value></member></struct></Configuration></Description></Information>';
+    type MSe
+     ports
+      power out p;
+      signal in effort;
+     restrictions
+      causality fixed out p;
+    end;
+    icon bg
+     figures
+      text 'MSe' 360 288 18 bold;
+    end;
+    implementation eq
+variables
+	real flow;
+equations
+	p.e = effort;
+	flow = p.f;
+implementation_end;
+   OneJunction1 504 144
+    description '<Information><Description><Version>4.2</Version><IsMainModel>1</IsMainModel><KeepParameterValues>False</KeepParameterValues><LibraryPath>Bond Graph\OneJunction.emx</LibraryPath><TimeStamp>2011-11-29 16:17:51</TimeStamp><AllowLibraryUpdate>True</AllowLibraryUpdate><Configuration><struct><member><name>DocumentationMask</name><value><struct></struct></value></member></struct></Configuration></Description></Information>';
+    knot OneJunction
+     ports
+      rotation knot duplicatable none p [1];
+      signal knot out flow [1];
+     restrictions
+      causality constraint one_out p;
+    end;
+    icon bg
+     figures
+      text '1' 504 144 18 bold;
+    end;
+    implementation eq
+equations
+	sum (direct (p.e)) = 0;
+	equal (collect (p.f));
+	flow = first (p.f);
+implementation_end;
+   OneJunction2 504 288
+    description '<Information><Description><Version>4.2</Version><IsMainModel>1</IsMainModel><KeepParameterValues>False</KeepParameterValues><LibraryPath>Bond Graph\OneJunction.emx</LibraryPath><TimeStamp>2011-11-29 16:17:51</TimeStamp><AllowLibraryUpdate>True</AllowLibraryUpdate><Configuration><struct><member><name>DocumentationMask</name><value><struct></struct></value></member></struct></Configuration></Description></Information>';
+    knot OneJunction
+     ports
+      rotation knot duplicatable none p [1];
+      signal knot out flow [1];
+     restrictions
+      causality constraint one_out p;
+    end;
+    icon bg
+     figures
+      text '1' 504 288 18 bold;
+    end;
+    implementation eq
+equations
+	sum (direct (p.e)) = 0;
+	equal (collect (p.f));
+	flow = first (p.f);
+implementation_end;
+   PlusMinus1 256 144
+    description '<Description><Version>4.0</Version><Version>4.0</Version><IsMainModel>1</IsMainModel><KeepParameterValues>False</KeepParameterValues>
+   <LibraryPath>Signal\Block Diagram\PlusMinus.emx</LibraryPath>
+  <TimeStamp>2007-9-27 10:15:13</TimeStamp>
+</Description>';
+    knot PlusMinus
+     ports
+      signal knot duplicatable in plus [1];
+      signal knot duplicatable in minus [1];
+      signal knot out output [1];
+    end;
+    icon bg ellipse
+     figures
+      ellipse 248 136 264 152 fill 16777215;
+    end;
+    implementation eq
+equations
+    output = sum (collect (plus)) - sum (collect (minus));
+    implementation_end;
+   PlusMinus2 256 288
+    description '<Description><Version>4.0</Version><Version>4.0</Version><IsMainModel>1</IsMainModel><KeepParameterValues>False</KeepParameterValues>
+   <LibraryPath>Signal\Block Diagram\PlusMinus.emx</LibraryPath>
+  <TimeStamp>2007-9-27 10:15:13</TimeStamp>
+</Description>';
+    knot PlusMinus
+     ports
+      signal knot duplicatable in plus [1];
+      signal knot duplicatable in minus [1];
+      signal knot out output [1];
+    end;
+    icon bg ellipse
+     figures
+      ellipse 248 280 264 296 fill 16777215;
+    end;
+    implementation eq
+equations
+    output = sum (collect (plus)) - sum (collect (minus));
+    implementation_end;
+   PlusMinus3 152 144
+    description '<Description><Version>4.0</Version><Version>4.0</Version><IsMainModel>1</IsMainModel><KeepParameterValues>False</KeepParameterValues>
+   <LibraryPath>Signal\Block Diagram\PlusMinus.emx</LibraryPath>
+  <TimeStamp>2007-9-27 10:15:13</TimeStamp>
+</Description>';
+    knot PlusMinus
+     ports
+      signal knot duplicatable in plus [1];
+      signal knot duplicatable in minus [1];
+      signal knot out output [1];
+    end;
+    icon bg ellipse
+     figures
+      ellipse 144 136 160 152 fill 16777215;
+    end;
+    implementation eq
+equations
+    output = sum (collect (plus)) - sum (collect (minus));
+    implementation_end;
+   PlusMinus4 152 288
+    description '<Description><Version>4.0</Version><Version>4.0</Version><IsMainModel>1</IsMainModel><KeepParameterValues>False</KeepParameterValues>
+   <LibraryPath>Signal\Block Diagram\PlusMinus.emx</LibraryPath>
+  <TimeStamp>2007-9-27 10:15:13</TimeStamp>
+</Description>';
+    knot PlusMinus
+     ports
+      signal knot duplicatable in plus [1];
+      signal knot duplicatable in minus [1];
+      signal knot out output [1];
+    end;
+    icon bg ellipse
+     figures
+      ellipse 144 280 160 296 fill 16777215;
+    end;
+    implementation eq
+equations
+    output = sum (collect (plus)) - sum (collect (minus));
+    implementation_end;
+   RR 672 216
+    description '<Information><Description><Version>4.4</Version><IsMainModel>1</IsMainModel><KeepParameterValues>False</KeepParameterValues><LibraryPath>RR.emx</LibraryPath><TimeStamp>2021-1-7 02:22:06</TimeStamp><AllowLibraryUpdate>True</AllowLibraryUpdate><Configuration><struct><member><name>DocumentationMask</name><value><struct></struct></value></member></struct></Configuration></Description><Attributes><GlobalRelations>constants
+	real g   = 9.81 {acceleration,m/s2};
+parameters
+	real l1  = 0.26 {m};				//Largo del eslabon 1
+	real l2  = 0.26 {m};				//Largo del eslabon 2
+	real lc1 = 0.0983 {m};			//Distancia a CM eslabon 1
+	real lc2 = 0.0229 {m};			//Distancia a CM eslabon
+	real m1  = 6.5225 {mass,kg};	//masa del eslabon 1
+	real m2  = 2.0458 {mass,kg};	//masa del eslabon 2
+	real I1  = 0.1213 {kg.m2};
+	real I2  = 0.0116 {kg.m2};
+variables
+	real P1 {kg.m/s2};
+	real P2 {kg.m/s2};
+initialequations
+	P1 = m1*g;
+	//P1 = 0;
+	P2 = m2*g;
+	//P2 = 0;</GlobalRelations></Attributes></Information>';
+    type RR
+     ports
+      rotation in T1;
+      rotation in T2;
+      signal out X1 {m} ;
+      signal out X2 {m} ;
+      signal out Xe {m} ;
+      signal out Y1 {m} ;
+      signal out Y2 {m} ;
+      signal out Ye {m} ;
+      signal out Theta1 {rad} ;
+      signal out Theta2 {rad} ;
+      signal out Omega1 {rad/s} ;
+      signal out Omega2 {rad/s} ;
+    end;
+    icon bg shadow 11776947
+     figures
+      group
+       ellipse 668 316 676 324 fill 16777215;
+       ellipse 564 236 572 244 fill 16777215;
+       ellipse 772 300 780 308 fill 16777215;
+       ellipse 772 284 780 292 fill 16777215;
+       ellipse 772 244 780 252 fill 16777215;
+       ellipse 772 180 780 188 fill 16777215;
+       ellipse 772 140 780 148 fill 16777215;
+       ellipse 772 124 780 132 fill 16777215;
+       ellipse 668 108 676 116 fill 16777215;
+       ellipse 564 188 572 196 fill 16777215;
+      end;
+      group
+       rectangle 568 112 776 320 fill 13750737;
+       text 'MANIPULADOR' 640 168 'Noto Sans Cond' 28 bold italic;
+       text 'RR' 648 216 'Noto Sans' 85 bold italic;
+       group
+        group
+         group
+          line 657.8 309.3 753 285.3 width 3;
+          group
+           ellipse 732.3 254 764.4 286 width 3;
+           ellipse 742.3 264 754.3 276 fill 8355711 dashed;
+          end;
+          group
+           ellipse 628.3 262 676.3 310 width 3;
+           ellipse 643.3 277 661.3 295 fill 8355711 dashed;
+          end;
+          line 650.3 262 747 254 width 3;
+         end;
+         ellipse 718.3 168.1 738.2 187.9 width 3;
+         line 732.3 272 718.3 179.3 width 3;
+         line 764.4 268 738.2 176 width 3;
+        end;
+        line 728 159 720 154 720 146 720 122 712 126 712 134 712 158 712 168 720 168 728 182 728 182 736 168 744 166 744 158 744 134 744 126 736 122 736 146 736 154 728 159 fill 12623485 width 3;
+       end;
+      end;
+     terminals
+      T1 560 144 fixed;
+      T2 560 288 fixed;
+      X1 780 128 fixed;
+      X2 780 288 fixed;
+      Xe 780 184 fixed;
+      Y1 780 144 fixed;
+      Y2 780 304 fixed;
+      Ye 780 248 fixed;
+      Theta1 672 108 fixed;
+      Theta2 672 325 fixed;
+      Omega1 564 192 fixed;
+      Omega2 564 240 fixed;
+    end;
+    implementation bg
+     submodels
+      I1 192 112
+       description '<Information><Description><Version>4.2</Version><IsMainModel>1</IsMainModel><KeepParameterValues>False</KeepParameterValues><LibraryPath>Bond Graph\I.emx</LibraryPath><TimeStamp>2011-11-29 15:55:55</TimeStamp><AllowLibraryUpdate>True</AllowLibraryUpdate><Configuration><struct><member><name>DocumentationMask</name><value><struct></struct></value></member></struct></Configuration></Description></Information>';
+       type I
+        ports
+         rotation in p;
+         signal out state;
+        restrictions
+         causality preferred in p;
+       end;
+       icon bg right
+        figures
+         text 'I' 192 112 18 bold;
+       end;
+       implementation eq
+parameters
+	real global I1;
+equations
+    state = int(p.e);
+    p.f = state / I1;
+implementation_end;
+      I2 624 112
+       description '<Information><Description><Version>4.2</Version><IsMainModel>1</IsMainModel><KeepParameterValues>False</KeepParameterValues><LibraryPath>Bond Graph\I.emx</LibraryPath><TimeStamp>2011-11-29 15:55:55</TimeStamp><AllowLibraryUpdate>True</AllowLibraryUpdate><Configuration><struct><member><name>DocumentationMask</name><value><struct></struct></value></member></struct></Configuration></Description></Information>';
+       type I
+        ports
+         rotation in p;
+         signal out state;
+        restrictions
+         causality preferred in p;
+       end;
+       icon bg right
+        figures
+         text 'I' 624 112 18 bold;
+       end;
+       implementation eq
+parameters
+	real global I2;
+equations
+    state = int(p.e);
+    p.f = state / I2;
+implementation_end;
+      Integrate 192 248
+       description '<Information>
+ <Description>
+    <Version>4.3</Version>
+<IsMainModel>1</IsMainModel>
+  <KeepParameterValues>False</KeepParameterValues>
+    <LibraryPath>Signal\Block Diagram\Integrate.emx</LibraryPath>
+  <TimeStamp>2013-3-8 14:47:42</TimeStamp>
+</Description>
+</Information>';
+       type Integrate
+        ports
+         signal in input {rad/s} ;
+         signal out output;
+       end;
+       icon bg
+        figures
+         rectangle 176 232 208 264 fill 15132390;
+         text 'ò' 192 245.3 color 16711680 'SymbolProp BT' 21 symbol;
+       end;
+       implementation eq
+parameters
+	real initial = 0;		// initial value
+equations
+	output = int (input, initial);
+     implementation_end;
+      Integrate1 624 248
+       description '<Information>
+ <Description>
+    <Version>4.3</Version>
+<IsMainModel>1</IsMainModel>
+  <KeepParameterValues>False</KeepParameterValues>
+    <LibraryPath>Signal\Block Diagram\Integrate.emx</LibraryPath>
+  <TimeStamp>2013-3-8 14:47:42</TimeStamp>
+</Description>
+</Information>';
+       type Integrate
+        ports
+         signal in input {rad/s} ;
+         signal out output;
+       end;
+       icon bg
+        figures
+         rectangle 608 232 640 264 fill 15132390;
+         text 'ò' 624 245.3 color 16711680 'SymbolProp BT' 21 symbol;
+       end;
+       implementation eq
+parameters
+	real initial = 0;		// initial value
+equations
+	output = int (input, initial);
+     implementation_end;
+      Mass1_X1 192 48
+       description '<Information><Description><Version>4.2</Version><IsMainModel>1</IsMainModel><KeepParameterValues>False</KeepParameterValues><LibraryPath>Bond Graph\I.emx</LibraryPath><TimeStamp>2011-11-29 15:55:55</TimeStamp><AllowLibraryUpdate>True</AllowLibraryUpdate><Configuration><struct><member><name>DocumentationMask</name><value><struct></struct></value></member></struct></Configuration></Description></Information>';
+       type I
+        ports
+         translation in p;
+         signal out state;
+        restrictions
+         causality preferred in p;
+       end;
+       icon bg right
+        figures
+         text 'I' 192 48 18 bold;
+       end;
+       implementation eq
+parameters
+	real global m1;
+equations
+    state = int(p.e);
+    p.f = state / m1;
+implementation_end;
+      Mass1_Y1 192 320
+       description '<Information><Description><Version>4.2</Version><IsMainModel>1</IsMainModel><KeepParameterValues>False</KeepParameterValues><LibraryPath>Bond Graph\I.emx</LibraryPath><TimeStamp>2011-11-29 15:55:55</TimeStamp><AllowLibraryUpdate>True</AllowLibraryUpdate><Configuration><struct><member><name>DocumentationMask</name><value><struct></struct></value></member></struct></Configuration></Description></Information>';
+       type I
+        ports
+         translation in p;
+         signal out state;
+        restrictions
+         causality preferred in p;
+       end;
+       icon bg left
+        figures
+         text 'I' 192 320 18 bold;
+       end;
+       implementation eq
+parameters
+	real global m1;
+equations
+    state = int(p.e);
+    p.f = state / m1;
+implementation_end;
+      Mass2_X2 624 48
+       description '<Information><Description><Version>4.2</Version><IsMainModel>1</IsMainModel><KeepParameterValues>False</KeepParameterValues><LibraryPath>Bond Graph\I.emx</LibraryPath><TimeStamp>2011-11-29 15:55:55</TimeStamp><AllowLibraryUpdate>True</AllowLibraryUpdate><Configuration><struct><member><name>DocumentationMask</name><value><struct></struct></value></member></struct></Configuration></Description></Information>';
+       type I
+        ports
+         translation in p;
+         signal out state;
+        restrictions
+         causality preferred in p;
+       end;
+       icon bg right
+        figures
+         text 'I' 624 48 18 bold;
+       end;
+       implementation eq
+parameters
+	real global m2;
+equations
+    state = int(p.e);
+    p.f = state / m2;
+implementation_end;
+      Mass2_Y2 624 320
+       description '<Information><Description><Version>4.2</Version><IsMainModel>1</IsMainModel><KeepParameterValues>False</KeepParameterValues><LibraryPath>Bond Graph\I.emx</LibraryPath><TimeStamp>2011-11-29 15:55:55</TimeStamp><AllowLibraryUpdate>True</AllowLibraryUpdate><Configuration><struct><member><name>DocumentationMask</name><value><struct></struct></value></member></struct></Configuration></Description></Information>';
+       type I
+        ports
+         translation in p;
+         signal out state;
+        restrictions
+         causality preferred in p;
+       end;
+       icon bg left
+        figures
+         text 'I' 624 320 18 bold;
+       end;
+       implementation eq
+parameters
+	real global m2;
+equations
+    state = int(p.e);
+    p.f = state / m2;
+implementation_end;
+      plug Ye 912 16;
+      plug Theta1 416 328;
+      plug Omega1 416 232;
+      plug Omega2 920 232;
+      plug Y2 912.1 447.9;
+      plug Y1 408 447.9;
+      plug T1 32 183.9;
+      plug Xe 912.1 -16;
+      plug X2 912 416.1;
+      plug X1 408.1 416.1;
+      plug T2 463.9 183.9;
+      plug Theta2 920 328;
+      OneJunction1 192 184
+       description '<Information><Description><Version>4.2</Version><IsMainModel>1</IsMainModel><KeepParameterValues>False</KeepParameterValues><LibraryPath>Bond Graph\OneJunction.emx</LibraryPath><TimeStamp>2011-11-29 16:17:51</TimeStamp><AllowLibraryUpdate>True</AllowLibraryUpdate><Configuration><struct><member><name>DocumentationMask</name><value><struct></struct></value></member></struct></Configuration><Title></Title></Description></Information>';
+       knot OneJunction
+        ports
+         rotation knot duplicatable none p [1];
+         signal knot out flow [1];
+        restrictions
+         causality constraint one_out p;
+       end;
+       icon bg
+        figures
+         text '1' 192 184 18 bold;
+       end;
+       implementation eq
+equations
+	sum (direct (p.e)) = 0;
+	equal (collect (p.f));
+	flow = first (p.f);
+implementation_end;
+      OneJunction2 624 184
+       description '<Information><Description><Version>4.2</Version><IsMainModel>1</IsMainModel><KeepParameterValues>False</KeepParameterValues><LibraryPath>Bond Graph\OneJunction.emx</LibraryPath><TimeStamp>2011-11-29 16:17:51</TimeStamp><AllowLibraryUpdate>True</AllowLibraryUpdate><Configuration><struct><member><name>DocumentationMask</name><value><struct></struct></value></member></struct></Configuration></Description></Information>';
+       knot OneJunction
+        ports
+         rotation knot duplicatable none p [1];
+         signal knot out flow [1];
+        restrictions
+         causality constraint one_out p;
+       end;
+       icon bg
+        figures
+         text '1' 624 184 18 bold;
+       end;
+       implementation eq
+equations
+	sum (direct (p.e)) = 0;
+	equal (collect (p.f));
+	flow = first (p.f);
+implementation_end;
+      OneJunction3 280 184
+       description '<Information><Description><Version>4.2</Version><IsMainModel>1</IsMainModel><KeepParameterValues>False</KeepParameterValues><LibraryPath>Bond Graph\OneJunction.emx</LibraryPath><TimeStamp>2011-11-29 16:17:51</TimeStamp><AllowLibraryUpdate>True</AllowLibraryUpdate><Configuration><struct><member><name>DocumentationMask</name><value><struct></struct></value></member></struct></Configuration></Description></Information>';
+       knot OneJunction
+        ports
+         rotation knot duplicatable none p [1];
+         signal knot out flow [1];
+        restrictions
+         causality constraint one_out p;
+       end;
+       icon bg
+        figures
+         text '1' 280 184 18 bold;
+       end;
+       implementation eq
+equations
+	sum (direct (p.e)) = 0;
+	equal (collect (p.f));
+	flow = first (p.f);
+implementation_end;
+      OneJunction4 704 184
+       description '<Information><Description><Version>4.2</Version><IsMainModel>1</IsMainModel><KeepParameterValues>False</KeepParameterValues><LibraryPath>Bond Graph\OneJunction.emx</LibraryPath><TimeStamp>2011-11-29 16:17:51</TimeStamp><AllowLibraryUpdate>True</AllowLibraryUpdate><Configuration><struct><member><name>DocumentationMask</name><value><struct></struct></value></member></struct></Configuration></Description></Information>';
+       knot OneJunction
+        ports
+         rotation knot duplicatable none p [1];
+         signal knot out flow [1];
+        restrictions
+         causality constraint one_out p;
+       end;
+       icon bg
+        figures
+         text '1' 704 184 18 bold;
+       end;
+       implementation eq
+equations
+	sum (direct (p.e)) = 0;
+	equal (collect (p.f));
+	flow = first (p.f);
+implementation_end;
+      P1 128 456
+       description '<Information><Description><Version>4.2</Version><IsMainModel>1</IsMainModel><KeepParameterValues>False</KeepParameterValues><LibraryPath>Bond Graph\Se.emx</LibraryPath><TimeStamp>2011-11-29 16:36:49</TimeStamp><AllowLibraryUpdate>True</AllowLibraryUpdate><Configuration><struct><member><name>DocumentationMask</name><value><struct></struct></value></member></struct></Configuration><Description>Weight Force on Link1
+This value is calculated by a global variable in the model, with a minus sign in front.</Description><Title></Title></Description></Information>';
+       type Se
+        ports
+         translation in p;
+        restrictions
+         causality fixed out p;
+       end;
+       icon bg left
+        figures
+         text 'Se' 128 456 18 bold;
+       end;
+       implementation eq
+variables
+	real global P1;
+	real flow;
+equations
+	p.e = P1;
+	flow = p.f;
+implementation_end;
+      P2 560 456
+       description '<Information><Description><Version>4.2</Version><IsMainModel>1</IsMainModel><KeepParameterValues>False</KeepParameterValues><LibraryPath>Bond Graph\Se.emx</LibraryPath><TimeStamp>2011-11-29 16:36:49</TimeStamp><AllowLibraryUpdate>True</AllowLibraryUpdate><Configuration><struct><member><name>DocumentationMask</name><value><struct></struct></value></member></struct></Configuration><Description>Weight Force on Link2
+This value is calculated by a global variable in the model, with a minus sign in front.</Description></Description></Information>';
+       type Se
+        ports
+         translation in p;
+        restrictions
+         causality fixed out p;
+       end;
+       icon bg left
+        figures
+         text 'Se' 560 456 18 bold;
+       end;
+       implementation eq
+variables
+	real global P2;
+	real flow;
+equations
+	p.e = P2;
+	flow = p.f;
+implementation_end;
+      R1 112 80
+       description '<Information><Description><Version>4.2</Version><IsMainModel>1</IsMainModel><KeepParameterValues>False</KeepParameterValues><LibraryPath>Bond Graph\MTF.emx</LibraryPath><TimeStamp>2011-11-29 16:15:31</TimeStamp><AllowLibraryUpdate>True</AllowLibraryUpdate><Configuration><struct><member><name>DocumentationMask</name><value><struct></struct></value></member></struct></Configuration></Description></Information>';
+       type MTF
+        ports
+         rotation in p1;
+         translation out p2;
+         signal in r;
+        restrictions
+         causality constraint not_equal p1 p2;
+       end;
+       icon bg left
+        figures
+         text 'MTF' 112 80 18 bold;
+       end;
+       implementation eq
+parameters
+	real global lc1;
+equations
+	p1.e = -lc1*sin(r) * p2.e;
+	p2.f = -lc1*sin(r) * p1.f;
+implementation_end;
+      R2 272 80
+       description '<Information><Description><Version>4.2</Version><IsMainModel>1</IsMainModel><KeepParameterValues>False</KeepParameterValues><LibraryPath>Bond Graph\MTF.emx</LibraryPath><TimeStamp>2011-11-29 16:15:31</TimeStamp><AllowLibraryUpdate>True</AllowLibraryUpdate><Configuration><struct><member><name>DocumentationMask</name><value><struct></struct></value></member></struct></Configuration></Description></Information>';
+       type MTF
+        ports
+         rotation in p1;
+         translation out p2;
+         signal in r;
+        restrictions
+         causality constraint not_equal p1 p2;
+       end;
+       icon bg right
+        figures
+         text 'MTF' 272 80 18 bold;
+       end;
+       implementation eq
+parameters
+	real global l1 {m};
+	real global lc1 {m};
+equations
+	p1.e = -(l1-lc1)*sin(r) * p2.e;
+	p2.f = -(l1-lc1)*sin(r) * p1.f;
+implementation_end;
+      R3 112 288
+       description '<Information><Description><Version>4.2</Version><IsMainModel>1</IsMainModel><KeepParameterValues>False</KeepParameterValues><LibraryPath>Bond Graph\MTF.emx</LibraryPath><TimeStamp>2011-11-29 16:15:31</TimeStamp><AllowLibraryUpdate>True</AllowLibraryUpdate><Configuration><struct><member><name>DocumentationMask</name><value><struct></struct></value></member></struct></Configuration></Description></Information>';
+       type MTF
+        ports
+         rotation in p1;
+         translation out p2;
+         signal in r;
+        restrictions
+         causality constraint not_equal p1 p2;
+       end;
+       icon bg left
+        figures
+         text 'MTF' 112 288 18 bold;
+       end;
+       implementation eq
+parameters
+	real global lc1;
+equations
+	p1.e = lc1*cos(r) * p2.e;
+	p2.f = lc1*cos(r) * p1.f;
+implementation_end;
+      R4 272 288
+       description '<Information><Description><Version>4.2</Version><IsMainModel>1</IsMainModel><KeepParameterValues>False</KeepParameterValues><LibraryPath>Bond Graph\MTF.emx</LibraryPath><TimeStamp>2011-11-29 16:15:31</TimeStamp><AllowLibraryUpdate>True</AllowLibraryUpdate><Configuration><struct><member><name>DocumentationMask</name><value><struct></struct></value></member></struct></Configuration></Description></Information>';
+       type MTF
+        ports
+         rotation in p1;
+         translation out p2;
+         signal in r;
+        restrictions
+         causality constraint not_equal p1 p2;
+       end;
+       icon bg right
+        figures
+         text 'MTF' 272 288 18 bold;
+       end;
+       implementation eq
+parameters
+	real global l1;
+	real global lc1;
+equations
+	p1.e = (l1-lc1)*cos(r) * p2.e;
+	p2.f = (l1-lc1)*cos(r) * p1.f;
+implementation_end;
+      R5 544 80
+       description '<Information><Description><Version>4.2</Version><IsMainModel>1</IsMainModel><KeepParameterValues>False</KeepParameterValues><LibraryPath>Bond Graph\MTF.emx</LibraryPath><TimeStamp>2011-11-29 16:15:31</TimeStamp><AllowLibraryUpdate>True</AllowLibraryUpdate><Configuration><struct><member><name>DocumentationMask</name><value><struct></struct></value></member></struct></Configuration></Description></Information>';
+       type MTF
+        ports
+         rotation in p1;
+         translation out p2;
+         signal in r;
+        restrictions
+         causality constraint not_equal p1 p2;
+       end;
+       icon bg left
+        figures
+         text 'MTF' 544 80 18 bold;
+       end;
+       implementation eq
+parameters
+	real global lc2;
+equations
+	p1.e = -lc2*sin(r) * p2.e;
+	p2.f = -lc2*sin(r) * p1.f;
+implementation_end;
+      R6 704 80
+       description '<Information><Description><Version>4.2</Version><IsMainModel>1</IsMainModel><KeepParameterValues>False</KeepParameterValues><LibraryPath>Bond Graph\MTF.emx</LibraryPath><TimeStamp>2011-11-29 16:15:31</TimeStamp><AllowLibraryUpdate>True</AllowLibraryUpdate><Configuration><struct><member><name>DocumentationMask</name><value><struct></struct></value></member></struct></Configuration></Description></Information>';
+       type MTF
+        ports
+         rotation in p1;
+         translation out p2;
+         signal in r;
+        restrictions
+         causality constraint not_equal p1 p2;
+       end;
+       icon bg right
+        figures
+         text 'MTF' 704 80 18 bold;
+       end;
+       implementation eq
+parameters
+	real global l2;
+	real global lc2;
+equations
+	p1.e = -(l2-lc2)*sin(r) * p2.e;
+	p2.f = -(l2-lc2)*sin(r) * p1.f;
+implementation_end;
+      R7 544 288
+       description '<Information><Description><Version>4.2</Version><IsMainModel>1</IsMainModel><KeepParameterValues>False</KeepParameterValues><LibraryPath>Bond Graph\MTF.emx</LibraryPath><TimeStamp>2011-11-29 16:15:31</TimeStamp><AllowLibraryUpdate>True</AllowLibraryUpdate><Configuration><struct><member><name>DocumentationMask</name><value><struct></struct></value></member></struct></Configuration></Description></Information>';
+       type MTF
+        ports
+         rotation in p1;
+         translation out p2;
+         signal in r;
+        restrictions
+         causality constraint not_equal p1 p2;
+       end;
+       icon bg left
+        figures
+         text 'MTF' 544 288 18 bold;
+       end;
+       implementation eq
+parameters
+	real global lc2;
+equations
+	p1.e = lc2*cos(r) * p2.e;
+	p2.f = lc2*cos(r) * p1.f;
+implementation_end;
+      R8 704 288
+       description '<Information><Description><Version>4.2</Version><IsMainModel>1</IsMainModel><KeepParameterValues>False</KeepParameterValues><LibraryPath>Bond Graph\MTF.emx</LibraryPath><TimeStamp>2011-11-29 16:15:31</TimeStamp><AllowLibraryUpdate>True</AllowLibraryUpdate><Configuration><struct><member><name>DocumentationMask</name><value><struct></struct></value></member></struct></Configuration></Description></Information>';
+       type MTF
+        ports
+         rotation in p1;
+         translation out p2;
+         signal in r;
+        restrictions
+         causality constraint not_equal p1 p2;
+       end;
+       icon bg right
+        figures
+         text 'MTF' 704 288 18 bold;
+       end;
+       implementation eq
+parameters
+	real global l2;
+	real global lc2;
+equations
+	p1.e = (l2-lc2)*cos(r) * p2.e;
+	p2.f = (l2-lc2)*cos(r) * p1.f;
+implementation_end;
+      RG1 344 416
+       description '<Information><Description><Version>4.0</Version><LibraryPath>Template\Submodel-Equation.emx</LibraryPath><IsMainModel>1</IsMainModel><KeepParameterValues>False</KeepParameterValues><TimeStamp>2007-11-1 22:32:1</TimeStamp><AllowLibraryUpdate>False</AllowLibraryUpdate><Configuration><struct><member><name>DocumentationMask</name><value><struct></struct></value></member></struct></Configuration></Description></Information>';
+       type 'RestriccionGeometrica-Equation'
+        ports
+         signal in theta1 {rad} ;
+         signal out X1 {m} ;
+         signal out Y1 {m} ;
+       end;
+       icon bg
+        figures
+         rectangle 320.5 398.4 367.5 433.5 fill 15132390;
+         text 'name' 344 415.9 color 16711680 'Arial Narrow' 20 bold;
+       end;
+       implementation eq
+/* Equation Submodel
+*/
+parameters
+	real global l1 {m};			//Largo del eslabon 1
+	real global lc1 {m};			//Distancia al centro de masa del eslabon 1
+	real global l2 {m};			//Largo del eslabon 1
+	real global lc2 {m};			//Distancia al centro de masa del eslabon 2
+equations
+  // start typing here
+	X1 = lc1 * cos(theta1);
+	Y1 = lc1 * sin(theta1);
+ implementation_end;
+      RG2 840 416
+       description '<Information><Description><Version>4.0</Version><LibraryPath>Template\Submodel-Equation.emx</LibraryPath><IsMainModel>1</IsMainModel><KeepParameterValues>False</KeepParameterValues><TimeStamp>2007-11-1 22:32:1</TimeStamp><AllowLibraryUpdate>False</AllowLibraryUpdate><Configuration><struct><member><name>DocumentationMask</name><value><struct></struct></value></member></struct></Configuration></Description></Information>';
+       type 'RestriccionGeometrica-Equation'
+        ports
+         signal in theta1 {rad} ;
+         signal in theta2 {rad} ;
+         signal out X2 {m} ;
+         signal out Y2 {m} ;
+       end;
+       icon bg
+        figures
+         rectangle 816.5 398.4 863.5 433.5 fill 15132390;
+         text 'name' 840 415.9 color 16711680 'Arial Narrow' 20 bold;
+       end;
+       implementation eq
+/* Equation Submodel
+*/
+parameters
+	real global l1 {m};			//Largo del eslabon 1
+	real global lc1 {m};			//Distancia al centro de masa del eslabon 1
+	real global l2 {m};			//Largo del eslabon 1
+	real global lc2 {m};			//Distancia al centro de masa del eslabon 2
+equations
+  // start typing here
+	X2 = l1 * cos(theta1) + lc2 * cos(theta2);
+	Y2 = l1 * sin(theta1) + lc2 * sin(theta2);
+ implementation_end;
+      RG3 840 -16
+       description '<Information><Description><Version>4.0</Version><LibraryPath>Template\Submodel-Equation.emx</LibraryPath><IsMainModel>1</IsMainModel><KeepParameterValues>False</KeepParameterValues><TimeStamp>2007-11-1 22:32:1</TimeStamp><AllowLibraryUpdate>False</AllowLibraryUpdate><Configuration><struct><member><name>DocumentationMask</name><value><struct></struct></value></member></struct></Configuration></Description></Information>';
+       type 'RestriccionGeometrica-Equation'
+        ports
+         signal in theta1 {rad} ;
+         signal in theta2 {rad} ;
+         signal out Xe {m} ;
+         signal out Ye {m} ;
+       end;
+       icon bg
+        figures
+         rectangle 816.5 -33.6 863.5 1.6 fill 15132390;
+         text 'name' 840 -16.1 color 16711680 'Arial Narrow' 20 bold;
+       end;
+       implementation eq
+/* Equation Submodel
+*/
+parameters
+	real global l1 {m};			//Largo del eslabon 1
+	real global lc1 {m};			//Distancia al centro de masa del eslabon 1
+	real global l2 {m};			//Largo del eslabon 1
+	real global lc2 {m};			//Distancia al centro de masa del eslabon 2
+equations
+  // start typing here
+	Xe = l1 * cos(theta1) + l2 * cos(theta2);
+	Ye = l1 * sin(theta1) + l2 * sin(theta2);
+ implementation_end;
+      Splitter1 192 288
+       description '<Description><Version>4.0</Version>
+   <LibraryPath>Signal\Block Diagram\Splitter.emx</LibraryPath>
+  <TimeStamp>2008-01-17 11:28:29</TimeStamp>
+<IsMainModel>1</IsMainModel>
+ <KeepParameterValues>False</KeepParameterValues>
+</Description>';
+       knot Splitter
+        ports
+         signal knot duplicatable out output [1];
+         signal knot in input [1];
+       end;
+       icon bg ellipse
+        figures
+         ellipse 188.8 284.8 195.2 291.2 color -1 fill 0;
+         ellipse 187.7 283.7 196.3 292.3 color -1;
+        terminals
+         input 192 288 fixed;
+       end;
+       implementation eq
+equations
+    collect (output) = input;
+implementation_end;
+      Splitter3 344 328
+       description '<Description><Version>4.0</Version>
+   <LibraryPath>Signal\Block Diagram\Splitter.emx</LibraryPath>
+  <TimeStamp>2008-01-17 11:28:29</TimeStamp>
+<IsMainModel>1</IsMainModel>
+ <KeepParameterValues>False</KeepParameterValues>
+</Description>';
+       knot Splitter
+        ports
+         signal knot duplicatable out output [1];
+         signal knot in input [1];
+       end;
+       icon bg ellipse
+        figures
+         ellipse 340.8 324.8 347.2 331.2 color -1 fill 0;
+         ellipse 339.7 323.7 348.3 332.3 color -1;
+        terminals
+         input 344 328 fixed;
+       end;
+       implementation eq
+equations
+    collect (output) = input;
+implementation_end;
+      Splitter4 624 288
+       description '<Description><Version>4.0</Version>
+   <LibraryPath>Signal\Block Diagram\Splitter.emx</LibraryPath>
+  <TimeStamp>2008-01-17 11:28:29</TimeStamp>
+<IsMainModel>1</IsMainModel>
+ <KeepParameterValues>False</KeepParameterValues>
+</Description>';
+       knot Splitter
+        ports
+         signal knot duplicatable out output [1];
+         signal knot in input [1];
+       end;
+       icon bg ellipse
+        figures
+         ellipse 620.8 284.8 627.2 291.2 color -1 fill 0;
+         ellipse 619.7 283.7 628.3 292.3 color -1;
+        terminals
+         input 624 288 fixed;
+       end;
+       implementation eq
+equations
+    collect (output) = input;
+implementation_end;
+      Splitter5 840 328
+       description '<Description><Version>4.0</Version>
+   <LibraryPath>Signal\Block Diagram\Splitter.emx</LibraryPath>
+  <TimeStamp>2008-01-17 11:28:29</TimeStamp>
+<IsMainModel>1</IsMainModel>
+ <KeepParameterValues>False</KeepParameterValues>
+</Description>';
+       knot Splitter
+        ports
+         signal knot duplicatable out output [1];
+         signal knot in input [1];
+       end;
+       icon bg ellipse
+        figures
+         ellipse 836.8 324.8 843.2 331.2 color -1 fill 0;
+         ellipse 835.7 323.7 844.3 332.3 color -1;
+        terminals
+         input 840 328 fixed;
+       end;
+       implementation eq
+equations
+    collect (output) = input;
+implementation_end;
+      Splitter6 304 328
+       description '<Description><Version>4.0</Version>
+   <LibraryPath>Signal\Block Diagram\Splitter.emx</LibraryPath>
+  <TimeStamp>2008-01-17 11:28:29</TimeStamp>
+<IsMainModel>1</IsMainModel>
+ <KeepParameterValues>False</KeepParameterValues>
+</Description>';
+       knot Splitter
+        ports
+         signal knot duplicatable out output [1];
+         signal knot in input [1];
+       end;
+       icon bg ellipse
+        figures
+         ellipse 300.8 324.8 307.2 331.2 color -1 fill 0;
+         ellipse 299.7 323.7 308.3 332.3 color -1;
+        terminals
+         input 304 328 fixed;
+       end;
+       implementation eq
+equations
+    collect (output) = input;
+implementation_end;
+      Splitter7 792 416
+       description '<Description><Version>4.0</Version>
+   <LibraryPath>Signal\Block Diagram\Splitter.emx</LibraryPath>
+  <TimeStamp>2008-01-17 11:28:29</TimeStamp>
+<IsMainModel>1</IsMainModel>
+ <KeepParameterValues>False</KeepParameterValues>
+</Description>';
+       knot Splitter
+        ports
+         signal knot duplicatable out output [1];
+         signal knot in input [1];
+       end;
+       icon bg ellipse
+        figures
+         ellipse 788.8 412.8 795.2 419.2 color -1 fill 0;
+         ellipse 787.7 411.7 796.3 420.3 color -1;
+        terminals
+         input 792 416 fixed;
+       end;
+       implementation eq
+equations
+    collect (output) = input;
+implementation_end;
+      VX1 192 -16
+       description '<Information><Description><Version>4.2</Version><IsMainModel>1</IsMainModel><KeepParameterValues>False</KeepParameterValues><LibraryPath>Bond Graph\OneJunction.emx</LibraryPath><TimeStamp>2011-11-29 16:17:51</TimeStamp><AllowLibraryUpdate>True</AllowLibraryUpdate><Configuration><struct><member><name>DocumentationMask</name><value><struct></struct></value></member></struct></Configuration></Description></Information>';
+       knot OneJunction
+        ports
+         translation knot duplicatable none p [1];
+         signal knot out flow [1];
+        restrictions
+         causality constraint one_out p;
+       end;
+       icon bg
+        figures
+         text '1' 192 -16 18 bold;
+       end;
+       implementation eq
+equations
+	sum (direct (p.e)) = 0;
+	equal (collect (p.f));
+	flow = first (p.f);
+implementation_end;
+      VX2 624 -16
+       description '<Information><Description><Version>4.2</Version><IsMainModel>1</IsMainModel><KeepParameterValues>False</KeepParameterValues><LibraryPath>Bond Graph\OneJunction.emx</LibraryPath><TimeStamp>2011-11-29 16:17:51</TimeStamp><AllowLibraryUpdate>True</AllowLibraryUpdate><Configuration><struct><member><name>DocumentationMask</name><value><struct></struct></value></member></struct></Configuration></Description></Information>';
+       knot OneJunction
+        ports
+         translation knot duplicatable none p [1];
+         signal knot out flow [1];
+        restrictions
+         causality constraint one_out p;
+       end;
+       icon bg
+        figures
+         text '1' 624 -16 18 bold;
+       end;
+       implementation eq
+equations
+	sum (direct (p.e)) = 0;
+	equal (collect (p.f));
+	flow = first (p.f);
+implementation_end;
+      VXa 464 -16
+       description '<Information><Description><Version>4.2</Version><IsMainModel>1</IsMainModel><KeepParameterValues>False</KeepParameterValues><LibraryPath>Bond Graph\OneJunction.emx</LibraryPath><TimeStamp>2011-11-29 16:17:51</TimeStamp><AllowLibraryUpdate>True</AllowLibraryUpdate><Configuration><struct><member><name>DocumentationMask</name><value><struct></struct></value></member></struct></Configuration></Description></Information>';
+       knot OneJunction
+        ports
+         translation knot duplicatable none p [1];
+         signal knot out flow [1];
+        restrictions
+         causality constraint one_out p;
+       end;
+       icon bg bottom
+        figures
+         text '1' 464 -16 18 bold;
+       end;
+       implementation eq
+equations
+	sum (direct (p.e)) = 0;
+	equal (collect (p.f));
+	flow = first (p.f);
+implementation_end;
+      VXe 776 -16
+       description '<Information><Description><Version>4.2</Version><IsMainModel>1</IsMainModel><KeepParameterValues>False</KeepParameterValues><LibraryPath>Bond Graph\OneJunction.emx</LibraryPath><TimeStamp>2011-11-29 16:17:51</TimeStamp><AllowLibraryUpdate>True</AllowLibraryUpdate><Configuration><struct><member><name>DocumentationMask</name><value><struct></struct></value></member></struct></Configuration></Description></Information>';
+       knot OneJunction
+        ports
+         translation knot duplicatable none p [1];
+         signal knot out flow [1];
+        restrictions
+         causality constraint one_out p;
+       end;
+       icon bg bottom
+        figures
+         text '1' 776 -16 18 bold;
+       end;
+       implementation eq
+equations
+	sum (direct (p.e)) = 0;
+	equal (collect (p.f));
+	flow = first (p.f);
+implementation_end;
+      VY1 192 384
+       description '<Information><Description><Version>4.2</Version><IsMainModel>1</IsMainModel><KeepParameterValues>False</KeepParameterValues><LibraryPath>Bond Graph\OneJunction.emx</LibraryPath><TimeStamp>2011-11-29 16:17:51</TimeStamp><AllowLibraryUpdate>True</AllowLibraryUpdate><Configuration><struct><member><name>DocumentationMask</name><value><struct></struct></value></member></struct></Configuration></Description></Information>';
+       knot OneJunction
+        ports
+         translation knot duplicatable none p [1];
+         signal knot out flow [1];
+        restrictions
+         causality constraint one_out p;
+       end;
+       icon bg
+        figures
+         text '1' 192 384 18 bold;
+       end;
+       implementation eq
+equations
+	sum (direct (p.e)) = 0;
+	equal (collect (p.f));
+	flow = first (p.f);
+implementation_end;
+      VY2 624 384
+       description '<Information><Description><Version>4.2</Version><IsMainModel>1</IsMainModel><KeepParameterValues>False</KeepParameterValues><LibraryPath>Bond Graph\OneJunction.emx</LibraryPath><TimeStamp>2011-11-29 16:17:51</TimeStamp><AllowLibraryUpdate>True</AllowLibraryUpdate><Configuration><struct><member><name>DocumentationMask</name><value><struct></struct></value></member></struct></Configuration></Description></Information>';
+       knot OneJunction
+        ports
+         translation knot duplicatable none p [1];
+         signal knot out flow [1];
+        restrictions
+         causality constraint one_out p;
+       end;
+       icon bg
+        figures
+         text '1' 624 384 18 bold;
+       end;
+       implementation eq
+equations
+	sum (direct (p.e)) = 0;
+	equal (collect (p.f));
+	flow = first (p.f);
+implementation_end;
+      VYa 464 384
+       description '<Information><Description><Version>4.2</Version><IsMainModel>1</IsMainModel><KeepParameterValues>False</KeepParameterValues><LibraryPath>Bond Graph\OneJunction.emx</LibraryPath><TimeStamp>2011-11-29 16:17:51</TimeStamp><AllowLibraryUpdate>True</AllowLibraryUpdate><Configuration><struct><member><name>DocumentationMask</name><value><struct></struct></value></member></struct></Configuration></Description></Information>';
+       knot OneJunction
+        ports
+         translation knot duplicatable none p [1];
+         signal knot out flow [1];
+        restrictions
+         causality constraint one_out p;
+       end;
+       icon bg bottom
+        figures
+         text '1' 464 384 18 bold;
+       end;
+       implementation eq
+equations
+	sum (direct (p.e)) = 0;
+	equal (collect (p.f));
+	flow = first (p.f);
+implementation_end;
+      VYe 776 384
+       description '<Information><Description><Version>4.2</Version><IsMainModel>1</IsMainModel><KeepParameterValues>False</KeepParameterValues><LibraryPath>Bond Graph\OneJunction.emx</LibraryPath><TimeStamp>2011-11-29 16:17:51</TimeStamp><AllowLibraryUpdate>True</AllowLibraryUpdate><Configuration><struct><member><name>DocumentationMask</name><value><struct></struct></value></member></struct></Configuration></Description></Information>';
+       knot OneJunction
+        ports
+         translation knot duplicatable none p [1];
+         signal knot out flow [1];
+        restrictions
+         causality constraint one_out p;
+       end;
+       icon bg bottom
+        figures
+         text '1' 776 384 18 bold;
+       end;
+       implementation eq
+equations
+	sum (direct (p.e)) = 0;
+	equal (collect (p.f));
+	flow = first (p.f);
+implementation_end;
+      ZeroJunction 112 -16
+       description '<Information>
+ <Description>
+    <Version>4.2</Version>
+<IsMainModel>1</IsMainModel>
+  <KeepParameterValues>False</KeepParameterValues>
+    <LibraryPath>Bond Graph\ZeroJunction.emx</LibraryPath>
+  <TimeStamp>2011-11-29 16:45:16</TimeStamp>
+</Description>
+</Information>';
+       knot ZeroJunction
+        ports
+         translation knot duplicatable none p [1];
+         signal knot out effort [1];
+        restrictions
+         causality constraint one_in p;
+       end;
+       icon bg
+        figures
+         text '0' 112 -16 18 bold;
+       end;
+       implementation eq
+equations
+	sum (direct (p.f)) = 0;
+	equal (collect (p.e));
+	effort = first (p.e);
+implementation_end;
+      ZeroJunction1 272 -16
+       description '<Information>
+ <Description>
+    <Version>4.2</Version>
+<IsMainModel>1</IsMainModel>
+  <KeepParameterValues>False</KeepParameterValues>
+    <LibraryPath>Bond Graph\ZeroJunction.emx</LibraryPath>
+  <TimeStamp>2011-11-29 16:45:16</TimeStamp>
+</Description>
+</Information>';
+       knot ZeroJunction
+        ports
+         translation knot duplicatable none p [1];
+         signal knot out effort [1];
+        restrictions
+         causality constraint one_in p;
+       end;
+       icon bg
+        figures
+         text '0' 272 -16 18 bold;
+       end;
+       implementation eq
+equations
+	sum (direct (p.f)) = 0;
+	equal (collect (p.e));
+	effort = first (p.e);
+implementation_end;
+      ZeroJunction10 528 184
+       description '<Information><Description><Version>4.2</Version><IsMainModel>1</IsMainModel><KeepParameterValues>False</KeepParameterValues><LibraryPath>Bond Graph\ZeroJunction.emx</LibraryPath><TimeStamp>2011-11-29 16:45:16</TimeStamp><AllowLibraryUpdate>True</AllowLibraryUpdate><Configuration><struct><member><name>DocumentationMask</name><value><struct></struct></value></member></struct></Configuration></Description></Information>';
+       knot ZeroJunction
+        ports
+         rotation knot duplicatable none p [1];
+         signal knot out effort [1];
+        restrictions
+         causality constraint one_in p;
+       end;
+       icon bg
+        figures
+         text '0' 528 184 18 bold;
+       end;
+       implementation eq
+equations
+	sum (direct (p.f)) = 0;
+	equal (collect (p.e));
+	effort = first (p.e);
+implementation_end;
+      ZeroJunction2 112 384
+       description '<Information>
+ <Description>
+    <Version>4.2</Version>
+<IsMainModel>1</IsMainModel>
+  <KeepParameterValues>False</KeepParameterValues>
+    <LibraryPath>Bond Graph\ZeroJunction.emx</LibraryPath>
+  <TimeStamp>2011-11-29 16:45:16</TimeStamp>
+</Description>
+</Information>';
+       knot ZeroJunction
+        ports
+         translation knot duplicatable none p [1];
+         signal knot out effort [1];
+        restrictions
+         causality constraint one_in p;
+       end;
+       icon bg
+        figures
+         text '0' 112 384 18 bold;
+       end;
+       implementation eq
+equations
+	sum (direct (p.f)) = 0;
+	equal (collect (p.e));
+	effort = first (p.e);
+implementation_end;
+      ZeroJunction3 272 384
+       description '<Information>
+ <Description>
+    <Version>4.2</Version>
+<IsMainModel>1</IsMainModel>
+  <KeepParameterValues>False</KeepParameterValues>
+    <LibraryPath>Bond Graph\ZeroJunction.emx</LibraryPath>
+  <TimeStamp>2011-11-29 16:45:16</TimeStamp>
+</Description>
+</Information>';
+       knot ZeroJunction
+        ports
+         translation knot duplicatable none p [1];
+         signal knot out effort [1];
+        restrictions
+         causality constraint one_in p;
+       end;
+       icon bg
+        figures
+         text '0' 272 384 18 bold;
+       end;
+       implementation eq
+equations
+	sum (direct (p.f)) = 0;
+	equal (collect (p.e));
+	effort = first (p.e);
+implementation_end;
+      ZeroJunction5 544 -16
+       description '<Information>
+ <Description>
+    <Version>4.2</Version>
+<IsMainModel>1</IsMainModel>
+  <KeepParameterValues>False</KeepParameterValues>
+    <LibraryPath>Bond Graph\ZeroJunction.emx</LibraryPath>
+  <TimeStamp>2011-11-29 16:45:16</TimeStamp>
+</Description>
+</Information>';
+       knot ZeroJunction
+        ports
+         translation knot duplicatable none p [1];
+         signal knot out effort [1];
+        restrictions
+         causality constraint one_in p;
+       end;
+       icon bg
+        figures
+         text '0' 544 -16 18 bold;
+       end;
+       implementation eq
+equations
+	sum (direct (p.f)) = 0;
+	equal (collect (p.e));
+	effort = first (p.e);
+implementation_end;
+      ZeroJunction6 704 -16
+       description '<Information>
+ <Description>
+    <Version>4.2</Version>
+<IsMainModel>1</IsMainModel>
+  <KeepParameterValues>False</KeepParameterValues>
+    <LibraryPath>Bond Graph\ZeroJunction.emx</LibraryPath>
+  <TimeStamp>2011-11-29 16:45:16</TimeStamp>
+</Description>
+</Information>';
+       knot ZeroJunction
+        ports
+         translation knot duplicatable none p [1];
+         signal knot out effort [1];
+        restrictions
+         causality constraint one_in p;
+       end;
+       icon bg
+        figures
+         text '0' 704 -16 18 bold;
+       end;
+       implementation eq
+equations
+	sum (direct (p.f)) = 0;
+	equal (collect (p.e));
+	effort = first (p.e);
+implementation_end;
+      ZeroJunction7 544 384
+       description '<Information>
+ <Description>
+    <Version>4.2</Version>
+<IsMainModel>1</IsMainModel>
+  <KeepParameterValues>False</KeepParameterValues>
+    <LibraryPath>Bond Graph\ZeroJunction.emx</LibraryPath>
+  <TimeStamp>2011-11-29 16:45:16</TimeStamp>
+</Description>
+</Information>';
+       knot ZeroJunction
+        ports
+         translation knot duplicatable none p [1];
+         signal knot out effort [1];
+        restrictions
+         causality constraint one_in p;
+       end;
+       icon bg
+        figures
+         text '0' 544 384 18 bold;
+       end;
+       implementation eq
+equations
+	sum (direct (p.f)) = 0;
+	equal (collect (p.e));
+	effort = first (p.e);
+implementation_end;
+      ZeroJunction8 704 384
+       description '<Information>
+ <Description>
+    <Version>4.2</Version>
+<IsMainModel>1</IsMainModel>
+  <KeepParameterValues>False</KeepParameterValues>
+    <LibraryPath>Bond Graph\ZeroJunction.emx</LibraryPath>
+  <TimeStamp>2011-11-29 16:45:16</TimeStamp>
+</Description>
+</Information>';
+       knot ZeroJunction
+        ports
+         translation knot duplicatable none p [1];
+         signal knot out effort [1];
+        restrictions
+         causality constraint one_in p;
+       end;
+       icon bg
+        figures
+         text '0' 704 384 18 bold;
+       end;
+       implementation eq
+equations
+	sum (direct (p.f)) = 0;
+	equal (collect (p.e));
+	effort = first (p.e);
+implementation_end;
+      ZeroJunction9 96 184
+       description '<Information><Description><Version>4.2</Version><IsMainModel>1</IsMainModel><KeepParameterValues>False</KeepParameterValues><LibraryPath>Bond Graph\ZeroJunction.emx</LibraryPath><TimeStamp>2011-11-29 16:45:16</TimeStamp><AllowLibraryUpdate>True</AllowLibraryUpdate><Configuration><struct><member><name>DocumentationMask</name><value><struct></struct></value></member></struct></Configuration></Description></Information>';
+       knot ZeroJunction
+        ports
+         rotation knot duplicatable none p [1];
+         signal knot out effort [1];
+        restrictions
+         causality constraint one_in p;
+       end;
+       icon bg
+        figures
+         text '0' 96 184 18 bold;
+       end;
+       implementation eq
+equations
+	sum (direct (p.f)) = 0;
+	equal (collect (p.e));
+	effort = first (p.e);
+implementation_end;
+     end;
+     connections
+      VX1\p => ZeroJunction1\p;
+      VX2\p => Mass2_X2\p;
+      OneJunction1\p => R3\p1 112 240;
+      ZeroJunction\p => VX1\p;
+      VX2\p => ZeroJunction6\p;
+      R6\p2 => ZeroJunction6\p;
+      OneJunction2\p =>| I2\p user;
+      P2\p <= VY2\p;
+      OneJunction2\p => OneJunction4\p;
+      VY1\p => P1\p;
+      OneJunction2\p => R6\p1 704 128;
+      OneJunction2\p => R8\p1 704 240;
+      OneJunction1\p => R2\p1 272 128;
+      ZeroJunction1\p => VXa\p;
+      R8\p2 => ZeroJunction8\p;
+      VY1\p => ZeroJunction3\p;
+      VXa\p => ZeroJunction5\p;
+      OneJunction1\p => R1\p1 112 128;
+      OneJunction2\p => R7\p1 544 240;
+      R5\p2 => ZeroJunction5\p;
+      R3\p2 => ZeroJunction2\p;
+      VYa\p => ZeroJunction7\p;
+      ZeroJunction5\p => VX2\p;
+      ZeroJunction10\p => OneJunction2\p;
+      R1\p2 => ZeroJunction\p;
+      T1 => ZeroJunction9\p;
+      R4\p2 => ZeroJunction3\p;
+      T2 => ZeroJunction10\p;
+      ZeroJunction7\p => VY2\p;
+      ZeroJunction8\p => VYe\p;
+      R7\p2 => ZeroJunction7\p;
+      VY2\p => Mass2_Y2\p;
+      VY2\p => ZeroJunction8\p;
+      VX1\p => Mass1_X1\p;
+      OneJunction1\p => OneJunction3\p;
+      ZeroJunction6\p => VXe\p;
+      OneJunction1\p => R4\p1 272 240;
+      ZeroJunction3\p => VYa\p;
+      ZeroJunction2\p => VY1\p;
+      OneJunction2\p => R5\p1 544 128;
+      ZeroJunction1\p <= R2\p2;
+      ZeroJunction9\p => OneJunction1\p;
+      VY1\p => Mass1_Y1\p;
+      OneJunction1\p =>| I1\p user;
+      Splitter1\output -> Splitter6\input 216 288 240 288 240 304 264 328;
+      Splitter4\output -> R5\r 600 288 576 288 576 112 color 8355711;
+      Splitter6\output -> Splitter3\input;
+      RG2\Y2 -> Y2 840 448;
+      RG3\Ye -> Ye 864 16;
+      OneJunction3\flow -> Omega1 320 232;
+      Splitter3\output -> Theta1;
+      Splitter1\output -> R3\r 168 288 color 8355711;
+      Integrate\output -> Splitter1\input;
+      Integrate1\output -> Splitter4\input;
+      Splitter7\output -> RG3\theta1 792 -16 color 8355711;
+      OneJunction4\flow -> Omega2 752 232;
+      OneJunction2\flow -> Integrate1\input;
+      Splitter4\output -> R7\r 600 288 color 8355711;
+      Splitter4\output -> R6\r 648 288 672 288 672 112 color 8355711;
+      RG3\Xe -> Xe;
+      RG1\Y1 -> Y1 344 448;
+      RG2\X2 -> X2;
+      Splitter4\output -> R8\r 648 288 color 8355711;
+      Splitter1\output -> R2\r 216 288 240 288 240 112 color 8355711;
+      Splitter1\output -> R4\r 216 288 color 8355711;
+      Splitter4\output -> Splitter5\input 648 288 672 288 672 304 696 328;
+      Splitter6\output -> Splitter7\input 304 496 792 496 color 8355711;
+      OneJunction1\flow -> Integrate\input;
+      Splitter5\output -> Theta2;
+      Splitter3\output -> RG1\theta1 color 8355711;
+      Splitter5\output -> RG3\theta2 color 8355711;
+      Splitter7\output -> RG2\theta1 792 416 color 8355711;
+      RG1\X1 -> X1;
+      Splitter5\output -> RG2\theta2 color 8355711;
+      Splitter1\output -> R1\r 168 288 144 288 144 112 color 8355711;
+     end;
+     figures
+      group
+       text 'Link 2' 520 -64 'Arial Narrow' 21 bold;
+       rectangle 496 -48 752 480 color 9143144 fill 16443110 dashed;
+       text 'Omega2' 704 168 'Arial Narrow' 16 bold italic;
+      end;
+      rectangle 880 -64 944 464 fill 16640705 width 2;
+      group
+       group
+        text 'Link 1' 88 -67 'Arial Narrow' 21 bold;
+        rectangle 64 -51 320 477 color 9143144 fill 16443110 dashed;
+        text 'Omega1' 280 165 'Arial Narrow' 16 bold italic;
+       end;
+      end;
+      rectangle 376 -64 440 464 fill 16640705 width 2;
+      text 'Salidas Link 1' 408 480 'Arial Narrow' 18 bold italic;
+      text 'Salidas Link 2' 912 480 'Arial Narrow' 18 bold italic;
+    implementation_end;
+   Splitter1 672 80
+    description '<Description><Version>4.0</Version>
+   <LibraryPath>Signal\Block Diagram\Splitter.emx</LibraryPath>
+  <TimeStamp>2008-01-17 11:28:29</TimeStamp>
+<IsMainModel>1</IsMainModel>
+ <KeepParameterValues>False</KeepParameterValues>
+</Description>';
+    knot Splitter
+     ports
+      signal knot duplicatable out output [1];
+      signal knot in input [1];
+    end;
+    icon bg ellipse
+     figures
+      ellipse 668.8 76.8 675.2 83.2 color -1 fill 0;
+      ellipse 667.7 75.7 676.3 84.3 color -1;
+     terminals
+      input 672 80 fixed;
+    end;
+    implementation eq
+equations
+    collect (output) = input;
+implementation_end;
+   Splitter2 672 352
+    description '<Description><Version>4.0</Version>
+   <LibraryPath>Signal\Block Diagram\Splitter.emx</LibraryPath>
+  <TimeStamp>2008-01-17 11:28:29</TimeStamp>
+<IsMainModel>1</IsMainModel>
+ <KeepParameterValues>False</KeepParameterValues>
+</Description>';
+    knot Splitter
+     ports
+      signal knot duplicatable out output [1];
+      signal knot in input [1];
+    end;
+    icon bg ellipse
+     figures
+      ellipse 668.8 348.8 675.2 355.2 color -1 fill 0;
+      ellipse 667.7 347.7 676.3 356.3 color -1;
+     terminals
+      input 672 352 fixed;
+    end;
+    implementation eq
+equations
+    collect (output) = input;
+implementation_end;
+   Splitter3 64 144
+    description '<Description><Version>4.0</Version>
+   <LibraryPath>Signal\Block Diagram\Splitter.emx</LibraryPath>
+  <TimeStamp>2008-01-17 11:28:29</TimeStamp>
+<IsMainModel>1</IsMainModel>
+ <KeepParameterValues>False</KeepParameterValues>
+</Description>';
+    knot Splitter
+     ports
+      signal knot duplicatable out output [1];
+      signal knot in input [1];
+    end;
+    icon bg ellipse
+     figures
+      ellipse 60.8 140.8 67.2 147.2 color -1 fill 0;
+      ellipse 59.7 139.7 68.3 148.3 color -1;
+     terminals
+      input 64 144 fixed;
+    end;
+    implementation eq
+equations
+    collect (output) = input;
+implementation_end;
+   Splitter4 64 288
+    description '<Description><Version>4.0</Version>
+   <LibraryPath>Signal\Block Diagram\Splitter.emx</LibraryPath>
+  <TimeStamp>2008-01-17 11:28:29</TimeStamp>
+<IsMainModel>1</IsMainModel>
+ <KeepParameterValues>False</KeepParameterValues>
+</Description>';
+    knot Splitter
+     ports
+      signal knot duplicatable out output [1];
+      signal knot in input [1];
+    end;
+    icon bg ellipse
+     figures
+      ellipse 60.8 284.8 67.2 291.2 color -1 fill 0;
+      ellipse 59.7 283.7 68.3 292.3 color -1;
+     terminals
+      input 64 288 fixed;
+    end;
+    implementation eq
+equations
+    collect (output) = input;
+implementation_end;
+   T1 600 16
+    description '<Information><Description><Version>4.0</Version><IsMainModel>1</IsMainModel><KeepParameterValues>False</KeepParameterValues><LibraryPath>Signal\Block Diagram\SignalMonitor.emx</LibraryPath><TimeStamp>2007-9-26 12:14:4</TimeStamp><AllowLibraryUpdate>True</AllowLibraryUpdate><Configuration><struct><member><name>DocumentationMask</name><value><struct></struct></value></member></struct></Configuration></Description></Information>';
+    type SignalMonitor
+     ports
+      signal in input;
+    end;
+    icon bg right
+     figures
+      rectangle 584 0 616 32 fill 15132390;
+      rectangle 589.7 5.8 610.3 26.6 color 16711680 fill 11776947 width 2;
+      rectangle 591.8 8.4 607.9 24 color -1 fill 16777215;
+      line 593.9 10.7 593.9 22 fill 16777215;
+      line 592 20.4 604.5 20.4 fill 16777215;
+      line 593.5 20.1 606.4 13.7 color 255 fill 16777215;
+    end;
+    implementation eq
+variables
+	real interesting plot;
+equations
+	plot = input;
+   implementation_end;
+   T2 600 416
+    description '<Information><Description><Version>4.0</Version><IsMainModel>1</IsMainModel><KeepParameterValues>False</KeepParameterValues><LibraryPath>Signal\Block Diagram\SignalMonitor.emx</LibraryPath><TimeStamp>2007-9-26 12:14:4</TimeStamp><AllowLibraryUpdate>True</AllowLibraryUpdate><Configuration><struct><member><name>DocumentationMask</name><value><struct></struct></value></member></struct></Configuration></Description></Information>';
+    type SignalMonitor
+     ports
+      signal in input;
+    end;
+    icon bg right
+     figures
+      rectangle 584 400 616 432 fill 15132390;
+      rectangle 589.7 405.8 610.3 426.6 color 16711680 fill 11776947 width 2;
+      rectangle 591.8 408.4 607.9 424 color -1 fill 16777215;
+      line 593.9 410.7 593.9 422 fill 16777215;
+      line 592 420.4 604.5 420.4 fill 16777215;
+      line 593.5 420.1 606.4 413.7 color 255 fill 16777215;
+    end;
+    implementation eq
+variables
+	real interesting plot;
+equations
+	plot = input;
+   implementation_end;
+   Theta1 672 16
+    description '<Information><Description><Version>4.0</Version><IsMainModel>1</IsMainModel><KeepParameterValues>False</KeepParameterValues><LibraryPath>Signal\Block Diagram\SignalMonitor.emx</LibraryPath><TimeStamp>2007-9-26 12:14:4</TimeStamp><AllowLibraryUpdate>True</AllowLibraryUpdate><Configuration><struct><member><name>DocumentationMask</name><value><struct></struct></value></member></struct></Configuration></Description></Information>';
+    type SignalMonitor
+     ports
+      signal in input;
+    end;
+    icon bg right
+     figures
+      rectangle 656 0 688 32 fill 15132390;
+      rectangle 661.7 5.8 682.3 26.6 color 16711680 fill 11776947 width 2;
+      rectangle 663.8 8.4 679.9 24 color -1 fill 16777215;
+      line 665.9 10.7 665.9 22 fill 16777215;
+      line 664 20.4 676.5 20.4 fill 16777215;
+      line 665.5 20.1 678.4 13.7 color 255 fill 16777215;
+    end;
+    implementation eq
+variables
+	real interesting plot;
+equations
+	plot = input;
+   implementation_end;
+   Theta2 672 416
+    description '<Information><Description><Version>4.0</Version><IsMainModel>1</IsMainModel><KeepParameterValues>False</KeepParameterValues><LibraryPath>Signal\Block Diagram\SignalMonitor.emx</LibraryPath><TimeStamp>2007-9-26 12:14:4</TimeStamp><AllowLibraryUpdate>True</AllowLibraryUpdate><Configuration><struct><member><name>DocumentationMask</name><value><struct></struct></value></member></struct></Configuration></Description></Information>';
+    type SignalMonitor
+     ports
+      signal in input;
+    end;
+    icon bg right
+     figures
+      rectangle 656 400 688 432 fill 15132390;
+      rectangle 661.7 405.8 682.3 426.6 color 16711680 fill 11776947 width 2;
+      rectangle 663.8 408.4 679.9 424 color -1 fill 16777215;
+      line 665.9 410.7 665.9 422 fill 16777215;
+      line 664 420.4 676.5 420.4 fill 16777215;
+      line 665.5 420.1 678.4 413.7 color 255 fill 16777215;
+    end;
+    implementation eq
+variables
+	real interesting plot;
+equations
+	plot = input;
+   implementation_end;
+   X1 872 16
+    description '<Information><Description><Version>4.0</Version><IsMainModel>1</IsMainModel><KeepParameterValues>False</KeepParameterValues><LibraryPath>Signal\Block Diagram\SignalMonitor.emx</LibraryPath><TimeStamp>2007-9-26 12:14:4</TimeStamp><AllowLibraryUpdate>True</AllowLibraryUpdate><Configuration><struct><member><name>DocumentationMask</name><value><struct></struct></value></member></struct></Configuration></Description></Information>';
+    type SignalMonitor
+     ports
+      signal in input;
+    end;
+    icon bg bottom
+     figures
+      rectangle 856 0 888 32 fill 15132390;
+      rectangle 861.7 5.8 882.3 26.6 color 16711680 fill 11776947 width 2;
+      rectangle 863.8 8.4 879.9 24 color -1 fill 16777215;
+      line 865.9 10.7 865.9 22 fill 16777215;
+      line 864 20.4 876.5 20.4 fill 16777215;
+      line 865.5 20.1 878.4 13.7 color 255 fill 16777215;
+    end;
+    implementation eq
+variables
+	real interesting plot;
+equations
+	plot = input;
+   implementation_end;
+   X2 872 352
+    description '<Information><Description><Version>4.0</Version><IsMainModel>1</IsMainModel><KeepParameterValues>False</KeepParameterValues><LibraryPath>Signal\Block Diagram\SignalMonitor.emx</LibraryPath><TimeStamp>2007-9-26 12:14:4</TimeStamp><AllowLibraryUpdate>True</AllowLibraryUpdate><Configuration><struct><member><name>DocumentationMask</name><value><struct></struct></value></member></struct></Configuration></Description></Information>';
+    type SignalMonitor
+     ports
+      signal in input;
+    end;
+    icon bg bottom
+     figures
+      rectangle 856 336 888 368 fill 15132390;
+      rectangle 861.7 341.8 882.3 362.6 color 16711680 fill 11776947 width 2;
+      rectangle 863.8 344.4 879.9 360 color -1 fill 16777215;
+      line 865.9 346.7 865.9 358 fill 16777215;
+      line 864 356.4 876.5 356.4 fill 16777215;
+      line 865.5 356.1 878.4 349.7 color 255 fill 16777215;
+    end;
+    implementation eq
+variables
+	real interesting plot;
+equations
+	plot = input;
+   implementation_end;
+   Xe 968 184
+    description '<Information><Description><Version>4.0</Version><IsMainModel>1</IsMainModel><KeepParameterValues>False</KeepParameterValues><LibraryPath>Signal\Block Diagram\SignalMonitor.emx</LibraryPath><TimeStamp>2007-9-26 12:14:4</TimeStamp><AllowLibraryUpdate>True</AllowLibraryUpdate><Configuration><struct><member><name>DocumentationMask</name><value><struct></struct></value></member></struct></Configuration></Description></Information>';
+    type SignalMonitor
+     ports
+      signal in input;
+    end;
+    icon bg bottom
+     figures
+      rectangle 952 168 984 200 fill 15132390;
+      rectangle 957.7 173.8 978.3 194.6 color 16711680 fill 11776947 width 2;
+      rectangle 959.8 176.4 975.9 192 color -1 fill 16777215;
+      line 961.9 178.7 961.9 190 fill 16777215;
+      line 960 188.4 972.5 188.4 fill 16777215;
+      line 961.5 188.1 974.4 181.7 color 255 fill 16777215;
+    end;
+    implementation eq
+variables
+	real interesting plot;
+equations
+	plot = input;
+   implementation_end;
+   Y1 872 80
+    description '<Information><Description><Version>4.0</Version><IsMainModel>1</IsMainModel><KeepParameterValues>False</KeepParameterValues><LibraryPath>Signal\Block Diagram\SignalMonitor.emx</LibraryPath><TimeStamp>2007-9-26 12:14:4</TimeStamp><AllowLibraryUpdate>True</AllowLibraryUpdate><Configuration><struct><member><name>DocumentationMask</name><value><struct></struct></value></member></struct></Configuration></Description></Information>';
+    type SignalMonitor
+     ports
+      signal in input;
+    end;
+    icon bg bottom
+     figures
+      rectangle 856 64 888 96 fill 15132390;
+      rectangle 861.7 69.8 882.3 90.6 color 16711680 fill 11776947 width 2;
+      rectangle 863.8 72.4 879.9 88 color -1 fill 16777215;
+      line 865.9 74.7 865.9 86 fill 16777215;
+      line 864 84.4 876.5 84.4 fill 16777215;
+      line 865.5 84.1 878.4 77.7 color 255 fill 16777215;
+    end;
+    implementation eq
+variables
+	real interesting plot;
+equations
+	plot = input;
+   implementation_end;
+   Y2 872 416
+    description '<Information><Description><Version>4.0</Version><IsMainModel>1</IsMainModel><KeepParameterValues>False</KeepParameterValues><LibraryPath>Signal\Block Diagram\SignalMonitor.emx</LibraryPath><TimeStamp>2007-9-26 12:14:4</TimeStamp><AllowLibraryUpdate>True</AllowLibraryUpdate><Configuration><struct><member><name>DocumentationMask</name><value><struct></struct></value></member></struct></Configuration></Description></Information>';
+    type SignalMonitor
+     ports
+      signal in input;
+    end;
+    icon bg bottom
+     figures
+      rectangle 856 400 888 432 fill 15132390;
+      rectangle 861.7 405.8 882.3 426.6 color 16711680 fill 11776947 width 2;
+      rectangle 863.8 408.4 879.9 424 color -1 fill 16777215;
+      line 865.9 410.7 865.9 422 fill 16777215;
+      line 864 420.4 876.5 420.4 fill 16777215;
+      line 865.5 420.1 878.4 413.7 color 255 fill 16777215;
+    end;
+    implementation eq
+variables
+	real interesting plot;
+equations
+	plot = input;
+   implementation_end;
+   Ye 968 248
+    description '<Information><Description><Version>4.0</Version><IsMainModel>1</IsMainModel><KeepParameterValues>False</KeepParameterValues><LibraryPath>Signal\Block Diagram\SignalMonitor.emx</LibraryPath><TimeStamp>2007-9-26 12:14:4</TimeStamp><AllowLibraryUpdate>True</AllowLibraryUpdate><Configuration><struct><member><name>DocumentationMask</name><value><struct></struct></value></member></struct></Configuration></Description></Information>';
+    type SignalMonitor
+     ports
+      signal in input;
+    end;
+    icon bg bottom
+     figures
+      rectangle 952 232 984 264 fill 15132390;
+      rectangle 957.7 237.8 978.3 258.6 color 16711680 fill 11776947 width 2;
+      rectangle 959.8 240.4 975.9 256 color -1 fill 16777215;
+      line 961.9 242.7 961.9 254 fill 16777215;
+      line 960 252.4 972.5 252.4 fill 16777215;
+      line 961.5 252.1 974.4 245.7 color 255 fill 16777215;
+    end;
+    implementation eq
+variables
+	real interesting plot;
+equations
+	plot = input;
+   implementation_end;
+   ZeroJunction1 432 144
+    description '<Information><Description><Version>4.2</Version><IsMainModel>1</IsMainModel><KeepParameterValues>False</KeepParameterValues><LibraryPath>Bond Graph\ZeroJunction.emx</LibraryPath><TimeStamp>2011-11-29 16:45:16</TimeStamp><AllowLibraryUpdate>True</AllowLibraryUpdate><Configuration><struct><member><name>DocumentationMask</name><value><struct></struct></value></member></struct></Configuration></Description></Information>';
+    knot ZeroJunction
+     ports
+      rotation knot duplicatable none p [1];
+      signal knot out effort [1];
+     restrictions
+      causality constraint one_in p;
+    end;
+    icon bg
+     figures
+      text '0' 432 144 18 bold;
+    end;
+    implementation eq
+equations
+	sum (direct (p.f)) = 0;
+	equal (collect (p.e));
+	effort = first (p.e);
+implementation_end;
+   ZeroJunction2 432 288
+    description '<Information><Description><Version>4.2</Version><IsMainModel>1</IsMainModel><KeepParameterValues>False</KeepParameterValues><LibraryPath>Bond Graph\ZeroJunction.emx</LibraryPath><TimeStamp>2011-11-29 16:45:16</TimeStamp><AllowLibraryUpdate>True</AllowLibraryUpdate><Configuration><struct><member><name>DocumentationMask</name><value><struct></struct></value></member></struct></Configuration></Description></Information>';
+    knot ZeroJunction
+     ports
+      rotation knot duplicatable none p [1];
+      signal knot out effort [1];
+     restrictions
+      causality constraint one_in p;
+    end;
+    icon bg
+     figures
+      text '0' 432 288 18 bold;
+    end;
+    implementation eq
+equations
+	sum (direct (p.f)) = 0;
+	equal (collect (p.e));
+	effort = first (p.e);
+implementation_end;
+  end;
+  connections
+   RR\Omega1 -> Kd1\input 'Omega 1';
+   RR\Omega2 -> Kd2\input 'Omega 2';
+   MSe1\p => MCC_IP1\U 400 144;
+   ZeroJunction1\p => OneJunction1\p;
+   OneJunction1\p => RR\T1;
+   MCC_IP2\T => ZeroJunction2\p;
+   ZeroJunction2\p => OneJunction2\p;
+   OneJunction2\p => RR\T2;
+   MCC_IP1\T => ZeroJunction1\p;
+   MSe2\p => MCC_IP2\U 400 288;
+   RR\Xe -> Xe\input;
+   RR\Ye -> Ye\input;
+   Splitter2\output -> PlusMinus4\minus 672 352 152 352;
+   Splitter1\output -> PlusMinus3\minus 672 80 152 80;
+   RR\Y2 -> Y2\input 808 304 808 416;
+   Kp1\output -> PlusMinus1\plus;
+   Kp2\output -> PlusMinus2\plus;
+   Splitter2\output -> Theta2\input;
+   RR\Theta1 -> Splitter1\input;
+   G1\output -> PlusMinus1\plus 240 192 256 176;
+   RR\X1 -> X1\input 808 128 808 16;
+   KRPE1\output -> MSe1\effort 320 144;
+   RR\Y1 -> Y1\input 824 144 824 80;
+   KRPE2\output -> MSe2\effort 320 288;
+   PlusMinus1\output -> KRPE1\input;
+   G2\output -> PlusMinus2\plus 240 240 256 256;
+   Constant1\output -> Splitter3\input;
+   Kd2\output -> PlusMinus2\minus 320 240 288 288;
+   Constant2\output -> Splitter4\input;
+   Splitter3\output -> G1\input 64 192;
+   Splitter4\output -> G2\input 64 240;
+   Kd1\output -> PlusMinus1\minus 328 192 288 144;
+   PlusMinus3\output -> Kp1\input;
+   PlusMinus2\output -> KRPE2\input;
+   PlusMinus4\output -> Kp2\input;
+   RR\X2 -> X2\input 824 288 824 352;
+   ZeroJunction1\effort -> T1\input 520 64 600 64;
+   ZeroJunction2\effort -> T2\input 520 368 600 368;
+   RR\Theta2 -> Splitter2\input;
+   Splitter1\output -> Theta1\input;
+   Splitter3\output -> PlusMinus3\plus 'Theta1*';
+   Splitter4\output -> PlusMinus4\plus 'Theta2*';
+  end;
+ implementation_end;
+]]>
+</Sidops>
+ </Model>
+ <Experiments>
+     <DefaultExperiment><![CDATA[Experiment 1]]>
+</DefaultExperiment>
+  <Experiment>
+    <Name>Experiment 1</Name>
+    <CreatedBy></CreatedBy>
+    <Info></Info>
+<ExpData>
+  <VersionNumber>4.4</VersionNumber>
+  <ModelProperties>
+    <ModelProperty section="processing" entry="showresult" value="1"/>
+    <ModelProperty section="processing" entry="debug_showresult" value="1"/>
+  </ModelProperties>
+  <Variables>
+   <Constants>
+   </Constants>
+   <Parameters>
+   </Parameters>
+   <Initials>
+    <Variable>
+     <Name>MCC_IP1\La\state_initial</Name>
+     <Value>0</Value>
+    </Variable>
+    <Variable>
+     <Name>MCC_IP2\La\state_initial</Name>
+     <Value>0</Value>
+    </Variable>
+    <Variable>
+     <Name>RR\I1\state_initial</Name>
+     <Unit>N.m.s</Unit>
+     <Value>0</Value>
+    </Variable>
+    <Variable>
+     <Name>RR\I2\state_initial</Name>
+     <Unit>N.m.s</Unit>
+     <Value>0</Value>
+    </Variable>
+    <Variable>
+     <Name>MCC_IP1\OneJunction2\p4.T_initial</Name>
+     <Unit>N.m</Unit>
+     <Value>0</Value>
+    </Variable>
+    <Variable>
+     <Name>MCC_IP2\OneJunction2\p4.T_initial</Name>
+     <Unit>N.m</Unit>
+     <Value>0</Value>
+    </Variable>
+    <Variable>
+     <Name>RR\Mass2_X2\p.F_in_initial</Name>
+     <Unit>N</Unit>
+     <Value>0</Value>
+    </Variable>
+    <Variable>
+     <Name>RR\OneJunction1\p2.T_initial</Name>
+     <Unit>N.m</Unit>
+     <Value>0</Value>
+    </Variable>
+    <Variable>
+     <Name>RR\OneJunction2\p3.T_initial</Name>
+     <Unit>N.m</Unit>
+     <Value>0</Value>
+    </Variable>
+    <Variable>
+     <Name>RR\R4\p1.T_initial</Name>
+     <Unit>N.m</Unit>
+     <Value>0</Value>
+    </Variable>
+   </Initials>
+  </Variables>
+  <PlotSpecs>
+   <VarNames>
+    <VarName>time</VarName>
+    <VarName>T1\plot</VarName>
+    <VarName>T2\plot</VarName>
+    <VarName>Theta1\plot</VarName>
+    <VarName>Theta2\plot</VarName>
+    <VarName>X1\plot</VarName>
+    <VarName>X2\plot</VarName>
+    <VarName>Xe\plot</VarName>
+    <VarName>Y1\plot</VarName>
+    <VarName>Y2\plot</VarName>
+    <VarName>Ye\plot</VarName>
+    <VarName>RR\I1\state</VarName>
+    <VarName>RR\I2\state</VarName>
+    <VarName>MCC_IP1\Km\p2.T</VarName>
+    <VarName>MCC_IP2\Km\p2.T</VarName>
+    <VarName>RR\Omega1</VarName>
+    <VarName>RR\Omega2</VarName>
+    <VarName>MCC_IP1\Ia</VarName>
+    <VarName>MCC_IP2\Ia</VarName>
+   </VarNames>
+   <Plots>
+    <Plot>
+     <PlotType>GraphPlot</PlotType>
+     <BasePlot>
+       <PlotId>1</PlotId>
+       <UseWindowsBGColor>true</UseWindowsBGColor>
+       <BGColor>15790320</BGColor>
+       <PlotIsVisible>true</PlotIsVisible>
+     </BasePlot>
+     <Grid>
+      <DrawGrid>true</DrawGrid>
+      <GridColor>15780518</GridColor>
+      <XTicks>10</XTicks>
+      <YTicks>10</YTicks>
+      <ZTicks>10</ZTicks>
+      <Use3DLook>false</Use3DLook>
+     </Grid>
+     <PlotBGColor>16777215</PlotBGColor>
+     <ShowPlotTitle>false</ShowPlotTitle>
+     <TitlePosition>1</TitlePosition>
+     <PlotTitle>T1</PlotTitle>
+     <ShowXValues>true</ShowXValues>
+     <Fonts>
+      <TitleFont>
+       <Name>Arial</Name>
+       <Height>12</Height>
+       <PitchFamily>34</PitchFamily>
+       <Weight>400</Weight>
+       <Italic>0</Italic>
+       <UnderLine>0</UnderLine>
+       <StrikeOut>0</StrikeOut>
+       <Color>0</Color>
+      </TitleFont>
+      <LabelFont>
+       <Name>Arial</Name>
+       <Height>12</Height>
+       <PitchFamily>34</PitchFamily>
+       <Weight>400</Weight>
+       <Italic>0</Italic>
+       <UnderLine>0</UnderLine>
+       <StrikeOut>0</StrikeOut>
+       <Color>0</Color>
+      </LabelFont>
+      <ValuesFont>
+       <Name>Arial</Name>
+       <Height>10</Height>
+       <PitchFamily>34</PitchFamily>
+       <Weight>400</Weight>
+       <Italic>0</Italic>
+       <UnderLine>0</UnderLine>
+       <StrikeOut>0</StrikeOut>
+       <Color>0</Color>
+      </ValuesFont>
+     </Fonts>
+     <SharedXAxis>true</SharedXAxis>
+     <SharedYAxis>true</SharedYAxis>
+     <SharedZAxis>false</SharedZAxis>
+     <XAxes>
+      <Axis>
+       <Minimum>0</Minimum>
+       <Maximum>2</Maximum>
+       <Linear>true</Linear>
+       <Scaling>3</Scaling>
+       <Label>time</Label>
+      </Axis>
+     </XAxes>
+     <YAxes>
+      <Axis>
+       <Minimum>0</Minimum>
+       <Maximum>50</Maximum>
+       <Linear>true</Linear>
+       <Scaling>1</Scaling>
+       <Label>T1</Label>
+      </Axis>
+     </YAxes>
+     <ZAxes>
+     </ZAxes>
+     <Curves>
+      <Curve>
+       <LineColor>16711680</LineColor>
+       <LineStyle>1</LineStyle>
+       <TickColor>16711680</TickColor>
+       <TickStyle>0</TickStyle>
+       <CurveVisible>true</CurveVisible>
+       <PixelThresshold>1</PixelThresshold>
+       <LineThickness>1</LineThickness>
+       <LineOrder>1</LineOrder>
+       <ShowYValues>true</ShowYValues>
+       <XCurveData>
+        <ShowUnit>true</ShowUnit>
+        <VarName>time</VarName>
+       </XCurveData>
+       <YCurveData>
+        <ShowUnit>true</ShowUnit>
+        <VarName>T1\plot</VarName>
+       </YCurveData>
+      </Curve>
+     </Curves>
+     <Legenda>
+      <ShowLegenda>true</ShowLegenda>
+     </Legenda>
+    </Plot>
+    <Plot>
+     <PlotType>GraphPlot</PlotType>
+     <BasePlot>
+       <PlotId>2</PlotId>
+       <UseWindowsBGColor>true</UseWindowsBGColor>
+       <BGColor>15790320</BGColor>
+       <PlotIsVisible>true</PlotIsVisible>
+     </BasePlot>
+     <Grid>
+      <DrawGrid>true</DrawGrid>
+      <GridColor>15780518</GridColor>
+      <XTicks>10</XTicks>
+      <YTicks>10</YTicks>
+      <ZTicks>10</ZTicks>
+      <Use3DLook>false</Use3DLook>
+     </Grid>
+     <PlotBGColor>16777215</PlotBGColor>
+     <ShowPlotTitle>false</ShowPlotTitle>
+     <TitlePosition>1</TitlePosition>
+     <PlotTitle>T2</PlotTitle>
+     <ShowXValues>true</ShowXValues>
+     <Fonts>
+      <TitleFont>
+       <Name>Arial</Name>
+       <Height>12</Height>
+       <PitchFamily>34</PitchFamily>
+       <Weight>400</Weight>
+       <Italic>0</Italic>
+       <UnderLine>0</UnderLine>
+       <StrikeOut>0</StrikeOut>
+       <Color>0</Color>
+      </TitleFont>
+      <LabelFont>
+       <Name>Arial</Name>
+       <Height>12</Height>
+       <PitchFamily>34</PitchFamily>
+       <Weight>400</Weight>
+       <Italic>0</Italic>
+       <UnderLine>0</UnderLine>
+       <StrikeOut>0</StrikeOut>
+       <Color>0</Color>
+      </LabelFont>
+      <ValuesFont>
+       <Name>Arial</Name>
+       <Height>10</Height>
+       <PitchFamily>34</PitchFamily>
+       <Weight>400</Weight>
+       <Italic>0</Italic>
+       <UnderLine>0</UnderLine>
+       <StrikeOut>0</StrikeOut>
+       <Color>0</Color>
+      </ValuesFont>
+     </Fonts>
+     <SharedXAxis>true</SharedXAxis>
+     <SharedYAxis>true</SharedYAxis>
+     <SharedZAxis>false</SharedZAxis>
+     <XAxes>
+      <Axis>
+       <Minimum>0</Minimum>
+       <Maximum>2</Maximum>
+       <Linear>true</Linear>
+       <Scaling>3</Scaling>
+       <Label>time</Label>
+      </Axis>
+     </XAxes>
+     <YAxes>
+      <Axis>
+       <Minimum>-0.2</Minimum>
+       <Maximum>1.8</Maximum>
+       <Linear>true</Linear>
+       <Scaling>1</Scaling>
+       <Label>T2</Label>
+      </Axis>
+     </YAxes>
+     <ZAxes>
+     </ZAxes>
+     <Curves>
+      <Curve>
+       <LineColor>16711935</LineColor>
+       <LineStyle>1</LineStyle>
+       <TickColor>16711935</TickColor>
+       <TickStyle>0</TickStyle>
+       <CurveVisible>true</CurveVisible>
+       <PixelThresshold>1</PixelThresshold>
+       <LineThickness>1</LineThickness>
+       <LineOrder>1</LineOrder>
+       <ShowYValues>true</ShowYValues>
+       <XCurveData>
+        <ShowUnit>true</ShowUnit>
+        <VarName>time</VarName>
+       </XCurveData>
+       <YCurveData>
+        <ShowUnit>true</ShowUnit>
+        <VarName>T2\plot</VarName>
+       </YCurveData>
+      </Curve>
+     </Curves>
+     <Legenda>
+      <ShowLegenda>true</ShowLegenda>
+     </Legenda>
+    </Plot>
+    <Plot>
+     <PlotType>GraphPlot</PlotType>
+     <BasePlot>
+       <PlotId>3</PlotId>
+       <UseWindowsBGColor>true</UseWindowsBGColor>
+       <BGColor>15790320</BGColor>
+       <PlotIsVisible>true</PlotIsVisible>
+     </BasePlot>
+     <Grid>
+      <DrawGrid>true</DrawGrid>
+      <GridColor>15780518</GridColor>
+      <XTicks>10</XTicks>
+      <YTicks>10</YTicks>
+      <ZTicks>10</ZTicks>
+      <Use3DLook>false</Use3DLook>
+     </Grid>
+     <PlotBGColor>16777215</PlotBGColor>
+     <ShowPlotTitle>false</ShowPlotTitle>
+     <TitlePosition>1</TitlePosition>
+     <PlotTitle>Theta1</PlotTitle>
+     <ShowXValues>true</ShowXValues>
+     <Fonts>
+      <TitleFont>
+       <Name>Arial</Name>
+       <Height>12</Height>
+       <PitchFamily>34</PitchFamily>
+       <Weight>400</Weight>
+       <Italic>0</Italic>
+       <UnderLine>0</UnderLine>
+       <StrikeOut>0</StrikeOut>
+       <Color>0</Color>
+      </TitleFont>
+      <LabelFont>
+       <Name>Arial</Name>
+       <Height>12</Height>
+       <PitchFamily>34</PitchFamily>
+       <Weight>400</Weight>
+       <Italic>0</Italic>
+       <UnderLine>0</UnderLine>
+       <StrikeOut>0</StrikeOut>
+       <Color>0</Color>
+      </LabelFont>
+      <ValuesFont>
+       <Name>Arial</Name>
+       <Height>10</Height>
+       <PitchFamily>34</PitchFamily>
+       <Weight>400</Weight>
+       <Italic>0</Italic>
+       <UnderLine>0</UnderLine>
+       <StrikeOut>0</StrikeOut>
+       <Color>0</Color>
+      </ValuesFont>
+     </Fonts>
+     <SharedXAxis>true</SharedXAxis>
+     <SharedYAxis>true</SharedYAxis>
+     <SharedZAxis>false</SharedZAxis>
+     <XAxes>
+      <Axis>
+       <Minimum>0</Minimum>
+       <Maximum>2</Maximum>
+       <Linear>true</Linear>
+       <Scaling>3</Scaling>
+       <Label>time</Label>
+      </Axis>
+     </XAxes>
+     <YAxes>
+      <Axis>
+       <Minimum>-0.1</Minimum>
+       <Maximum>0.9</Maximum>
+       <Linear>true</Linear>
+       <Scaling>1</Scaling>
+       <Label>Theta1</Label>
+      </Axis>
+     </YAxes>
+     <ZAxes>
+     </ZAxes>
+     <Curves>
+      <Curve>
+       <LineColor>255</LineColor>
+       <LineStyle>1</LineStyle>
+       <TickColor>255</TickColor>
+       <TickStyle>0</TickStyle>
+       <CurveVisible>true</CurveVisible>
+       <PixelThresshold>1</PixelThresshold>
+       <LineThickness>1</LineThickness>
+       <LineOrder>1</LineOrder>
+       <ShowYValues>true</ShowYValues>
+       <XCurveData>
+        <ShowUnit>true</ShowUnit>
+        <VarName>time</VarName>
+       </XCurveData>
+       <YCurveData>
+        <ShowUnit>true</ShowUnit>
+        <VarName>Theta1\plot</VarName>
+       </YCurveData>
+      </Curve>
+     </Curves>
+     <Legenda>
+      <ShowLegenda>true</ShowLegenda>
+     </Legenda>
+    </Plot>
+    <Plot>
+     <PlotType>GraphPlot</PlotType>
+     <BasePlot>
+       <PlotId>4</PlotId>
+       <UseWindowsBGColor>true</UseWindowsBGColor>
+       <BGColor>15790320</BGColor>
+       <PlotIsVisible>true</PlotIsVisible>
+     </BasePlot>
+     <Grid>
+      <DrawGrid>true</DrawGrid>
+      <GridColor>15780518</GridColor>
+      <XTicks>10</XTicks>
+      <YTicks>10</YTicks>
+      <ZTicks>10</ZTicks>
+      <Use3DLook>false</Use3DLook>
+     </Grid>
+     <PlotBGColor>16777215</PlotBGColor>
+     <ShowPlotTitle>false</ShowPlotTitle>
+     <TitlePosition>1</TitlePosition>
+     <PlotTitle>Theta2</PlotTitle>
+     <ShowXValues>true</ShowXValues>
+     <Fonts>
+      <TitleFont>
+       <Name>Arial</Name>
+       <Height>12</Height>
+       <PitchFamily>34</PitchFamily>
+       <Weight>400</Weight>
+       <Italic>0</Italic>
+       <UnderLine>0</UnderLine>
+       <StrikeOut>0</StrikeOut>
+       <Color>0</Color>
+      </TitleFont>
+      <LabelFont>
+       <Name>Arial</Name>
+       <Height>12</Height>
+       <PitchFamily>34</PitchFamily>
+       <Weight>400</Weight>
+       <Italic>0</Italic>
+       <UnderLine>0</UnderLine>
+       <StrikeOut>0</StrikeOut>
+       <Color>0</Color>
+      </LabelFont>
+      <ValuesFont>
+       <Name>Arial</Name>
+       <Height>10</Height>
+       <PitchFamily>34</PitchFamily>
+       <Weight>400</Weight>
+       <Italic>0</Italic>
+       <UnderLine>0</UnderLine>
+       <StrikeOut>0</StrikeOut>
+       <Color>0</Color>
+      </ValuesFont>
+     </Fonts>
+     <SharedXAxis>true</SharedXAxis>
+     <SharedYAxis>true</SharedYAxis>
+     <SharedZAxis>false</SharedZAxis>
+     <XAxes>
+      <Axis>
+       <Minimum>0</Minimum>
+       <Maximum>2</Maximum>
+       <Linear>true</Linear>
+       <Scaling>3</Scaling>
+       <Label>time</Label>
+      </Axis>
+     </XAxes>
+     <YAxes>
+      <Axis>
+       <Minimum>-0.0035</Minimum>
+       <Maximum>0.0015</Maximum>
+       <Linear>true</Linear>
+       <Scaling>1</Scaling>
+       <Label>Theta2</Label>
+      </Axis>
+     </YAxes>
+     <ZAxes>
+     </ZAxes>
+     <Curves>
+      <Curve>
+       <LineColor>65280</LineColor>
+       <LineStyle>1</LineStyle>
+       <TickColor>65280</TickColor>
+       <TickStyle>0</TickStyle>
+       <CurveVisible>true</CurveVisible>
+       <PixelThresshold>1</PixelThresshold>
+       <LineThickness>1</LineThickness>
+       <LineOrder>1</LineOrder>
+       <ShowYValues>true</ShowYValues>
+       <XCurveData>
+        <ShowUnit>true</ShowUnit>
+        <VarName>time</VarName>
+       </XCurveData>
+       <YCurveData>
+        <ShowUnit>true</ShowUnit>
+        <VarName>Theta2\plot</VarName>
+       </YCurveData>
+      </Curve>
+     </Curves>
+     <Legenda>
+      <ShowLegenda>true</ShowLegenda>
+     </Legenda>
+    </Plot>
+    <Plot>
+     <PlotType>GraphPlot</PlotType>
+     <BasePlot>
+       <PlotId>5</PlotId>
+       <UseWindowsBGColor>true</UseWindowsBGColor>
+       <BGColor>15790320</BGColor>
+       <PlotIsVisible>true</PlotIsVisible>
+     </BasePlot>
+     <Grid>
+      <DrawGrid>true</DrawGrid>
+      <GridColor>15780518</GridColor>
+      <XTicks>10</XTicks>
+      <YTicks>10</YTicks>
+      <ZTicks>10</ZTicks>
+      <Use3DLook>false</Use3DLook>
+     </Grid>
+     <PlotBGColor>16777215</PlotBGColor>
+     <ShowPlotTitle>false</ShowPlotTitle>
+     <TitlePosition>1</TitlePosition>
+     <PlotTitle>X1</PlotTitle>
+     <ShowXValues>true</ShowXValues>
+     <Fonts>
+      <TitleFont>
+       <Name>Arial</Name>
+       <Height>12</Height>
+       <PitchFamily>34</PitchFamily>
+       <Weight>400</Weight>
+       <Italic>0</Italic>
+       <UnderLine>0</UnderLine>
+       <StrikeOut>0</StrikeOut>
+       <Color>0</Color>
+      </TitleFont>
+      <LabelFont>
+       <Name>Arial</Name>
+       <Height>12</Height>
+       <PitchFamily>34</PitchFamily>
+       <Weight>400</Weight>
+       <Italic>0</Italic>
+       <UnderLine>0</UnderLine>
+       <StrikeOut>0</StrikeOut>
+       <Color>0</Color>
+      </LabelFont>
+      <ValuesFont>
+       <Name>Arial</Name>
+       <Height>10</Height>
+       <PitchFamily>34</PitchFamily>
+       <Weight>400</Weight>
+       <Italic>0</Italic>
+       <UnderLine>0</UnderLine>
+       <StrikeOut>0</StrikeOut>
+       <Color>0</Color>
+      </ValuesFont>
+     </Fonts>
+     <SharedXAxis>true</SharedXAxis>
+     <SharedYAxis>true</SharedYAxis>
+     <SharedZAxis>false</SharedZAxis>
+     <XAxes>
+      <Axis>
+       <Minimum>0</Minimum>
+       <Maximum>2</Maximum>
+       <Linear>true</Linear>
+       <Scaling>3</Scaling>
+       <Label>time</Label>
+      </Axis>
+     </XAxes>
+     <YAxes>
+      <Axis>
+       <Minimum>0.06</Minimum>
+       <Maximum>0.11</Maximum>
+       <Linear>true</Linear>
+       <Scaling>1</Scaling>
+       <Label>X1</Label>
+      </Axis>
+     </YAxes>
+     <ZAxes>
+     </ZAxes>
+     <Curves>
+      <Curve>
+       <LineColor>0</LineColor>
+       <LineStyle>1</LineStyle>
+       <TickColor>0</TickColor>
+       <TickStyle>0</TickStyle>
+       <CurveVisible>true</CurveVisible>
+       <PixelThresshold>1</PixelThresshold>
+       <LineThickness>1</LineThickness>
+       <LineOrder>1</LineOrder>
+       <ShowYValues>true</ShowYValues>
+       <XCurveData>
+        <ShowUnit>true</ShowUnit>
+        <VarName>time</VarName>
+       </XCurveData>
+       <YCurveData>
+        <ShowUnit>true</ShowUnit>
+        <VarName>X1\plot</VarName>
+       </YCurveData>
+      </Curve>
+     </Curves>
+     <Legenda>
+      <ShowLegenda>true</ShowLegenda>
+     </Legenda>
+    </Plot>
+    <Plot>
+     <PlotType>GraphPlot</PlotType>
+     <BasePlot>
+       <PlotId>6</PlotId>
+       <UseWindowsBGColor>true</UseWindowsBGColor>
+       <BGColor>15790320</BGColor>
+       <PlotIsVisible>true</PlotIsVisible>
+     </BasePlot>
+     <Grid>
+      <DrawGrid>true</DrawGrid>
+      <GridColor>15780518</GridColor>
+      <XTicks>10</XTicks>
+      <YTicks>10</YTicks>
+      <ZTicks>10</ZTicks>
+      <Use3DLook>false</Use3DLook>
+     </Grid>
+     <PlotBGColor>16777215</PlotBGColor>
+     <ShowPlotTitle>false</ShowPlotTitle>
+     <TitlePosition>1</TitlePosition>
+     <PlotTitle>X2</PlotTitle>
+     <ShowXValues>true</ShowXValues>
+     <Fonts>
+      <TitleFont>
+       <Name>Arial</Name>
+       <Height>12</Height>
+       <PitchFamily>34</PitchFamily>
+       <Weight>400</Weight>
+       <Italic>0</Italic>
+       <UnderLine>0</UnderLine>
+       <StrikeOut>0</StrikeOut>
+       <Color>0</Color>
+      </TitleFont>
+      <LabelFont>
+       <Name>Arial</Name>
+       <Height>12</Height>
+       <PitchFamily>34</PitchFamily>
+       <Weight>400</Weight>
+       <Italic>0</Italic>
+       <UnderLine>0</UnderLine>
+       <StrikeOut>0</StrikeOut>
+       <Color>0</Color>
+      </LabelFont>
+      <ValuesFont>
+       <Name>Arial</Name>
+       <Height>10</Height>
+       <PitchFamily>34</PitchFamily>
+       <Weight>400</Weight>
+       <Italic>0</Italic>
+       <UnderLine>0</UnderLine>
+       <StrikeOut>0</StrikeOut>
+       <Color>0</Color>
+      </ValuesFont>
+     </Fonts>
+     <SharedXAxis>true</SharedXAxis>
+     <SharedYAxis>true</SharedYAxis>
+     <SharedZAxis>false</SharedZAxis>
+     <XAxes>
+      <Axis>
+       <Minimum>0</Minimum>
+       <Maximum>2</Maximum>
+       <Linear>true</Linear>
+       <Scaling>3</Scaling>
+       <Label>time</Label>
+      </Axis>
+     </XAxes>
+     <YAxes>
+      <Axis>
+       <Minimum>0.19</Minimum>
+       <Maximum>0.29</Maximum>
+       <Linear>true</Linear>
+       <Scaling>1</Scaling>
+       <Label>X2</Label>
+      </Axis>
+     </YAxes>
+     <ZAxes>
+     </ZAxes>
+     <Curves>
+      <Curve>
+       <LineColor>10040319</LineColor>
+       <LineStyle>1</LineStyle>
+       <TickColor>10040319</TickColor>
+       <TickStyle>0</TickStyle>
+       <CurveVisible>true</CurveVisible>
+       <PixelThresshold>1</PixelThresshold>
+       <LineThickness>1</LineThickness>
+       <LineOrder>1</LineOrder>
+       <ShowYValues>true</ShowYValues>
+       <XCurveData>
+        <ShowUnit>true</ShowUnit>
+        <VarName>time</VarName>
+       </XCurveData>
+       <YCurveData>
+        <ShowUnit>true</ShowUnit>
+        <VarName>X2\plot</VarName>
+       </YCurveData>
+      </Curve>
+     </Curves>
+     <Legenda>
+      <ShowLegenda>true</ShowLegenda>
+     </Legenda>
+    </Plot>
+    <Plot>
+     <PlotType>GraphPlot</PlotType>
+     <BasePlot>
+       <PlotId>7</PlotId>
+       <UseWindowsBGColor>true</UseWindowsBGColor>
+       <BGColor>15790320</BGColor>
+       <PlotIsVisible>true</PlotIsVisible>
+     </BasePlot>
+     <Grid>
+      <DrawGrid>true</DrawGrid>
+      <GridColor>15780518</GridColor>
+      <XTicks>10</XTicks>
+      <YTicks>10</YTicks>
+      <ZTicks>10</ZTicks>
+      <Use3DLook>false</Use3DLook>
+     </Grid>
+     <PlotBGColor>16777215</PlotBGColor>
+     <ShowPlotTitle>false</ShowPlotTitle>
+     <TitlePosition>1</TitlePosition>
+     <PlotTitle>Y1</PlotTitle>
+     <ShowXValues>true</ShowXValues>
+     <Fonts>
+      <TitleFont>
+       <Name>Arial</Name>
+       <Height>12</Height>
+       <PitchFamily>34</PitchFamily>
+       <Weight>400</Weight>
+       <Italic>0</Italic>
+       <UnderLine>0</UnderLine>
+       <StrikeOut>0</StrikeOut>
+       <Color>0</Color>
+      </TitleFont>
+      <LabelFont>
+       <Name>Arial</Name>
+       <Height>12</Height>
+       <PitchFamily>34</PitchFamily>
+       <Weight>400</Weight>
+       <Italic>0</Italic>
+       <UnderLine>0</UnderLine>
+       <StrikeOut>0</StrikeOut>
+       <Color>0</Color>
+      </LabelFont>
+      <ValuesFont>
+       <Name>Arial</Name>
+       <Height>10</Height>
+       <PitchFamily>34</PitchFamily>
+       <Weight>400</Weight>
+       <Italic>0</Italic>
+       <UnderLine>0</UnderLine>
+       <StrikeOut>0</StrikeOut>
+       <Color>0</Color>
+      </ValuesFont>
+     </Fonts>
+     <SharedXAxis>true</SharedXAxis>
+     <SharedYAxis>true</SharedYAxis>
+     <SharedZAxis>false</SharedZAxis>
+     <XAxes>
+      <Axis>
+       <Minimum>0</Minimum>
+       <Maximum>2</Maximum>
+       <Linear>true</Linear>
+       <Scaling>3</Scaling>
+       <Label>time</Label>
+      </Axis>
+     </XAxes>
+     <YAxes>
+      <Axis>
+       <Minimum>-0.02</Minimum>
+       <Maximum>0.08</Maximum>
+       <Linear>true</Linear>
+       <Scaling>1</Scaling>
+       <Label>Y1</Label>
+      </Axis>
+     </YAxes>
+     <ZAxes>
+     </ZAxes>
+     <Curves>
+      <Curve>
+       <LineColor>16711680</LineColor>
+       <LineStyle>1</LineStyle>
+       <TickColor>16711680</TickColor>
+       <TickStyle>0</TickStyle>
+       <CurveVisible>true</CurveVisible>
+       <PixelThresshold>1</PixelThresshold>
+       <LineThickness>1</LineThickness>
+       <LineOrder>1</LineOrder>
+       <ShowYValues>true</ShowYValues>
+       <XCurveData>
+        <ShowUnit>true</ShowUnit>
+        <VarName>time</VarName>
+       </XCurveData>
+       <YCurveData>
+        <ShowUnit>true</ShowUnit>
+        <VarName>Y1\plot</VarName>
+       </YCurveData>
+      </Curve>
+     </Curves>
+     <Legenda>
+      <ShowLegenda>true</ShowLegenda>
+     </Legenda>
+    </Plot>
+    <Plot>
+     <PlotType>GraphPlot</PlotType>
+     <BasePlot>
+       <PlotId>8</PlotId>
+       <UseWindowsBGColor>true</UseWindowsBGColor>
+       <BGColor>15790320</BGColor>
+       <PlotIsVisible>true</PlotIsVisible>
+     </BasePlot>
+     <Grid>
+      <DrawGrid>true</DrawGrid>
+      <GridColor>15780518</GridColor>
+      <XTicks>10</XTicks>
+      <YTicks>10</YTicks>
+      <ZTicks>10</ZTicks>
+      <Use3DLook>false</Use3DLook>
+     </Grid>
+     <PlotBGColor>16777215</PlotBGColor>
+     <ShowPlotTitle>false</ShowPlotTitle>
+     <TitlePosition>1</TitlePosition>
+     <PlotTitle>Y2</PlotTitle>
+     <ShowXValues>true</ShowXValues>
+     <Fonts>
+      <TitleFont>
+       <Name>Arial</Name>
+       <Height>12</Height>
+       <PitchFamily>34</PitchFamily>
+       <Weight>400</Weight>
+       <Italic>0</Italic>
+       <UnderLine>0</UnderLine>
+       <StrikeOut>0</StrikeOut>
+       <Color>0</Color>
+      </TitleFont>
+      <LabelFont>
+       <Name>Arial</Name>
+       <Height>12</Height>
+       <PitchFamily>34</PitchFamily>
+       <Weight>400</Weight>
+       <Italic>0</Italic>
+       <UnderLine>0</UnderLine>
+       <StrikeOut>0</StrikeOut>
+       <Color>0</Color>
+      </LabelFont>
+      <ValuesFont>
+       <Name>Arial</Name>
+       <Height>10</Height>
+       <PitchFamily>34</PitchFamily>
+       <Weight>400</Weight>
+       <Italic>0</Italic>
+       <UnderLine>0</UnderLine>
+       <StrikeOut>0</StrikeOut>
+       <Color>0</Color>
+      </ValuesFont>
+     </Fonts>
+     <SharedXAxis>true</SharedXAxis>
+     <SharedYAxis>true</SharedYAxis>
+     <SharedZAxis>false</SharedZAxis>
+     <XAxes>
+      <Axis>
+       <Minimum>0</Minimum>
+       <Maximum>2</Maximum>
+       <Linear>true</Linear>
+       <Scaling>3</Scaling>
+       <Label>time</Label>
+      </Axis>
+     </XAxes>
+     <YAxes>
+      <Axis>
+       <Minimum>-0.15</Minimum>
+       <Maximum>0.35</Maximum>
+       <Linear>true</Linear>
+       <Scaling>1</Scaling>
+       <Label>Y2</Label>
+      </Axis>
+     </YAxes>
+     <ZAxes>
+     </ZAxes>
+     <Curves>
+      <Curve>
+       <LineColor>16763904</LineColor>
+       <LineStyle>1</LineStyle>
+       <TickColor>16763904</TickColor>
+       <TickStyle>0</TickStyle>
+       <CurveVisible>true</CurveVisible>
+       <PixelThresshold>1</PixelThresshold>
+       <LineThickness>1</LineThickness>
+       <LineOrder>1</LineOrder>
+       <ShowYValues>true</ShowYValues>
+       <XCurveData>
+        <ShowUnit>true</ShowUnit>
+        <VarName>time</VarName>
+       </XCurveData>
+       <YCurveData>
+        <ShowUnit>true</ShowUnit>
+        <VarName>Y2\plot</VarName>
+       </YCurveData>
+      </Curve>
+     </Curves>
+     <Legenda>
+      <ShowLegenda>true</ShowLegenda>
+     </Legenda>
+    </Plot>
+    <Plot>
+     <PlotType>GraphPlot</PlotType>
+     <BasePlot>
+       <PlotId>9</PlotId>
+       <UseWindowsBGColor>true</UseWindowsBGColor>
+       <BGColor>15790320</BGColor>
+       <PlotIsVisible>true</PlotIsVisible>
+     </BasePlot>
+     <Grid>
+      <DrawGrid>true</DrawGrid>
+      <GridColor>15780518</GridColor>
+      <XTicks>10</XTicks>
+      <YTicks>10</YTicks>
+      <ZTicks>10</ZTicks>
+      <Use3DLook>false</Use3DLook>
+     </Grid>
+     <PlotBGColor>16777215</PlotBGColor>
+     <ShowPlotTitle>false</ShowPlotTitle>
+     <TitlePosition>1</TitlePosition>
+     <PlotTitle>Xe</PlotTitle>
+     <ShowXValues>true</ShowXValues>
+     <Fonts>
+      <TitleFont>
+       <Name>Arial</Name>
+       <Height>12</Height>
+       <PitchFamily>34</PitchFamily>
+       <Weight>400</Weight>
+       <Italic>0</Italic>
+       <UnderLine>0</UnderLine>
+       <StrikeOut>0</StrikeOut>
+       <Color>0</Color>
+      </TitleFont>
+      <LabelFont>
+       <Name>Arial</Name>
+       <Height>12</Height>
+       <PitchFamily>34</PitchFamily>
+       <Weight>400</Weight>
+       <Italic>0</Italic>
+       <UnderLine>0</UnderLine>
+       <StrikeOut>0</StrikeOut>
+       <Color>0</Color>
+      </LabelFont>
+      <ValuesFont>
+       <Name>Arial</Name>
+       <Height>10</Height>
+       <PitchFamily>34</PitchFamily>
+       <Weight>400</Weight>
+       <Italic>0</Italic>
+       <UnderLine>0</UnderLine>
+       <StrikeOut>0</StrikeOut>
+       <Color>0</Color>
+      </ValuesFont>
+     </Fonts>
+     <SharedXAxis>true</SharedXAxis>
+     <SharedYAxis>true</SharedYAxis>
+     <SharedZAxis>false</SharedZAxis>
+     <XAxes>
+      <Axis>
+       <Minimum>0</Minimum>
+       <Maximum>2</Maximum>
+       <Linear>true</Linear>
+       <Scaling>3</Scaling>
+       <Label>time</Label>
+      </Axis>
+     </XAxes>
+     <YAxes>
+      <Axis>
+       <Minimum>0.43</Minimum>
+       <Maximum>0.53</Maximum>
+       <Linear>true</Linear>
+       <Scaling>1</Scaling>
+       <Label>Xe</Label>
+      </Axis>
+     </YAxes>
+     <ZAxes>
+     </ZAxes>
+     <Curves>
+      <Curve>
+       <LineColor>26367</LineColor>
+       <LineStyle>1</LineStyle>
+       <TickColor>26367</TickColor>
+       <TickStyle>0</TickStyle>
+       <CurveVisible>true</CurveVisible>
+       <PixelThresshold>1</PixelThresshold>
+       <LineThickness>1</LineThickness>
+       <LineOrder>1</LineOrder>
+       <ShowYValues>true</ShowYValues>
+       <XCurveData>
+        <ShowUnit>true</ShowUnit>
+        <VarName>time</VarName>
+       </XCurveData>
+       <YCurveData>
+        <ShowUnit>true</ShowUnit>
+        <VarName>Xe\plot</VarName>
+       </YCurveData>
+      </Curve>
+     </Curves>
+     <Legenda>
+      <ShowLegenda>true</ShowLegenda>
+     </Legenda>
+    </Plot>
+    <Plot>
+     <PlotType>GraphPlot</PlotType>
+     <BasePlot>
+       <PlotId>10</PlotId>
+       <UseWindowsBGColor>true</UseWindowsBGColor>
+       <BGColor>15790320</BGColor>
+       <PlotIsVisible>true</PlotIsVisible>
+     </BasePlot>
+     <Grid>
+      <DrawGrid>true</DrawGrid>
+      <GridColor>15780518</GridColor>
+      <XTicks>10</XTicks>
+      <YTicks>10</YTicks>
+      <ZTicks>10</ZTicks>
+      <Use3DLook>false</Use3DLook>
+     </Grid>
+     <PlotBGColor>16777215</PlotBGColor>
+     <ShowPlotTitle>false</ShowPlotTitle>
+     <TitlePosition>1</TitlePosition>
+     <PlotTitle>Ye</PlotTitle>
+     <ShowXValues>true</ShowXValues>
+     <Fonts>
+      <TitleFont>
+       <Name>Arial</Name>
+       <Height>12</Height>
+       <PitchFamily>34</PitchFamily>
+       <Weight>400</Weight>
+       <Italic>0</Italic>
+       <UnderLine>0</UnderLine>
+       <StrikeOut>0</StrikeOut>
+       <Color>0</Color>
+      </TitleFont>
+      <LabelFont>
+       <Name>Arial</Name>
+       <Height>12</Height>
+       <PitchFamily>34</PitchFamily>
+       <Weight>400</Weight>
+       <Italic>0</Italic>
+       <UnderLine>0</UnderLine>
+       <StrikeOut>0</StrikeOut>
+       <Color>0</Color>
+      </LabelFont>
+      <ValuesFont>
+       <Name>Arial</Name>
+       <Height>10</Height>
+       <PitchFamily>34</PitchFamily>
+       <Weight>400</Weight>
+       <Italic>0</Italic>
+       <UnderLine>0</UnderLine>
+       <StrikeOut>0</StrikeOut>
+       <Color>0</Color>
+      </ValuesFont>
+     </Fonts>
+     <SharedXAxis>true</SharedXAxis>
+     <SharedYAxis>true</SharedYAxis>
+     <SharedZAxis>false</SharedZAxis>
+     <XAxes>
+      <Axis>
+       <Minimum>0</Minimum>
+       <Maximum>2</Maximum>
+       <Linear>true</Linear>
+       <Scaling>3</Scaling>
+       <Label>time</Label>
+      </Axis>
+     </XAxes>
+     <YAxes>
+      <Axis>
+       <Minimum>-0.15</Minimum>
+       <Maximum>0.35</Maximum>
+       <Linear>true</Linear>
+       <Scaling>1</Scaling>
+       <Label>Ye</Label>
+      </Axis>
+     </YAxes>
+     <ZAxes>
+     </ZAxes>
+     <Curves>
+      <Curve>
+       <LineColor>3368448</LineColor>
+       <LineStyle>1</LineStyle>
+       <TickColor>3368448</TickColor>
+       <TickStyle>0</TickStyle>
+       <CurveVisible>true</CurveVisible>
+       <PixelThresshold>1</PixelThresshold>
+       <LineThickness>1</LineThickness>
+       <LineOrder>1</LineOrder>
+       <ShowYValues>true</ShowYValues>
+       <XCurveData>
+        <ShowUnit>true</ShowUnit>
+        <VarName>time</VarName>
+       </XCurveData>
+       <YCurveData>
+        <ShowUnit>true</ShowUnit>
+        <VarName>Ye\plot</VarName>
+       </YCurveData>
+      </Curve>
+     </Curves>
+     <Legenda>
+      <ShowLegenda>true</ShowLegenda>
+     </Legenda>
+    </Plot>
+    <Plot>
+     <PlotType>GraphPlot</PlotType>
+     <BasePlot>
+       <PlotId>11</PlotId>
+       <UseWindowsBGColor>true</UseWindowsBGColor>
+       <BGColor>15790320</BGColor>
+       <PlotIsVisible>true</PlotIsVisible>
+     </BasePlot>
+     <Grid>
+      <DrawGrid>true</DrawGrid>
+      <GridColor>15780518</GridColor>
+      <XTicks>10</XTicks>
+      <YTicks>10</YTicks>
+      <ZTicks>10</ZTicks>
+      <Use3DLook>false</Use3DLook>
+     </Grid>
+     <PlotBGColor>16777215</PlotBGColor>
+     <ShowPlotTitle>false</ShowPlotTitle>
+     <TitlePosition>1</TitlePosition>
+     <PlotTitle>I1.state</PlotTitle>
+     <ShowXValues>true</ShowXValues>
+     <Fonts>
+      <TitleFont>
+       <Name>Arial</Name>
+       <Height>12</Height>
+       <PitchFamily>34</PitchFamily>
+       <Weight>400</Weight>
+       <Italic>0</Italic>
+       <UnderLine>0</UnderLine>
+       <StrikeOut>0</StrikeOut>
+       <Color>0</Color>
+      </TitleFont>
+      <LabelFont>
+       <Name>Arial</Name>
+       <Height>12</Height>
+       <PitchFamily>34</PitchFamily>
+       <Weight>400</Weight>
+       <Italic>0</Italic>
+       <UnderLine>0</UnderLine>
+       <StrikeOut>0</StrikeOut>
+       <Color>0</Color>
+      </LabelFont>
+      <ValuesFont>
+       <Name>Arial</Name>
+       <Height>10</Height>
+       <PitchFamily>34</PitchFamily>
+       <Weight>400</Weight>
+       <Italic>0</Italic>
+       <UnderLine>0</UnderLine>
+       <StrikeOut>0</StrikeOut>
+       <Color>0</Color>
+      </ValuesFont>
+     </Fonts>
+     <SharedXAxis>true</SharedXAxis>
+     <SharedYAxis>true</SharedYAxis>
+     <SharedZAxis>false</SharedZAxis>
+     <XAxes>
+      <Axis>
+       <Minimum>0</Minimum>
+       <Maximum>2</Maximum>
+       <Linear>true</Linear>
+       <Scaling>3</Scaling>
+       <Label>time</Label>
+      </Axis>
+     </XAxes>
+     <YAxes>
+      <Axis>
+       <Minimum>-0.1</Minimum>
+       <Maximum>0.4</Maximum>
+       <Linear>true</Linear>
+       <Scaling>1</Scaling>
+       <Label>I1.state</Label>
+      </Axis>
+     </YAxes>
+     <ZAxes>
+     </ZAxes>
+     <Curves>
+      <Curve>
+       <LineColor>16711680</LineColor>
+       <LineStyle>1</LineStyle>
+       <TickColor>16711680</TickColor>
+       <TickStyle>0</TickStyle>
+       <CurveVisible>true</CurveVisible>
+       <PixelThresshold>1</PixelThresshold>
+       <LineThickness>1</LineThickness>
+       <LineOrder>1</LineOrder>
+       <ShowYValues>true</ShowYValues>
+       <XCurveData>
+        <ShowUnit>true</ShowUnit>
+        <VarName>time</VarName>
+       </XCurveData>
+       <YCurveData>
+        <ShowUnit>true</ShowUnit>
+        <VarName>RR\I1\state</VarName>
+       </YCurveData>
+      </Curve>
+     </Curves>
+     <Legenda>
+      <ShowLegenda>true</ShowLegenda>
+     </Legenda>
+    </Plot>
+    <Plot>
+     <PlotType>GraphPlot</PlotType>
+     <BasePlot>
+       <PlotId>12</PlotId>
+       <UseWindowsBGColor>true</UseWindowsBGColor>
+       <BGColor>15790320</BGColor>
+       <PlotIsVisible>true</PlotIsVisible>
+     </BasePlot>
+     <Grid>
+      <DrawGrid>true</DrawGrid>
+      <GridColor>15780518</GridColor>
+      <XTicks>10</XTicks>
+      <YTicks>10</YTicks>
+      <ZTicks>10</ZTicks>
+      <Use3DLook>false</Use3DLook>
+     </Grid>
+     <PlotBGColor>16777215</PlotBGColor>
+     <ShowPlotTitle>false</ShowPlotTitle>
+     <TitlePosition>1</TitlePosition>
+     <PlotTitle>I2.state</PlotTitle>
+     <ShowXValues>true</ShowXValues>
+     <Fonts>
+      <TitleFont>
+       <Name>Arial</Name>
+       <Height>12</Height>
+       <PitchFamily>34</PitchFamily>
+       <Weight>400</Weight>
+       <Italic>0</Italic>
+       <UnderLine>0</UnderLine>
+       <StrikeOut>0</StrikeOut>
+       <Color>0</Color>
+      </TitleFont>
+      <LabelFont>
+       <Name>Arial</Name>
+       <Height>12</Height>
+       <PitchFamily>34</PitchFamily>
+       <Weight>400</Weight>
+       <Italic>0</Italic>
+       <UnderLine>0</UnderLine>
+       <StrikeOut>0</StrikeOut>
+       <Color>0</Color>
+      </LabelFont>
+      <ValuesFont>
+       <Name>Arial</Name>
+       <Height>10</Height>
+       <PitchFamily>34</PitchFamily>
+       <Weight>400</Weight>
+       <Italic>0</Italic>
+       <UnderLine>0</UnderLine>
+       <StrikeOut>0</StrikeOut>
+       <Color>0</Color>
+      </ValuesFont>
+     </Fonts>
+     <SharedXAxis>true</SharedXAxis>
+     <SharedYAxis>true</SharedYAxis>
+     <SharedZAxis>false</SharedZAxis>
+     <XAxes>
+      <Axis>
+       <Minimum>0</Minimum>
+       <Maximum>2</Maximum>
+       <Linear>true</Linear>
+       <Scaling>3</Scaling>
+       <Label>time</Label>
+      </Axis>
+     </XAxes>
+     <YAxes>
+      <Axis>
+       <Minimum>-0.0016</Minimum>
+       <Maximum>0.0004</Maximum>
+       <Linear>true</Linear>
+       <Scaling>1</Scaling>
+       <Label>I2.state</Label>
+      </Axis>
+     </YAxes>
+     <ZAxes>
+     </ZAxes>
+     <Curves>
+      <Curve>
+       <LineColor>16711935</LineColor>
+       <LineStyle>1</LineStyle>
+       <TickColor>16711935</TickColor>
+       <TickStyle>0</TickStyle>
+       <CurveVisible>true</CurveVisible>
+       <PixelThresshold>1</PixelThresshold>
+       <LineThickness>1</LineThickness>
+       <LineOrder>1</LineOrder>
+       <ShowYValues>true</ShowYValues>
+       <XCurveData>
+        <ShowUnit>true</ShowUnit>
+        <VarName>time</VarName>
+       </XCurveData>
+       <YCurveData>
+        <ShowUnit>true</ShowUnit>
+        <VarName>RR\I2\state</VarName>
+       </YCurveData>
+      </Curve>
+     </Curves>
+     <Legenda>
+      <ShowLegenda>true</ShowLegenda>
+     </Legenda>
+    </Plot>
+    <Plot>
+     <PlotType>GraphPlot</PlotType>
+     <BasePlot>
+       <PlotId>13</PlotId>
+       <UseWindowsBGColor>true</UseWindowsBGColor>
+       <BGColor>15790320</BGColor>
+       <PlotIsVisible>true</PlotIsVisible>
+     </BasePlot>
+     <Grid>
+      <DrawGrid>true</DrawGrid>
+      <GridColor>15780518</GridColor>
+      <XTicks>10</XTicks>
+      <YTicks>10</YTicks>
+      <ZTicks>10</ZTicks>
+      <Use3DLook>false</Use3DLook>
+     </Grid>
+     <PlotBGColor>16777215</PlotBGColor>
+     <ShowPlotTitle>false</ShowPlotTitle>
+     <TitlePosition>1</TitlePosition>
+     <PlotTitle>Omega1</PlotTitle>
+     <ShowXValues>true</ShowXValues>
+     <Fonts>
+      <TitleFont>
+       <Name>Arial</Name>
+       <Height>12</Height>
+       <PitchFamily>34</PitchFamily>
+       <Weight>400</Weight>
+       <Italic>0</Italic>
+       <UnderLine>0</UnderLine>
+       <StrikeOut>0</StrikeOut>
+       <Color>0</Color>
+      </TitleFont>
+      <LabelFont>
+       <Name>Arial</Name>
+       <Height>12</Height>
+       <PitchFamily>34</PitchFamily>
+       <Weight>400</Weight>
+       <Italic>0</Italic>
+       <UnderLine>0</UnderLine>
+       <StrikeOut>0</StrikeOut>
+       <Color>0</Color>
+      </LabelFont>
+      <ValuesFont>
+       <Name>Arial</Name>
+       <Height>10</Height>
+       <PitchFamily>34</PitchFamily>
+       <Weight>400</Weight>
+       <Italic>0</Italic>
+       <UnderLine>0</UnderLine>
+       <StrikeOut>0</StrikeOut>
+       <Color>0</Color>
+      </ValuesFont>
+     </Fonts>
+     <SharedXAxis>true</SharedXAxis>
+     <SharedYAxis>true</SharedYAxis>
+     <SharedZAxis>false</SharedZAxis>
+     <XAxes>
+      <Axis>
+       <Minimum>0</Minimum>
+       <Maximum>2</Maximum>
+       <Linear>true</Linear>
+       <Scaling>3</Scaling>
+       <Label>time</Label>
+      </Axis>
+     </XAxes>
+     <YAxes>
+      <Axis>
+       <Minimum>-1</Minimum>
+       <Maximum>4</Maximum>
+       <Linear>true</Linear>
+       <Scaling>1</Scaling>
+       <Label>Omega1</Label>
+      </Axis>
+     </YAxes>
+     <ZAxes>
+     </ZAxes>
+     <Curves>
+      <Curve>
+       <LineColor>16711680</LineColor>
+       <LineStyle>1</LineStyle>
+       <TickColor>16711680</TickColor>
+       <TickStyle>0</TickStyle>
+       <CurveVisible>true</CurveVisible>
+       <PixelThresshold>1</PixelThresshold>
+       <LineThickness>1</LineThickness>
+       <LineOrder>1</LineOrder>
+       <ShowYValues>true</ShowYValues>
+       <XCurveData>
+        <ShowUnit>true</ShowUnit>
+        <VarName>time</VarName>
+       </XCurveData>
+       <YCurveData>
+        <ShowUnit>true</ShowUnit>
+        <VarName>RR\Omega1</VarName>
+       </YCurveData>
+      </Curve>
+     </Curves>
+     <Legenda>
+      <ShowLegenda>true</ShowLegenda>
+     </Legenda>
+    </Plot>
+    <Plot>
+     <PlotType>GraphPlot</PlotType>
+     <BasePlot>
+       <PlotId>14</PlotId>
+       <UseWindowsBGColor>true</UseWindowsBGColor>
+       <BGColor>15790320</BGColor>
+       <PlotIsVisible>true</PlotIsVisible>
+     </BasePlot>
+     <Grid>
+      <DrawGrid>true</DrawGrid>
+      <GridColor>15780518</GridColor>
+      <XTicks>10</XTicks>
+      <YTicks>10</YTicks>
+      <ZTicks>10</ZTicks>
+      <Use3DLook>false</Use3DLook>
+     </Grid>
+     <PlotBGColor>16777215</PlotBGColor>
+     <ShowPlotTitle>false</ShowPlotTitle>
+     <TitlePosition>1</TitlePosition>
+     <PlotTitle>Omega2</PlotTitle>
+     <ShowXValues>true</ShowXValues>
+     <Fonts>
+      <TitleFont>
+       <Name>Arial</Name>
+       <Height>12</Height>
+       <PitchFamily>34</PitchFamily>
+       <Weight>400</Weight>
+       <Italic>0</Italic>
+       <UnderLine>0</UnderLine>
+       <StrikeOut>0</StrikeOut>
+       <Color>0</Color>
+      </TitleFont>
+      <LabelFont>
+       <Name>Arial</Name>
+       <Height>12</Height>
+       <PitchFamily>34</PitchFamily>
+       <Weight>400</Weight>
+       <Italic>0</Italic>
+       <UnderLine>0</UnderLine>
+       <StrikeOut>0</StrikeOut>
+       <Color>0</Color>
+      </LabelFont>
+      <ValuesFont>
+       <Name>Arial</Name>
+       <Height>10</Height>
+       <PitchFamily>34</PitchFamily>
+       <Weight>400</Weight>
+       <Italic>0</Italic>
+       <UnderLine>0</UnderLine>
+       <StrikeOut>0</StrikeOut>
+       <Color>0</Color>
+      </ValuesFont>
+     </Fonts>
+     <SharedXAxis>true</SharedXAxis>
+     <SharedYAxis>true</SharedYAxis>
+     <SharedZAxis>false</SharedZAxis>
+     <XAxes>
+      <Axis>
+       <Minimum>0</Minimum>
+       <Maximum>2</Maximum>
+       <Linear>true</Linear>
+       <Scaling>3</Scaling>
+       <Label>time</Label>
+      </Axis>
+     </XAxes>
+     <YAxes>
+      <Axis>
+       <Minimum>-0.16</Minimum>
+       <Maximum>0.04</Maximum>
+       <Linear>true</Linear>
+       <Scaling>1</Scaling>
+       <Label>Omega2</Label>
+      </Axis>
+     </YAxes>
+     <ZAxes>
+     </ZAxes>
+     <Curves>
+      <Curve>
+       <LineColor>16711680</LineColor>
+       <LineStyle>1</LineStyle>
+       <TickColor>16711680</TickColor>
+       <TickStyle>0</TickStyle>
+       <CurveVisible>true</CurveVisible>
+       <PixelThresshold>1</PixelThresshold>
+       <LineThickness>1</LineThickness>
+       <LineOrder>1</LineOrder>
+       <ShowYValues>true</ShowYValues>
+       <XCurveData>
+        <ShowUnit>true</ShowUnit>
+        <VarName>time</VarName>
+       </XCurveData>
+       <YCurveData>
+        <ShowUnit>true</ShowUnit>
+        <VarName>RR\Omega2</VarName>
+       </YCurveData>
+      </Curve>
+     </Curves>
+     <Legenda>
+      <ShowLegenda>true</ShowLegenda>
+     </Legenda>
+    </Plot>
+    <Plot>
+     <PlotType>GraphPlot</PlotType>
+     <BasePlot>
+       <PlotId>15</PlotId>
+       <UseWindowsBGColor>true</UseWindowsBGColor>
+       <BGColor>15790320</BGColor>
+       <PlotIsVisible>true</PlotIsVisible>
+     </BasePlot>
+     <Grid>
+      <DrawGrid>true</DrawGrid>
+      <GridColor>15780518</GridColor>
+      <XTicks>10</XTicks>
+      <YTicks>10</YTicks>
+      <ZTicks>10</ZTicks>
+      <Use3DLook>false</Use3DLook>
+     </Grid>
+     <PlotBGColor>16777215</PlotBGColor>
+     <ShowPlotTitle>true</ShowPlotTitle>
+     <TitlePosition>1</TitlePosition>
+     <PlotTitle>Ia1</PlotTitle>
+     <ShowXValues>true</ShowXValues>
+     <Fonts>
+      <TitleFont>
+       <Name>Arial</Name>
+       <Height>12</Height>
+       <PitchFamily>34</PitchFamily>
+       <Weight>400</Weight>
+       <Italic>0</Italic>
+       <UnderLine>0</UnderLine>
+       <StrikeOut>0</StrikeOut>
+       <Color>0</Color>
+      </TitleFont>
+      <LabelFont>
+       <Name>Arial</Name>
+       <Height>12</Height>
+       <PitchFamily>34</PitchFamily>
+       <Weight>400</Weight>
+       <Italic>0</Italic>
+       <UnderLine>0</UnderLine>
+       <StrikeOut>0</StrikeOut>
+       <Color>0</Color>
+      </LabelFont>
+      <ValuesFont>
+       <Name>Arial</Name>
+       <Height>10</Height>
+       <PitchFamily>34</PitchFamily>
+       <Weight>400</Weight>
+       <Italic>0</Italic>
+       <UnderLine>0</UnderLine>
+       <StrikeOut>0</StrikeOut>
+       <Color>0</Color>
+      </ValuesFont>
+     </Fonts>
+     <SharedXAxis>true</SharedXAxis>
+     <SharedYAxis>true</SharedYAxis>
+     <SharedZAxis>false</SharedZAxis>
+     <XAxes>
+      <Axis>
+       <Minimum>0</Minimum>
+       <Maximum>2</Maximum>
+       <Linear>true</Linear>
+       <Scaling>3</Scaling>
+       <Label>time</Label>
+      </Axis>
+     </XAxes>
+     <YAxes>
+      <Axis>
+       <Minimum>-50</Minimum>
+       <Maximum>450</Maximum>
+       <Linear>true</Linear>
+       <Scaling>1</Scaling>
+       <Label>Ia1</Label>
+      </Axis>
+     </YAxes>
+     <ZAxes>
+     </ZAxes>
+     <Curves>
+      <Curve>
+       <LineColor>16711680</LineColor>
+       <LineStyle>1</LineStyle>
+       <TickColor>16711680</TickColor>
+       <TickStyle>0</TickStyle>
+       <CurveVisible>true</CurveVisible>
+       <PixelThresshold>1</PixelThresshold>
+       <LineThickness>1</LineThickness>
+       <LineOrder>1</LineOrder>
+       <ShowYValues>true</ShowYValues>
+       <XCurveData>
+        <ShowUnit>true</ShowUnit>
+        <VarName>time</VarName>
+       </XCurveData>
+       <YCurveData>
+        <ShowUnit>true</ShowUnit>
+        <VarName>MCC_IP1\Ia</VarName>
+       </YCurveData>
+      </Curve>
+     </Curves>
+     <Legenda>
+      <ShowLegenda>true</ShowLegenda>
+     </Legenda>
+    </Plot>
+    <Plot>
+     <PlotType>GraphPlot</PlotType>
+     <BasePlot>
+       <PlotId>16</PlotId>
+       <UseWindowsBGColor>true</UseWindowsBGColor>
+       <BGColor>15790320</BGColor>
+       <PlotIsVisible>true</PlotIsVisible>
+     </BasePlot>
+     <Grid>
+      <DrawGrid>true</DrawGrid>
+      <GridColor>15780518</GridColor>
+      <XTicks>10</XTicks>
+      <YTicks>10</YTicks>
+      <ZTicks>10</ZTicks>
+      <Use3DLook>false</Use3DLook>
+     </Grid>
+     <PlotBGColor>16777215</PlotBGColor>
+     <ShowPlotTitle>true</ShowPlotTitle>
+     <TitlePosition>1</TitlePosition>
+     <PlotTitle>Ia2</PlotTitle>
+     <ShowXValues>true</ShowXValues>
+     <Fonts>
+      <TitleFont>
+       <Name>Arial</Name>
+       <Height>12</Height>
+       <PitchFamily>34</PitchFamily>
+       <Weight>400</Weight>
+       <Italic>0</Italic>
+       <UnderLine>0</UnderLine>
+       <StrikeOut>0</StrikeOut>
+       <Color>0</Color>
+      </TitleFont>
+      <LabelFont>
+       <Name>Arial</Name>
+       <Height>12</Height>
+       <PitchFamily>34</PitchFamily>
+       <Weight>400</Weight>
+       <Italic>0</Italic>
+       <UnderLine>0</UnderLine>
+       <StrikeOut>0</StrikeOut>
+       <Color>0</Color>
+      </LabelFont>
+      <ValuesFont>
+       <Name>Arial</Name>
+       <Height>10</Height>
+       <PitchFamily>34</PitchFamily>
+       <Weight>400</Weight>
+       <Italic>0</Italic>
+       <UnderLine>0</UnderLine>
+       <StrikeOut>0</StrikeOut>
+       <Color>0</Color>
+      </ValuesFont>
+     </Fonts>
+     <SharedXAxis>true</SharedXAxis>
+     <SharedYAxis>true</SharedYAxis>
+     <SharedZAxis>false</SharedZAxis>
+     <XAxes>
+      <Axis>
+       <Minimum>0</Minimum>
+       <Maximum>2</Maximum>
+       <Linear>true</Linear>
+       <Scaling>3</Scaling>
+       <Label>time</Label>
+      </Axis>
+     </XAxes>
+     <YAxes>
+      <Axis>
+       <Minimum>-2</Minimum>
+       <Maximum>18</Maximum>
+       <Linear>true</Linear>
+       <Scaling>1</Scaling>
+       <Label>Ia2</Label>
+      </Axis>
+     </YAxes>
+     <ZAxes>
+     </ZAxes>
+     <Curves>
+      <Curve>
+       <LineColor>16711680</LineColor>
+       <LineStyle>1</LineStyle>
+       <TickColor>16711680</TickColor>
+       <TickStyle>0</TickStyle>
+       <CurveVisible>true</CurveVisible>
+       <PixelThresshold>1</PixelThresshold>
+       <LineThickness>1</LineThickness>
+       <LineOrder>1</LineOrder>
+       <ShowYValues>true</ShowYValues>
+       <XCurveData>
+        <ShowUnit>true</ShowUnit>
+        <VarName>time</VarName>
+       </XCurveData>
+       <YCurveData>
+        <ShowUnit>true</ShowUnit>
+        <VarName>MCC_IP2\Ia</VarName>
+       </YCurveData>
+      </Curve>
+     </Curves>
+     <Legenda>
+      <ShowLegenda>true</ShowLegenda>
+     </Legenda>
+    </Plot>
+    <Plot>
+     <PlotType>GraphPlot</PlotType>
+     <BasePlot>
+       <PlotId>17</PlotId>
+       <UseWindowsBGColor>true</UseWindowsBGColor>
+       <BGColor>15790320</BGColor>
+       <PlotIsVisible>true</PlotIsVisible>
+     </BasePlot>
+     <Grid>
+      <DrawGrid>true</DrawGrid>
+      <GridColor>15780518</GridColor>
+      <XTicks>10</XTicks>
+      <YTicks>10</YTicks>
+      <ZTicks>10</ZTicks>
+      <Use3DLook>false</Use3DLook>
+     </Grid>
+     <PlotBGColor>16777215</PlotBGColor>
+     <ShowPlotTitle>true</ShowPlotTitle>
+     <TitlePosition>1</TitlePosition>
+     <PlotTitle>time</PlotTitle>
+     <ShowXValues>true</ShowXValues>
+     <Fonts>
+      <TitleFont>
+       <Name>Arial</Name>
+       <Height>12</Height>
+       <PitchFamily>34</PitchFamily>
+       <Weight>400</Weight>
+       <Italic>0</Italic>
+       <UnderLine>0</UnderLine>
+       <StrikeOut>0</StrikeOut>
+       <Color>0</Color>
+      </TitleFont>
+      <LabelFont>
+       <Name>Arial</Name>
+       <Height>12</Height>
+       <PitchFamily>34</PitchFamily>
+       <Weight>400</Weight>
+       <Italic>0</Italic>
+       <UnderLine>0</UnderLine>
+       <StrikeOut>0</StrikeOut>
+       <Color>0</Color>
+      </LabelFont>
+      <ValuesFont>
+       <Name>Arial</Name>
+       <Height>10</Height>
+       <PitchFamily>34</PitchFamily>
+       <Weight>400</Weight>
+       <Italic>0</Italic>
+       <UnderLine>0</UnderLine>
+       <StrikeOut>0</StrikeOut>
+       <Color>0</Color>
+      </ValuesFont>
+     </Fonts>
+     <SharedXAxis>true</SharedXAxis>
+     <SharedYAxis>true</SharedYAxis>
+     <SharedZAxis>false</SharedZAxis>
+     <XAxes>
+      <Axis>
+       <Minimum>0</Minimum>
+       <Maximum>2</Maximum>
+       <Linear>true</Linear>
+       <Scaling>3</Scaling>
+       <Label>time</Label>
+      </Axis>
+     </XAxes>
+     <YAxes>
+      <Axis>
+       <Minimum>-1.5</Minimum>
+       <Maximum>3.5</Maximum>
+       <Linear>true</Linear>
+       <Scaling>1</Scaling>
+       <Label>time</Label>
+      </Axis>
+     </YAxes>
+     <ZAxes>
+     </ZAxes>
+     <Curves>
+      <Curve>
+       <LineColor>16711680</LineColor>
+       <LineStyle>1</LineStyle>
+       <TickColor>16711680</TickColor>
+       <TickStyle>0</TickStyle>
+       <CurveVisible>true</CurveVisible>
+       <PixelThresshold>1</PixelThresshold>
+       <LineThickness>1</LineThickness>
+       <LineOrder>1</LineOrder>
+       <ShowYValues>true</ShowYValues>
+       <XCurveData>
+        <ShowUnit>true</ShowUnit>
+        <VarName>time</VarName>
+       </XCurveData>
+       <YCurveData>
+        <ShowUnit>true</ShowUnit>
+        <VarName>time</VarName>
+       </YCurveData>
+      </Curve>
+     </Curves>
+     <Legenda>
+      <ShowLegenda>true</ShowLegenda>
+     </Legenda>
+    </Plot>
+    <Plot>
+     <PlotType>GraphPlot</PlotType>
+     <BasePlot>
+       <PlotId>18</PlotId>
+       <UseWindowsBGColor>true</UseWindowsBGColor>
+       <BGColor>15790320</BGColor>
+       <PlotIsVisible>true</PlotIsVisible>
+     </BasePlot>
+     <Grid>
+      <DrawGrid>true</DrawGrid>
+      <GridColor>15780518</GridColor>
+      <XTicks>10</XTicks>
+      <YTicks>10</YTicks>
+      <ZTicks>10</ZTicks>
+      <Use3DLook>false</Use3DLook>
+     </Grid>
+     <PlotBGColor>16777215</PlotBGColor>
+     <ShowPlotTitle>true</ShowPlotTitle>
+     <TitlePosition>1</TitlePosition>
+     <PlotTitle>Tem1</PlotTitle>
+     <ShowXValues>true</ShowXValues>
+     <Fonts>
+      <TitleFont>
+       <Name>Arial</Name>
+       <Height>12</Height>
+       <PitchFamily>34</PitchFamily>
+       <Weight>400</Weight>
+       <Italic>0</Italic>
+       <UnderLine>0</UnderLine>
+       <StrikeOut>0</StrikeOut>
+       <Color>0</Color>
+      </TitleFont>
+      <LabelFont>
+       <Name>Arial</Name>
+       <Height>12</Height>
+       <PitchFamily>34</PitchFamily>
+       <Weight>400</Weight>
+       <Italic>0</Italic>
+       <UnderLine>0</UnderLine>
+       <StrikeOut>0</StrikeOut>
+       <Color>0</Color>
+      </LabelFont>
+      <ValuesFont>
+       <Name>Arial</Name>
+       <Height>10</Height>
+       <PitchFamily>34</PitchFamily>
+       <Weight>400</Weight>
+       <Italic>0</Italic>
+       <UnderLine>0</UnderLine>
+       <StrikeOut>0</StrikeOut>
+       <Color>0</Color>
+      </ValuesFont>
+     </Fonts>
+     <SharedXAxis>true</SharedXAxis>
+     <SharedYAxis>true</SharedYAxis>
+     <SharedZAxis>false</SharedZAxis>
+     <XAxes>
+      <Axis>
+       <Minimum>0</Minimum>
+       <Maximum>2</Maximum>
+       <Linear>true</Linear>
+       <Scaling>3</Scaling>
+       <Label>time</Label>
+      </Axis>
+     </XAxes>
+     <YAxes>
+      <Axis>
+       <Minimum>-30</Minimum>
+       <Maximum>70</Maximum>
+       <Linear>true</Linear>
+       <Scaling>1</Scaling>
+       <Label>Tem1</Label>
+      </Axis>
+     </YAxes>
+     <ZAxes>
+     </ZAxes>
+     <Curves>
+      <Curve>
+       <LineColor>16711680</LineColor>
+       <LineStyle>1</LineStyle>
+       <TickColor>16711680</TickColor>
+       <TickStyle>0</TickStyle>
+       <CurveVisible>true</CurveVisible>
+       <PixelThresshold>1</PixelThresshold>
+       <LineThickness>1</LineThickness>
+       <LineOrder>1</LineOrder>
+       <ShowYValues>true</ShowYValues>
+       <XCurveData>
+        <ShowUnit>true</ShowUnit>
+        <VarName>time</VarName>
+       </XCurveData>
+       <YCurveData>
+        <ShowUnit>true</ShowUnit>
+        <VarName>MCC_IP1\Km\p2.T</VarName>
+       </YCurveData>
+      </Curve>
+     </Curves>
+     <Legenda>
+      <ShowLegenda>true</ShowLegenda>
+     </Legenda>
+    </Plot>
+    <Plot>
+     <PlotType>GraphPlot</PlotType>
+     <BasePlot>
+       <PlotId>19</PlotId>
+       <UseWindowsBGColor>true</UseWindowsBGColor>
+       <BGColor>15790320</BGColor>
+       <PlotIsVisible>true</PlotIsVisible>
+     </BasePlot>
+     <Grid>
+      <DrawGrid>true</DrawGrid>
+      <GridColor>15780518</GridColor>
+      <XTicks>10</XTicks>
+      <YTicks>10</YTicks>
+      <ZTicks>10</ZTicks>
+      <Use3DLook>false</Use3DLook>
+     </Grid>
+     <PlotBGColor>16777215</PlotBGColor>
+     <ShowPlotTitle>true</ShowPlotTitle>
+     <TitlePosition>1</TitlePosition>
+     <PlotTitle>Tem2</PlotTitle>
+     <ShowXValues>true</ShowXValues>
+     <Fonts>
+      <TitleFont>
+       <Name>Arial</Name>
+       <Height>12</Height>
+       <PitchFamily>34</PitchFamily>
+       <Weight>400</Weight>
+       <Italic>0</Italic>
+       <UnderLine>0</UnderLine>
+       <StrikeOut>0</StrikeOut>
+       <Color>0</Color>
+      </TitleFont>
+      <LabelFont>
+       <Name>Arial</Name>
+       <Height>12</Height>
+       <PitchFamily>34</PitchFamily>
+       <Weight>400</Weight>
+       <Italic>0</Italic>
+       <UnderLine>0</UnderLine>
+       <StrikeOut>0</StrikeOut>
+       <Color>0</Color>
+      </LabelFont>
+      <ValuesFont>
+       <Name>Arial</Name>
+       <Height>10</Height>
+       <PitchFamily>34</PitchFamily>
+       <Weight>400</Weight>
+       <Italic>0</Italic>
+       <UnderLine>0</UnderLine>
+       <StrikeOut>0</StrikeOut>
+       <Color>0</Color>
+      </ValuesFont>
+     </Fonts>
+     <SharedXAxis>true</SharedXAxis>
+     <SharedYAxis>true</SharedYAxis>
+     <SharedZAxis>false</SharedZAxis>
+     <XAxes>
+      <Axis>
+       <Minimum>0</Minimum>
+       <Maximum>2</Maximum>
+       <Linear>true</Linear>
+       <Scaling>3</Scaling>
+       <Label>time</Label>
+      </Axis>
+     </XAxes>
+     <YAxes>
+      <Axis>
+       <Minimum>-0.2</Minimum>
+       <Maximum>1.8</Maximum>
+       <Linear>true</Linear>
+       <Scaling>1</Scaling>
+       <Label>Tem2</Label>
+      </Axis>
+     </YAxes>
+     <ZAxes>
+     </ZAxes>
+     <Curves>
+      <Curve>
+       <LineColor>16711680</LineColor>
+       <LineStyle>1</LineStyle>
+       <TickColor>16711680</TickColor>
+       <TickStyle>0</TickStyle>
+       <CurveVisible>true</CurveVisible>
+       <PixelThresshold>1</PixelThresshold>
+       <LineThickness>1</LineThickness>
+       <LineOrder>1</LineOrder>
+       <ShowYValues>true</ShowYValues>
+       <XCurveData>
+        <ShowUnit>true</ShowUnit>
+        <VarName>time</VarName>
+       </XCurveData>
+       <YCurveData>
+        <ShowUnit>true</ShowUnit>
+        <VarName>MCC_IP2\Km\p2.T</VarName>
+       </YCurveData>
+      </Curve>
+     </Curves>
+     <Legenda>
+      <ShowLegenda>true</ShowLegenda>
+     </Legenda>
+    </Plot>
+   </Plots>
+   <PlotPanels>
+    <PlotPanel>
+     <PlotPanelId>1</PlotPanelId>
+     <PlotPanelVisible>true</PlotPanelVisible>
+     <Name>Window 1</Name>
+     <Tiling>2</Tiling>
+     <PlotIds>
+       <PlotId>1</PlotId>
+       <PlotId>2</PlotId>
+       <PlotId>3</PlotId>
+       <PlotId>4</PlotId>
+       <PlotId>13</PlotId>
+       <PlotId>14</PlotId>
+       <PlotId>5</PlotId>
+       <PlotId>7</PlotId>
+       <PlotId>6</PlotId>
+       <PlotId>8</PlotId>
+       <PlotId>9</PlotId>
+       <PlotId>10</PlotId>
+       <PlotId>11</PlotId>
+       <PlotId>12</PlotId>
+       <PlotId>15</PlotId>
+       <PlotId>16</PlotId>
+       <PlotId>18</PlotId>
+       <PlotId>19</PlotId>
+       <PlotId>17</PlotId>
+     </PlotIds>
+     <ToggleState>Base</ToggleState>
+    </PlotPanel>
+   </PlotPanels>
+   <WindowRectangles virtualDesktopWidth="2646" virtualDesktopHeight="1073">
+     <WindowRectangle monitor="1" left="-1366" top="305" right="0" bottom="1073" plotpanelid="1">
+-0.00512445 -0.0104167 1.00586 0.958333
+     </WindowRectangle>
+   </WindowRectangles>
+  </PlotSpecs>
+  <RunSpecs>
+   <SimulatorSettings>
+    <StartTime>0</StartTime>
+    <FinishTime>2</FinishTime>
+    <Warp>false</Warp>
+    <UseOutputAfterEach>false</UseOutputAfterEach>
+    <OutputAfterEach>0.1</OutputAfterEach>
+    <EventEpsilon>1e-006</EventEpsilon>
+    <AlgebraicTolerance>1e-007</AlgebraicTolerance>
+    <SteadyStateAnalysis>false</SteadyStateAnalysis>
+    <UpdateHoldInstructions>true</UpdateHoldInstructions>
+   </SimulatorSettings>
+   <IntegrationMethods>
+    <IntegrationMethod>
+     <Name>Euler</Name>
+     <StepSize>0.01</StepSize>
+     <AutoStepSize>false</AutoStepSize>
+    </IntegrationMethod>
+    <IntegrationMethod>
+     <Name>BackwardEuler</Name>
+     <AbsoluteTolerance>1e-005</AbsoluteTolerance>
+     <RelativeTolerance>1e-005</RelativeTolerance>
+     <AlgebraicAbsoluteTolerance>1e-005</AlgebraicAbsoluteTolerance>
+     <AlgebraicRelativeTolerance>1e-005</AlgebraicRelativeTolerance>
+     <StepSize>0.01</StepSize>
+     <Alpha>1</Alpha>
+    </IntegrationMethod>
+    <IntegrationMethod>
+     <Name>AdamsBashforth</Name>
+     <StepSize>0.01</StepSize>
+     <AutoStepSize>false</AutoStepSize>
+    </IntegrationMethod>
+    <IntegrationMethod>
+     <Name>RungeKutta2</Name>
+     <StepSize>0.01</StepSize>
+     <AutoStepSize>false</AutoStepSize>
+    </IntegrationMethod>
+    <IntegrationMethod>
+     <Name>RungeKutta4</Name>
+     <StepSize>0.01</StepSize>
+     <AutoStepSize>false</AutoStepSize>
+    </IntegrationMethod>
+    <IntegrationMethod>
+     <Name>RungeKutta8</Name>
+     <UseInitialStepSize>false</UseInitialStepSize>
+     <InitialStepSize>0</InitialStepSize>
+     <UseMaximumStepSize>false</UseMaximumStepSize>
+     <MaximumStepSize>0</MaximumStepSize>
+     <AbsoluteTolerance>1e-006</AbsoluteTolerance>
+     <RelativeTolerance>1e-006</RelativeTolerance>
+     <SafetyFactor>0.9</SafetyFactor>
+     <Factor1>0.33</Factor1>
+     <Factor2>6</Factor2>
+     <Beta>0</Beta>
+     <UseMaxNrSteps>false</UseMaxNrSteps>
+     <MaxNrSteps>100000</MaxNrSteps>
+     <UseStiffDetection>false</UseStiffDetection>
+     <MaxNrStiffnessSteps>1000</MaxNrStiffnessSteps>
+    </IntegrationMethod>
+    <IntegrationMethod>
+     <Name>RungeKuttaFehlberg</Name>
+     <UseInitialStepSize>false</UseInitialStepSize>
+     <InitialStepSize>0</InitialStepSize>
+     <UseMaximumStepSize>false</UseMaximumStepSize>
+     <MaximumStepSize>0</MaximumStepSize>
+     <AbsoluteTolerance>1e-006</AbsoluteTolerance>
+     <RelativeTolerance>1e-006</RelativeTolerance>
+    </IntegrationMethod>
+    <IntegrationMethod>
+     <Name>VodeAdams</Name>
+     <UseInitialStepSize>false</UseInitialStepSize>
+     <InitialStepSize>0</InitialStepSize>
+     <UseMaximumStepSize>false</UseMaximumStepSize>
+     <MaximumStepSize>0</MaximumStepSize>
+     <AbsoluteTolerance>1e-006</AbsoluteTolerance>
+     <RelativeTolerance>1e-006</RelativeTolerance>
+     <VodeUseBDF>true</VodeUseBDF>
+     <VodeUseNewton>true</VodeUseNewton>
+    </IntegrationMethod>
+    <IntegrationMethod>
+     <Name>BDFMethod</Name>
+     <AbsoluteTolerance>1e-005</AbsoluteTolerance>
+     <RelativeTolerance>1e-005</RelativeTolerance>
+     <AlgebraicAbsoluteTolerance>1e-005</AlgebraicAbsoluteTolerance>
+     <AlgebraicRelativeTolerance>1e-005</AlgebraicRelativeTolerance>
+     <UseInitialStepSize>false</UseInitialStepSize>
+     <InitialStepSize>0</InitialStepSize>
+     <UseMaximumStepSize>false</UseMaximumStepSize>
+     <MaximumStepSize>0</MaximumStepSize>
+     <UseFixedStepSize>false</UseFixedStepSize>
+     <FixedStepSize>0</FixedStepSize>
+    </IntegrationMethod>
+    <IntegrationMethod>
+     <Name>MeBDFiMethod</Name>
+     <AbsoluteTolerance>1e-005</AbsoluteTolerance>
+     <RelativeTolerance>1e-005</RelativeTolerance>
+     <AlgebraicAbsoluteTolerance>1e-005</AlgebraicAbsoluteTolerance>
+     <AlgebraicRelativeTolerance>1e-005</AlgebraicRelativeTolerance>
+     <UseInitialStepSize>false</UseInitialStepSize>
+     <InitialStepSize>0</InitialStepSize>
+     <UseMaximumStepSize>false</UseMaximumStepSize>
+     <MaximumStepSize>0</MaximumStepSize>
+     <UseFixedStepSize>false</UseFixedStepSize>
+     <FixedStepSize>0</FixedStepSize>
+    </IntegrationMethod>
+    <SelectedIntegrationMethod>8</SelectedIntegrationMethod>
+   </IntegrationMethods>
+  </RunSpecs>
+  <MultipleRun>
+   <NrSteps>10</NrSteps>
+   <CopyFromStates>false</CopyFromStates>
+   <JoinParameterVariation>true</JoinParameterVariation>
+   <ClearAfterRun>true</ClearAfterRun>
+   <RedrawAfterRun>false</RedrawAfterRun>
+   <DrawDuringSimulation>true</DrawDuringSimulation>
+   <ActionBeforeOptimization>0</ActionBeforeOptimization>
+   <CompareValue>0</CompareValue>
+   <UseCompareValue>true</UseCompareValue>
+   <MultipleRunType>MultipleRun</MultipleRunType>
+   <Minimize>true</Minimize>
+   <OptimizationVariable></OptimizationVariable>
+   <ResulVarUsage>UseEndValue</ResulVarUsage>
+   <Tolerance>0.001</Tolerance>
+   <OptimizationMethod>BroydonFletcherGoldfarbShanno</OptimizationMethod>
+   <MultipleRunVariables>
+   </MultipleRunVariables>
+  </MultipleRun>
+  <ExportData>
+   <WriteAsText>true</WriteAsText>
+   <ReadAsText>true</ReadAsText>
+   <WriteHeader>true</WriteHeader>
+   <ReadHeader>true</ReadHeader>
+   <ReadFilename></ReadFilename>
+   <WriteFilename></WriteFilename>
+   <DoWrite>false</DoWrite>
+   <ExportVariables>
+   </ExportVariables>
+   <ImportVariables>
+   </ImportVariables>
+  </ExportData>
+  <BreakPoints>
+  </BreakPoints>
+  <AnimationPlayback>
+   <PlaybackSpeed>1</PlaybackSpeed>
+  </AnimationPlayback>
+</ExpData>
+  </Experiment>
+</Experiments>
+</Document>
