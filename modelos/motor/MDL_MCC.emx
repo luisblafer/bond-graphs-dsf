@@ -1,0 +1,3903 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Document>
+ <Model version="4.4" build="4.4.2.5077">
+  <Sidops><![CDATA[model 128 184
+ description '<Information>
+ <Description>
+    <Version>4.4</Version>
+<IsMainModel>0</IsMainModel>
+  <KeepParameterValues>False</KeepParameterValues>
+    <LibraryPath>C:\Users\la.fernandez\Desktop\TP_BG\MCC\MDL4.emx</LibraryPath>
+  <TimeStamp>2021-9-24 23:33:27</TimeStamp>
+</Description>
+</Information>';
+ type Mainmodel
+ end;
+ implementation bg
+  submodels
+   ArranqueBruscoProfile 96 160
+    description '<Information><Description><Version>4.0</Version><IsMainModel>1</IsMainModel><KeepParameterValues>False</KeepParameterValues><LibraryPath>Signal\Sources\MotionProfileWizard.emx</LibraryPath><TimeStamp>2007-12-19 14:33:18</TimeStamp><AllowLibraryUpdate>False</AllowLibraryUpdate><Configuration><struct><member><name>DocumentationMask</name><value><struct></struct></value></member></struct></Configuration><Description>Condiciones Iniciales:
+J.state = 0.0
+La.state = 0.0
+
+Regimen Inicial:
+Tc = 0.0
+Ua = 0.0</Description></Description></Information>';
+    type 'MotionProfile-Wizard'
+     ports
+      signal out position;
+    end;
+    icon bg bottom
+     figures
+      group
+       rectangle 80 144 112 176 fill 15132390;
+       group
+        group
+         rectangle 91.3 153.1 104.8 170.5 color -1 fill 8454143;
+         line 91.1 153.2 91.1 170.6;
+         line 104.2 153.1 104.2 170.5;
+         spline 91.5 169.7 94.4 167.5 98.2 160.5 100.7 156.3 104.2 154.7 color 16711680;
+         line 104 154.7 110.1 154.7 color 16711680;
+         line 85.2 169.8 92.1 169.8 color 16711680;
+        end;
+       end;
+       line 85.1 149.8 85.1 174;
+       line 81.7 170.5 110.6 170.5;
+      end;
+    end;
+    implementation eq
+// 20-sim User Editor
+// MotionProfileWizard.dll
+parameters
+	real hidden period = 0.6;	// the total period of all regions
+	real hidden totalStroke = 0;
+	integer nrTimes = 1;
+
+variables
+	real hidden fu;
+	real hidden offsetTime, modTime, divTime;
+	real hidden stroke;
+	real hidden duration;
+	real hidden normalizedRegionTime;
+	real hidden runningTime;
+	integer hidden localProfileCounter;
+	integer hidden region;
+	integer hidden ProfileCounter;
+
+	real hidden globalStrokeOffset;
+	real hidden localStrokeOffset;
+
+	// dll-variables
+	real hidden dllInput;
+
+	real hidden dllOutput[3];
+
+initialequations
+
+	fu = 0.0;
+	offsetTime = 0.0;
+	modTime = 0.0;
+	region = 0;
+	stroke = 1.0;
+	duration = 1.0;
+
+	dllInput = 0.0;
+
+	dllOutput = 0.0;
+
+	modTime = 0.0;
+	divTime = 0.0;
+	offsetTime = 0.0;	
+
+	globalStrokeOffset = 0.0;
+	localStrokeOffset = 0.0;
+	normalizedRegionTime = 1.0;
+
+	runningTime = 0.0;
+	ProfileCounter = 1;
+	localProfileCounter = 1;
+	
+code
+
+		runningTime = time - offsetTime;
+		modTime = runningTime mod period;
+		divTime = runningTime div period;
+		localProfileCounter = 1 + round(divTime);
+
+		if localProfileCounter <= nrTimes then
+			ProfileCounter = localProfileCounter;
+			globalStrokeOffset = divTime * totalStroke;
+			// determine in which region we are
+			if modTime < 0.1 then
+				region = 1;
+				normalizedRegionTime = modTime / 0.1;
+			else
+				if modTime < 0.1 then
+					region = 2;
+					normalizedRegionTime = ( modTime - 0.1) / 0;
+				else
+					if modTime < 0.1 then
+						region = 3;
+						normalizedRegionTime = ( modTime - 0.1) / 0;
+					else
+						if modTime < 0.1 then
+							region = 4;
+							normalizedRegionTime = ( modTime - 0.1) / 0;
+						else
+							if modTime < 0.3 then
+								region = 5;
+								normalizedRegionTime = ( modTime - 0.1) / 0.2;
+							else
+								if modTime < 0.3 then
+									region = 6;
+									normalizedRegionTime = ( modTime - 0.3) / 0;
+								else
+									region = 7;
+									normalizedRegionTime = ( modTime - 0.3) / 0.3;
+							end;
+						end;
+					end;
+				end;
+			end;
+		end;
+
+			switch(region)
+
+				case 1 do
+					dllInput = normalizedRegionTime;
+					dllOutput = dll('MotionProfiles.dll', 'ProfileFlat', dllInput);
+
+					localStrokeOffset = 0;
+					stroke = 0;
+					duration = 0.1;
+
+				case 2 do
+					dllInput = normalizedRegionTime;
+					dllOutput = dll('MotionProfiles.dll', 'ProfileFlat', dllInput);
+
+					localStrokeOffset = 1;
+					stroke = 0;
+					duration = 0;
+
+				case 3 do
+					dllInput = normalizedRegionTime;
+					dllOutput = dll('MotionProfiles.dll', 'ProfileFlat', dllInput);
+
+					localStrokeOffset = 1;
+					stroke = 0;
+					duration = 0;
+
+				case 4 do
+					dllInput = normalizedRegionTime;
+					dllOutput = dll('MotionProfiles.dll', 'ProfileRamp', dllInput);
+
+					localStrokeOffset = 1;
+					stroke = 0;
+					duration = 0;
+
+				case 5 do
+					dllInput = normalizedRegionTime;
+					dllOutput = dll('MotionProfiles.dll', 'ProfileFlat', dllInput);
+
+					localStrokeOffset = 1;
+					stroke = 0;
+					duration = 0.2;
+
+				case 6 do
+					dllInput = normalizedRegionTime;
+					dllOutput = dll('MotionProfiles.dll', 'ProfileRamp', dllInput);
+
+					localStrokeOffset = 1;
+					stroke = -1;
+					duration = 0;
+
+				case 7 do
+					dllInput = normalizedRegionTime;
+					dllOutput = dll('MotionProfiles.dll', 'ProfileFlat', dllInput);
+
+					localStrokeOffset = 0;
+					stroke = 0;
+					duration = 0.3;
+
+			end;
+
+			fu = dllOutput[1];
+
+			position = (globalStrokeOffset + localStrokeOffset) + stroke * fu;
+		end; //nrTimes
+implementation_end;
+   ArranqueSuaveProfileT1 96 224
+    description '<Information><Description><Version>4.0</Version><IsMainModel>1</IsMainModel><KeepParameterValues>False</KeepParameterValues><LibraryPath>Signal\Sources\MotionProfileWizard.emx</LibraryPath><TimeStamp>2007-12-19 14:33:18</TimeStamp><AllowLibraryUpdate>False</AllowLibraryUpdate><Configuration><struct><member><name>DocumentationMask</name><value><struct></struct></value></member></struct></Configuration><Description>Condiciones Iniciales:
+J.state = 0.0
+La.state = 0.0
+
+Regimen Inicial:
+Tc = 0.0
+Ua = 0.0</Description></Description></Information>';
+    type 'MotionProfile-Wizard'
+     ports
+      signal out position;
+    end;
+    icon bg bottom
+     figures
+      group
+       rectangle 80 208 112 240 fill 15132390;
+       group
+        group
+         rectangle 91.3 217.1 104.8 234.5 color -1 fill 8454143;
+         line 91.1 217.2 91.1 234.6;
+         line 104.2 217.1 104.2 234.5;
+         spline 91.5 233.7 94.4 231.5 98.2 224.5 100.7 220.3 104.2 218.7 color 16711680;
+         line 104 218.7 110.1 218.7 color 16711680;
+         line 85.2 233.8 92.1 233.8 color 16711680;
+        end;
+       end;
+       line 85.1 213.8 85.1 238;
+       line 81.7 234.5 110.6 234.5;
+      end;
+    end;
+    implementation eq
+// 20-sim User Editor
+// MotionProfileWizard.dll
+parameters
+	real hidden period = 0.6;	// the total period of all regions
+	real hidden totalStroke = 0;
+	integer nrTimes = 1;
+
+variables
+	real hidden fu;
+	real hidden offsetTime, modTime, divTime;
+	real hidden stroke;
+	real hidden duration;
+	real hidden normalizedRegionTime;
+	real hidden runningTime;
+	integer hidden localProfileCounter;
+	integer hidden region;
+	integer hidden ProfileCounter;
+
+	real hidden globalStrokeOffset;
+	real hidden localStrokeOffset;
+
+	// dll-variables
+	real hidden dllInput;
+
+	real hidden dllOutput[3];
+
+initialequations
+
+	fu = 0.0;
+	offsetTime = 0.0;
+	modTime = 0.0;
+	region = 0;
+	stroke = 1.0;
+	duration = 1.0;
+
+	dllInput = 0.0;
+
+	dllOutput = 0.0;
+
+	modTime = 0.0;
+	divTime = 0.0;
+	offsetTime = 0.0;	
+
+	globalStrokeOffset = 0.0;
+	localStrokeOffset = 0.0;
+	normalizedRegionTime = 1.0;
+
+	runningTime = 0.0;
+	ProfileCounter = 1;
+	localProfileCounter = 1;
+	
+code
+
+		runningTime = time - offsetTime;
+		modTime = runningTime mod period;
+		divTime = runningTime div period;
+		localProfileCounter = 1 + round(divTime);
+
+		if localProfileCounter <= nrTimes then
+			ProfileCounter = localProfileCounter;
+			globalStrokeOffset = divTime * totalStroke;
+			// determine in which region we are
+			if modTime < 0.1 then
+				region = 1;
+				normalizedRegionTime = modTime / 0.1;
+			else
+				if modTime < 0.1 then
+					region = 2;
+					normalizedRegionTime = ( modTime - 0.1) / 0;
+				else
+					if modTime < 0.2 then
+						region = 3;
+						normalizedRegionTime = ( modTime - 0.1) / 0.1;
+					else
+						if modTime < 0.3 then
+							region = 4;
+							normalizedRegionTime = ( modTime - 0.2) / 0.1;
+						else
+							if modTime < 0.4 then
+								region = 5;
+								normalizedRegionTime = ( modTime - 0.3) / 0.1;
+							else
+								region = 6;
+								normalizedRegionTime = ( modTime - 0.4) / 0.2;
+						end;
+					end;
+				end;
+			end;
+		end;
+
+			switch(region)
+
+				case 1 do
+					dllInput = normalizedRegionTime;
+					dllOutput = dll('MotionProfiles.dll', 'ProfileFlat', dllInput);
+
+					localStrokeOffset = 0;
+					stroke = 0;
+					duration = 0.1;
+
+				case 2 do
+					dllInput = normalizedRegionTime;
+					dllOutput = dll('MotionProfiles.dll', 'ProfileFlat', dllInput);
+
+					localStrokeOffset = 0;
+					stroke = 0;
+					duration = 0;
+
+				case 3 do
+					dllInput = normalizedRegionTime;
+					dllOutput = dll('MotionProfiles.dll', 'ProfileRamp', dllInput);
+
+					localStrokeOffset = 0;
+					stroke = 1;
+					duration = 0.1;
+
+				case 4 do
+					dllInput = normalizedRegionTime;
+					dllOutput = dll('MotionProfiles.dll', 'ProfileFlat', dllInput);
+
+					localStrokeOffset = 1;
+					stroke = 0;
+					duration = 0.1;
+
+				case 5 do
+					dllInput = normalizedRegionTime;
+					dllOutput = dll('MotionProfiles.dll', 'ProfileRamp', dllInput);
+
+					localStrokeOffset = 1;
+					stroke = -1;
+					duration = 0.1;
+
+				case 6 do
+					dllInput = normalizedRegionTime;
+					dllOutput = dll('MotionProfiles.dll', 'ProfileFlat', dllInput);
+
+					localStrokeOffset = 0;
+					stroke = 0;
+					duration = 0.2;
+
+			end;
+
+			fu = dllOutput[1];
+
+			position = (globalStrokeOffset + localStrokeOffset) + stroke * fu;
+		end; //nrTimes
+implementation_end;
+   ArranqueSuaveProfileT2 96 288
+    description '<Information><Description><Version>4.0</Version><IsMainModel>1</IsMainModel><KeepParameterValues>False</KeepParameterValues><LibraryPath>Signal\Sources\MotionProfileWizard.emx</LibraryPath><TimeStamp>2007-12-19 14:33:18</TimeStamp><AllowLibraryUpdate>False</AllowLibraryUpdate><Configuration><struct><member><name>DocumentationMask</name><value><struct></struct></value></member></struct></Configuration><Description>Condiciones Iniciales:
+J.state = 0.0
+La.state = 0.0
+
+Regimen Inicial:
+Tc = 0.0
+Ua = 0.0</Description></Description></Information>';
+    type 'MotionProfile-Wizard'
+     ports
+      signal out position;
+    end;
+    icon bg bottom
+     figures
+      group
+       rectangle 80 272 112 304 fill 15132390;
+       group
+        group
+         rectangle 91.3 281.1 104.8 298.5 color -1 fill 8454143;
+         line 91.1 281.2 91.1 298.6;
+         line 104.2 281.1 104.2 298.5;
+         spline 91.5 297.7 94.4 295.5 98.2 288.5 100.7 284.3 104.2 282.7 color 16711680;
+         line 104 282.7 110.1 282.7 color 16711680;
+         line 85.2 297.8 92.1 297.8 color 16711680;
+        end;
+       end;
+       line 85.1 277.8 85.1 302;
+       line 81.7 298.5 110.6 298.5;
+      end;
+    end;
+    implementation eq
+// 20-sim User Editor
+// MotionProfileWizard.dll
+parameters
+	real hidden period = 0.6;	// the total period of all regions
+	real hidden totalStroke = 0;
+	integer nrTimes = 1;
+
+variables
+	real hidden fu;
+	real hidden offsetTime, modTime, divTime;
+	real hidden stroke;
+	real hidden duration;
+	real hidden normalizedRegionTime;
+	real hidden runningTime;
+	integer hidden localProfileCounter;
+	integer hidden region;
+	integer hidden ProfileCounter;
+
+	real hidden globalStrokeOffset;
+	real hidden localStrokeOffset;
+
+	// dll-variables
+	real hidden dllInput;
+
+	real hidden dllOutput[3];
+
+initialequations
+
+	fu = 0.0;
+	offsetTime = 0.0;
+	modTime = 0.0;
+	region = 0;
+	stroke = 1.0;
+	duration = 1.0;
+
+	dllInput = 0.0;
+
+	dllOutput = 0.0;
+
+	modTime = 0.0;
+	divTime = 0.0;
+	offsetTime = 0.0;	
+
+	globalStrokeOffset = 0.0;
+	localStrokeOffset = 0.0;
+	normalizedRegionTime = 1.0;
+
+	runningTime = 0.0;
+	ProfileCounter = 1;
+	localProfileCounter = 1;
+	
+code
+
+		runningTime = time - offsetTime;
+		modTime = runningTime mod period;
+		divTime = runningTime div period;
+		localProfileCounter = 1 + round(divTime);
+
+		if localProfileCounter <= nrTimes then
+			ProfileCounter = localProfileCounter;
+			globalStrokeOffset = divTime * totalStroke;
+			// determine in which region we are
+			if modTime < 0.1 then
+				region = 1;
+				normalizedRegionTime = modTime / 0.1;
+			else
+				if modTime < 0.1 then
+					region = 2;
+					normalizedRegionTime = ( modTime - 0.1) / 0;
+				else
+					if modTime < 0.15 then
+						region = 3;
+						normalizedRegionTime = ( modTime - 0.1) / 0.05;
+					else
+						if modTime < 0.3 then
+							region = 4;
+							normalizedRegionTime = ( modTime - 0.15) / 0.15;
+						else
+							if modTime < 0.35 then
+								region = 5;
+								normalizedRegionTime = ( modTime - 0.3) / 0.05;
+							else
+								region = 6;
+								normalizedRegionTime = ( modTime - 0.35) / 0.25;
+						end;
+					end;
+				end;
+			end;
+		end;
+
+			switch(region)
+
+				case 1 do
+					dllInput = normalizedRegionTime;
+					dllOutput = dll('MotionProfiles.dll', 'ProfileFlat', dllInput);
+
+					localStrokeOffset = 0;
+					stroke = 0;
+					duration = 0.1;
+
+				case 2 do
+					dllInput = normalizedRegionTime;
+					dllOutput = dll('MotionProfiles.dll', 'ProfileFlat', dllInput);
+
+					localStrokeOffset = 0;
+					stroke = 0;
+					duration = 0;
+
+				case 3 do
+					dllInput = normalizedRegionTime;
+					dllOutput = dll('MotionProfiles.dll', 'ProfileRamp', dllInput);
+
+					localStrokeOffset = 0;
+					stroke = 1;
+					duration = 0.05;
+
+				case 4 do
+					dllInput = normalizedRegionTime;
+					dllOutput = dll('MotionProfiles.dll', 'ProfileFlat', dllInput);
+
+					localStrokeOffset = 1;
+					stroke = 0;
+					duration = 0.15;
+
+				case 5 do
+					dllInput = normalizedRegionTime;
+					dllOutput = dll('MotionProfiles.dll', 'ProfileRamp', dllInput);
+
+					localStrokeOffset = 1;
+					stroke = -1;
+					duration = 0.05;
+
+				case 6 do
+					dllInput = normalizedRegionTime;
+					dllOutput = dll('MotionProfiles.dll', 'ProfileFlat', dllInput);
+
+					localStrokeOffset = 0;
+					stroke = 0;
+					duration = 0.25;
+
+			end;
+
+			fu = dllOutput[1];
+
+			position = (globalStrokeOffset + localStrokeOffset) + stroke * fu;
+		end; //nrTimes
+implementation_end;
+   ArranqueSuaveProfileT3 96 352
+    description '<Information><Description><Version>4.0</Version><IsMainModel>1</IsMainModel><KeepParameterValues>False</KeepParameterValues><LibraryPath>Signal\Sources\MotionProfileWizard.emx</LibraryPath><TimeStamp>2007-12-19 14:33:18</TimeStamp><AllowLibraryUpdate>False</AllowLibraryUpdate><Configuration><struct><member><name>DocumentationMask</name><value><struct></struct></value></member></struct></Configuration><Description>Condiciones Iniciales:
+J.state = 0.0
+La.state = 0.0
+
+Regimen Inicial:
+Tc = 0.0
+Ua = 0.0</Description></Description></Information>';
+    type 'MotionProfile-Wizard'
+     ports
+      signal out position;
+    end;
+    icon bg bottom
+     figures
+      group
+       rectangle 80 336 112 368 fill 15132390;
+       group
+        group
+         rectangle 91.3 345.1 104.8 362.5 color -1 fill 8454143;
+         line 91.1 345.2 91.1 362.6;
+         line 104.2 345.1 104.2 362.5;
+         spline 91.5 361.7 94.4 359.5 98.2 352.5 100.7 348.3 104.2 346.7 color 16711680;
+         line 104 346.7 110.1 346.7 color 16711680;
+         line 85.2 361.8 92.1 361.8 color 16711680;
+        end;
+       end;
+       line 85.1 341.8 85.1 366;
+       line 81.7 362.5 110.6 362.5;
+      end;
+    end;
+    implementation eq
+// 20-sim User Editor
+// MotionProfileWizard.dll
+parameters
+	real hidden period = 0.6;	// the total period of all regions
+	real hidden totalStroke = 0;
+	integer nrTimes = 1;
+
+variables
+	real hidden fu;
+	real hidden offsetTime, modTime, divTime;
+	real hidden stroke;
+	real hidden duration;
+	real hidden normalizedRegionTime;
+	real hidden runningTime;
+	integer hidden localProfileCounter;
+	integer hidden region;
+	integer hidden ProfileCounter;
+
+	real hidden globalStrokeOffset;
+	real hidden localStrokeOffset;
+
+	// dll-variables
+	real hidden dllInput;
+
+	real hidden dllOutput[3];
+
+initialequations
+
+	fu = 0.0;
+	offsetTime = 0.0;
+	modTime = 0.0;
+	region = 0;
+	stroke = 1.0;
+	duration = 1.0;
+
+	dllInput = 0.0;
+
+	dllOutput = 0.0;
+
+	modTime = 0.0;
+	divTime = 0.0;
+	offsetTime = 0.0;	
+
+	globalStrokeOffset = 0.0;
+	localStrokeOffset = 0.0;
+	normalizedRegionTime = 1.0;
+
+	runningTime = 0.0;
+	ProfileCounter = 1;
+	localProfileCounter = 1;
+	
+code
+
+		runningTime = time - offsetTime;
+		modTime = runningTime mod period;
+		divTime = runningTime div period;
+		localProfileCounter = 1 + round(divTime);
+
+		if localProfileCounter <= nrTimes then
+			ProfileCounter = localProfileCounter;
+			globalStrokeOffset = divTime * totalStroke;
+			// determine in which region we are
+			if modTime < 0.1 then
+				region = 1;
+				normalizedRegionTime = modTime / 0.1;
+			else
+				if modTime < 0.1 then
+					region = 2;
+					normalizedRegionTime = ( modTime - 0.1) / 0;
+				else
+					if modTime < 0.125 then
+						region = 3;
+						normalizedRegionTime = ( modTime - 0.1) / 0.025;
+					else
+						if modTime < 0.3 then
+							region = 4;
+							normalizedRegionTime = ( modTime - 0.125) / 0.175;
+						else
+							if modTime < 0.325 then
+								region = 5;
+								normalizedRegionTime = ( modTime - 0.3) / 0.025;
+							else
+								region = 6;
+								normalizedRegionTime = ( modTime - 0.325) / 0.275;
+						end;
+					end;
+				end;
+			end;
+		end;
+
+			switch(region)
+
+				case 1 do
+					dllInput = normalizedRegionTime;
+					dllOutput = dll('MotionProfiles.dll', 'ProfileFlat', dllInput);
+
+					localStrokeOffset = 0;
+					stroke = 0;
+					duration = 0.1;
+
+				case 2 do
+					dllInput = normalizedRegionTime;
+					dllOutput = dll('MotionProfiles.dll', 'ProfileFlat', dllInput);
+
+					localStrokeOffset = 0;
+					stroke = 0;
+					duration = 0;
+
+				case 3 do
+					dllInput = normalizedRegionTime;
+					dllOutput = dll('MotionProfiles.dll', 'ProfileRamp', dllInput);
+
+					localStrokeOffset = 0;
+					stroke = 1;
+					duration = 0.025;
+
+				case 4 do
+					dllInput = normalizedRegionTime;
+					dllOutput = dll('MotionProfiles.dll', 'ProfileFlat', dllInput);
+
+					localStrokeOffset = 1;
+					stroke = 0;
+					duration = 0.175;
+
+				case 5 do
+					dllInput = normalizedRegionTime;
+					dllOutput = dll('MotionProfiles.dll', 'ProfileRamp', dllInput);
+
+					localStrokeOffset = 1;
+					stroke = -1;
+					duration = 0.025;
+
+				case 6 do
+					dllInput = normalizedRegionTime;
+					dllOutput = dll('MotionProfiles.dll', 'ProfileFlat', dllInput);
+
+					localStrokeOffset = 0;
+					stroke = 0;
+					duration = 0.275;
+
+			end;
+
+			fu = dllOutput[1];
+
+			position = (globalStrokeOffset + localStrokeOffset) + stroke * fu;
+		end; //nrTimes
+implementation_end;
+   ArranqueSuaveProfileT4 96 416
+    description '<Information><Description><Version>4.0</Version><IsMainModel>1</IsMainModel><KeepParameterValues>False</KeepParameterValues><LibraryPath>Signal\Sources\MotionProfileWizard.emx</LibraryPath><TimeStamp>2007-12-19 14:33:18</TimeStamp><AllowLibraryUpdate>False</AllowLibraryUpdate><Configuration><struct><member><name>DocumentationMask</name><value><struct></struct></value></member></struct></Configuration><Description>Condiciones Iniciales:
+J.state = 0.0
+La.state = 0.0
+
+Regimen Inicial:
+Tc = 0.0
+Ua = 0.0</Description></Description></Information>';
+    type 'MotionProfile-Wizard'
+     ports
+      signal out position;
+    end;
+    icon bg bottom
+     figures
+      group
+       rectangle 80 400 112 432 fill 15132390;
+       group
+        group
+         rectangle 91.3 409.1 104.8 426.5 color -1 fill 8454143;
+         line 91.1 409.2 91.1 426.6;
+         line 104.2 409.1 104.2 426.5;
+         spline 91.5 425.7 94.4 423.5 98.2 416.5 100.7 412.3 104.2 410.7 color 16711680;
+         line 104 410.7 110.1 410.7 color 16711680;
+         line 85.2 425.8 92.1 425.8 color 16711680;
+        end;
+       end;
+       line 85.1 405.8 85.1 430;
+       line 81.7 426.5 110.6 426.5;
+      end;
+    end;
+    implementation eq
+// 20-sim User Editor
+// MotionProfileWizard.dll
+parameters
+	real hidden period = 0.6;	// the total period of all regions
+	real hidden totalStroke = 0;
+	integer nrTimes = 1;
+
+variables
+	real hidden fu;
+	real hidden offsetTime, modTime, divTime;
+	real hidden stroke;
+	real hidden duration;
+	real hidden normalizedRegionTime;
+	real hidden runningTime;
+	integer hidden localProfileCounter;
+	integer hidden region;
+	integer hidden ProfileCounter;
+
+	real hidden globalStrokeOffset;
+	real hidden localStrokeOffset;
+
+	// dll-variables
+	real hidden dllInput;
+
+	real hidden dllOutput[3];
+
+initialequations
+
+	fu = 0.0;
+	offsetTime = 0.0;
+	modTime = 0.0;
+	region = 0;
+	stroke = 1.0;
+	duration = 1.0;
+
+	dllInput = 0.0;
+
+	dllOutput = 0.0;
+
+	modTime = 0.0;
+	divTime = 0.0;
+	offsetTime = 0.0;	
+
+	globalStrokeOffset = 0.0;
+	localStrokeOffset = 0.0;
+	normalizedRegionTime = 1.0;
+
+	runningTime = 0.0;
+	ProfileCounter = 1;
+	localProfileCounter = 1;
+	
+code
+
+		runningTime = time - offsetTime;
+		modTime = runningTime mod period;
+		divTime = runningTime div period;
+		localProfileCounter = 1 + round(divTime);
+
+		if localProfileCounter <= nrTimes then
+			ProfileCounter = localProfileCounter;
+			globalStrokeOffset = divTime * totalStroke;
+			// determine in which region we are
+			if modTime < 0.1 then
+				region = 1;
+				normalizedRegionTime = modTime / 0.1;
+			else
+				if modTime < 0.1 then
+					region = 2;
+					normalizedRegionTime = ( modTime - 0.1) / 0;
+				else
+					if modTime < 0.11 then
+						region = 3;
+						normalizedRegionTime = ( modTime - 0.1) / 0.01;
+					else
+						if modTime < 0.3 then
+							region = 4;
+							normalizedRegionTime = ( modTime - 0.11) / 0.19;
+						else
+							if modTime < 0.31 then
+								region = 5;
+								normalizedRegionTime = ( modTime - 0.3) / 0.00999999999999995;
+							else
+								region = 6;
+								normalizedRegionTime = ( modTime - 0.31) / 0.29;
+						end;
+					end;
+				end;
+			end;
+		end;
+
+			switch(region)
+
+				case 1 do
+					dllInput = normalizedRegionTime;
+					dllOutput = dll('MotionProfiles.dll', 'ProfileFlat', dllInput);
+
+					localStrokeOffset = 0;
+					stroke = 0;
+					duration = 0.1;
+
+				case 2 do
+					dllInput = normalizedRegionTime;
+					dllOutput = dll('MotionProfiles.dll', 'ProfileFlat', dllInput);
+
+					localStrokeOffset = 0;
+					stroke = 0;
+					duration = 0;
+
+				case 3 do
+					dllInput = normalizedRegionTime;
+					dllOutput = dll('MotionProfiles.dll', 'ProfileRamp', dllInput);
+
+					localStrokeOffset = 0;
+					stroke = 1;
+					duration = 0.01;
+
+				case 4 do
+					dllInput = normalizedRegionTime;
+					dllOutput = dll('MotionProfiles.dll', 'ProfileFlat', dllInput);
+
+					localStrokeOffset = 1;
+					stroke = 0;
+					duration = 0.19;
+
+				case 5 do
+					dllInput = normalizedRegionTime;
+					dllOutput = dll('MotionProfiles.dll', 'ProfileRamp', dllInput);
+
+					localStrokeOffset = 1;
+					stroke = -1;
+					duration = 0.00999999999999995;
+
+				case 6 do
+					dllInput = normalizedRegionTime;
+					dllOutput = dll('MotionProfiles.dll', 'ProfileFlat', dllInput);
+
+					localStrokeOffset = 0;
+					stroke = 0;
+					duration = 0.29;
+
+			end;
+
+			fu = dllOutput[1];
+
+			position = (globalStrokeOffset + localStrokeOffset) + stroke * fu;
+		end; //nrTimes
+implementation_end;
+   Constant0 880 136
+    description '<Information><Description><Version>4.0</Version><IsMainModel>1</IsMainModel><KeepParameterValues>False</KeepParameterValues><LibraryPath>Signal\Sources\Constant.emx</LibraryPath><TimeStamp>2007-10-19 14:48:44</TimeStamp><AllowLibraryUpdate>True</AllowLibraryUpdate><Configuration><struct><member><name>DocumentationMask</name><value><struct></struct></value></member></struct></Configuration></Description></Information>';
+    type Constant
+     ports
+      signal out output;
+    end;
+    icon bg bottom
+     figures
+      rectangle 864.1 120 895.9 152 fill 15132390;
+      line 868.9 131.6 890.9 131.6 color 16711680 width 2;
+      line 866.2 142.7 891.9 142.7;
+      line 868.5 126.7 868.5 145;
+    end;
+    implementation eq
+parameters
+	real C = 0.0;		// output value
+equations
+	output = C;
+     implementation_end;
+   Constant05 880 224
+    description '<Information><Description><Version>4.0</Version><IsMainModel>1</IsMainModel><KeepParameterValues>False</KeepParameterValues><LibraryPath>Signal\Sources\Constant.emx</LibraryPath><TimeStamp>2007-10-19 14:48:44</TimeStamp><AllowLibraryUpdate>True</AllowLibraryUpdate><Configuration><struct><member><name>DocumentationMask</name><value><struct></struct></value></member></struct></Configuration></Description></Information>';
+    type Constant
+     ports
+      signal out output;
+    end;
+    icon bg bottom
+     figures
+      rectangle 864.1 208 895.9 240 fill 15132390;
+      line 868.9 219.6 890.9 219.6 color 16711680 width 2;
+      line 866.2 230.7 891.9 230.7;
+      line 868.5 214.7 868.5 233;
+    end;
+    implementation eq
+parameters
+	real C = 0.5;		// output value
+equations
+	output = C;
+     implementation_end;
+   Ia 456 32
+    description '<Information><Description><Version>4.0</Version><IsMainModel>1</IsMainModel><KeepParameterValues>False</KeepParameterValues><LibraryPath>Signal\Block Diagram\SignalMonitor.emx</LibraryPath><TimeStamp>2007-9-26 12:14:4</TimeStamp><AllowLibraryUpdate>True</AllowLibraryUpdate><Configuration><struct><member><name>DocumentationMask</name><value><struct></struct></value></member></struct></Configuration></Description></Information>';
+    type SignalMonitor
+     ports
+      signal in input;
+    end;
+    icon bg bottom
+     figures
+      rectangle 440 16 472 48 fill 15132390;
+      rectangle 445.7 21.8 466.3 42.6 color 16711680 fill 11776947 width 2;
+      rectangle 447.8 24.4 463.9 40 color -1 fill 16777215;
+      line 449.9 26.7 449.9 38 fill 16777215;
+      line 448 36.4 460.5 36.4 fill 16777215;
+      line 449.5 36.1 462.4 29.7 color 255 fill 16777215;
+    end;
+    implementation eq
+variables
+	real interesting plot;
+equations
+	plot = input;
+   implementation_end;
+   InversionDeMarchaHalfLoadRampProfile 624 384
+    description '<Information><Description><Version>4.0</Version><IsMainModel>1</IsMainModel><KeepParameterValues>False</KeepParameterValues><LibraryPath>Signal\Sources\MotionProfileWizard.emx</LibraryPath><TimeStamp>2007-12-19 14:33:18</TimeStamp><AllowLibraryUpdate>False</AllowLibraryUpdate><Configuration><struct><member><name>DocumentationMask</name><value><struct></struct></value></member></struct></Configuration><Description>Condiciones Iniciales:
+J.state = 0.050886
+La.state = 569.556u
+
+Regimen Inicial:
+Tc = 0.5 * Tn
+Ua = Un</Description></Description></Information>';
+    type 'MotionProfile-Wizard'
+     ports
+      signal out position;
+    end;
+    icon bg bottom
+     figures
+      group
+       rectangle 608 368 640 400 fill 15132390;
+       group
+        group
+         rectangle 619.3 377.1 632.8 394.5 color -1 fill 8454143;
+         line 619.1 377.2 619.1 394.6;
+         line 632.2 377.1 632.2 394.5;
+         spline 619.5 393.7 622.4 391.5 626.2 384.5 628.7 380.3 632.2 378.7 color 16711680;
+         line 632 378.7 638.1 378.7 color 16711680;
+         line 613.2 393.8 620.1 393.8 color 16711680;
+        end;
+       end;
+       line 613.1 373.8 613.1 398;
+       line 609.7 394.5 638.6 394.5;
+      end;
+    end;
+    implementation eq
+// 20-sim User Editor
+// MotionProfileWizard.dll
+parameters
+	real hidden period = 0.3;	// the total period of all regions
+	real hidden totalStroke = -2;
+	integer nrTimes = 1;
+
+variables
+	real hidden fu;
+	real hidden offsetTime, modTime, divTime;
+	real hidden stroke;
+	real hidden duration;
+	real hidden normalizedRegionTime;
+	real hidden runningTime;
+	integer hidden localProfileCounter;
+	integer hidden region;
+	integer hidden ProfileCounter;
+
+	real hidden globalStrokeOffset;
+	real hidden localStrokeOffset;
+
+	// dll-variables
+	real hidden dllInput;
+
+	real hidden dllOutput[3];
+
+initialequations
+
+	fu = 0.0;
+	offsetTime = 0.0;
+	modTime = 0.0;
+	region = 0;
+	stroke = 1.0;
+	duration = 1.0;
+
+	dllInput = 0.0;
+
+	dllOutput = 0.0;
+
+	modTime = 0.0;
+	divTime = 0.0;
+	offsetTime = 0.0;	
+
+	globalStrokeOffset = 0.0;
+	localStrokeOffset = 0.0;
+	normalizedRegionTime = 1.0;
+
+	runningTime = 0.0;
+	ProfileCounter = 1;
+	localProfileCounter = 1;
+	
+code
+
+		runningTime = time - offsetTime;
+		modTime = runningTime mod period;
+		divTime = runningTime div period;
+		localProfileCounter = 1 + round(divTime);
+
+		if localProfileCounter <= nrTimes then
+			ProfileCounter = localProfileCounter;
+			globalStrokeOffset = divTime * totalStroke;
+			// determine in which region we are
+			if modTime < 0.1 then
+				region = 1;
+				normalizedRegionTime = modTime / 0.1;
+			else
+				if modTime < 0.15 then
+					region = 2;
+					normalizedRegionTime = ( modTime - 0.1) / 0.05;
+				else
+					region = 3;
+					normalizedRegionTime = ( modTime - 0.15) / 0.15;
+			end;
+		end;
+
+			switch(region)
+
+				case 1 do
+					dllInput = normalizedRegionTime;
+					dllOutput = dll('MotionProfiles.dll', 'ProfileFlat', dllInput);
+
+					localStrokeOffset = 1;
+					stroke = 0;
+					duration = 0.1;
+
+				case 2 do
+					dllInput = normalizedRegionTime;
+					dllOutput = dll('MotionProfiles.dll', 'ProfileRamp', dllInput);
+
+					localStrokeOffset = 1;
+					stroke = -2;
+					duration = 0.05;
+
+				case 3 do
+					dllInput = normalizedRegionTime;
+					dllOutput = dll('MotionProfiles.dll', 'ProfileFlat', dllInput);
+
+					localStrokeOffset = -1;
+					stroke = 0;
+					duration = 0.15;
+
+			end;
+
+			fu = dllOutput[1];
+
+			position = (globalStrokeOffset + localStrokeOffset) + stroke * fu;
+		end; //nrTimes
+implementation_end;
+   InversionDeMarchaHalfLoadStepProfile 624 304
+    description '<Information><Description><Version>4.0</Version><IsMainModel>1</IsMainModel><KeepParameterValues>False</KeepParameterValues><LibraryPath>Signal\Sources\MotionProfileWizard.emx</LibraryPath><TimeStamp>2007-12-19 14:33:18</TimeStamp><AllowLibraryUpdate>False</AllowLibraryUpdate><Configuration><struct><member><name>DocumentationMask</name><value><struct></struct></value></member></struct></Configuration><Description>Condiciones Iniciales:
+J.state = 0.050886
+La.state = 569.556u
+
+Regimen Inicial:
+Tc = 0.5 * Tn
+Ua = Un</Description></Description></Information>';
+    type 'MotionProfile-Wizard'
+     ports
+      signal out position;
+    end;
+    icon bg bottom
+     figures
+      group
+       rectangle 608 288 640 320 fill 15132390;
+       group
+        group
+         rectangle 619.3 297.1 632.8 314.5 color -1 fill 8454143;
+         line 619.1 297.2 619.1 314.6;
+         line 632.2 297.1 632.2 314.5;
+         spline 619.5 313.7 622.4 311.5 626.2 304.5 628.7 300.3 632.2 298.7 color 16711680;
+         line 632 298.7 638.1 298.7 color 16711680;
+         line 613.2 313.8 620.1 313.8 color 16711680;
+        end;
+       end;
+       line 613.1 293.8 613.1 318;
+       line 609.7 314.5 638.6 314.5;
+      end;
+    end;
+    implementation eq
+// 20-sim User Editor
+// MotionProfileWizard.dll
+parameters
+	real hidden period = 0.3;	// the total period of all regions
+	real hidden totalStroke = -2;
+	integer nrTimes = 1;
+
+variables
+	real hidden fu;
+	real hidden offsetTime, modTime, divTime;
+	real hidden stroke;
+	real hidden duration;
+	real hidden normalizedRegionTime;
+	real hidden runningTime;
+	integer hidden localProfileCounter;
+	integer hidden region;
+	integer hidden ProfileCounter;
+
+	real hidden globalStrokeOffset;
+	real hidden localStrokeOffset;
+
+	// dll-variables
+	real hidden dllInput;
+
+	real hidden dllOutput[3];
+
+initialequations
+
+	fu = 0.0;
+	offsetTime = 0.0;
+	modTime = 0.0;
+	region = 0;
+	stroke = 1.0;
+	duration = 1.0;
+
+	dllInput = 0.0;
+
+	dllOutput = 0.0;
+
+	modTime = 0.0;
+	divTime = 0.0;
+	offsetTime = 0.0;	
+
+	globalStrokeOffset = 0.0;
+	localStrokeOffset = 0.0;
+	normalizedRegionTime = 1.0;
+
+	runningTime = 0.0;
+	ProfileCounter = 1;
+	localProfileCounter = 1;
+	
+code
+
+		runningTime = time - offsetTime;
+		modTime = runningTime mod period;
+		divTime = runningTime div period;
+		localProfileCounter = 1 + round(divTime);
+
+		if localProfileCounter <= nrTimes then
+			ProfileCounter = localProfileCounter;
+			globalStrokeOffset = divTime * totalStroke;
+			// determine in which region we are
+			if modTime < 0.1 then
+				region = 1;
+				normalizedRegionTime = modTime / 0.1;
+			else
+				if modTime < 0.1 then
+					region = 2;
+					normalizedRegionTime = ( modTime - 0.1) / 0;
+				else
+					region = 3;
+					normalizedRegionTime = ( modTime - 0.1) / 0.2;
+			end;
+		end;
+
+			switch(region)
+
+				case 1 do
+					dllInput = normalizedRegionTime;
+					dllOutput = dll('MotionProfiles.dll', 'ProfileFlat', dllInput);
+
+					localStrokeOffset = 1;
+					stroke = 0;
+					duration = 0.1;
+
+				case 2 do
+					dllInput = normalizedRegionTime;
+					dllOutput = dll('MotionProfiles.dll', 'ProfileRamp', dllInput);
+
+					localStrokeOffset = 1;
+					stroke = -2;
+					duration = 0;
+
+				case 3 do
+					dllInput = normalizedRegionTime;
+					dllOutput = dll('MotionProfiles.dll', 'ProfileFlat', dllInput);
+
+					localStrokeOffset = -1;
+					stroke = 0;
+					duration = 0.2;
+
+			end;
+
+			fu = dllOutput[1];
+
+			position = (globalStrokeOffset + localStrokeOffset) + stroke * fu;
+		end; //nrTimes
+implementation_end;
+   InversionDeMarchaNoLoadRampProfile 448 384
+    description '<Information><Description><Version>4.0</Version><IsMainModel>1</IsMainModel><KeepParameterValues>False</KeepParameterValues><LibraryPath>Signal\Sources\MotionProfileWizard.emx</LibraryPath><TimeStamp>2007-12-19 14:33:18</TimeStamp><AllowLibraryUpdate>False</AllowLibraryUpdate><Configuration><struct><member><name>DocumentationMask</name><value><struct></struct></value></member></struct></Configuration><Description>Condiciones Iniciales:
+J.state = 0.052176
+La.state = 47.144u
+
+Regimen Inicial:
+Tc = 0
+Ua = Un</Description></Description></Information>';
+    type 'MotionProfile-Wizard'
+     ports
+      signal out position;
+    end;
+    icon bg bottom
+     figures
+      group
+       rectangle 432 368 464 400 fill 15132390;
+       group
+        group
+         rectangle 443.3 377.1 456.8 394.5 color -1 fill 8454143;
+         line 443.1 377.2 443.1 394.6;
+         line 456.2 377.1 456.2 394.5;
+         spline 443.5 393.7 446.4 391.5 450.2 384.5 452.7 380.3 456.2 378.7 color 16711680;
+         line 456 378.7 462.1 378.7 color 16711680;
+         line 437.2 393.8 444.1 393.8 color 16711680;
+        end;
+       end;
+       line 437.1 373.8 437.1 398;
+       line 433.7 394.5 462.6 394.5;
+      end;
+    end;
+    implementation eq
+// 20-sim User Editor
+// MotionProfileWizard.dll
+parameters
+	real hidden period = 0.3;	// the total period of all regions
+	real hidden totalStroke = -2;
+	integer nrTimes = 1;
+
+variables
+	real hidden fu;
+	real hidden offsetTime, modTime, divTime;
+	real hidden stroke;
+	real hidden duration;
+	real hidden normalizedRegionTime;
+	real hidden runningTime;
+	integer hidden localProfileCounter;
+	integer hidden region;
+	integer hidden ProfileCounter;
+
+	real hidden globalStrokeOffset;
+	real hidden localStrokeOffset;
+
+	// dll-variables
+	real hidden dllInput;
+
+	real hidden dllOutput[3];
+
+initialequations
+
+	fu = 0.0;
+	offsetTime = 0.0;
+	modTime = 0.0;
+	region = 0;
+	stroke = 1.0;
+	duration = 1.0;
+
+	dllInput = 0.0;
+
+	dllOutput = 0.0;
+
+	modTime = 0.0;
+	divTime = 0.0;
+	offsetTime = 0.0;	
+
+	globalStrokeOffset = 0.0;
+	localStrokeOffset = 0.0;
+	normalizedRegionTime = 1.0;
+
+	runningTime = 0.0;
+	ProfileCounter = 1;
+	localProfileCounter = 1;
+	
+code
+
+		runningTime = time - offsetTime;
+		modTime = runningTime mod period;
+		divTime = runningTime div period;
+		localProfileCounter = 1 + round(divTime);
+
+		if localProfileCounter <= nrTimes then
+			ProfileCounter = localProfileCounter;
+			globalStrokeOffset = divTime * totalStroke;
+			// determine in which region we are
+			if modTime < 0.1 then
+				region = 1;
+				normalizedRegionTime = modTime / 0.1;
+			else
+				if modTime < 0.15 then
+					region = 2;
+					normalizedRegionTime = ( modTime - 0.1) / 0.05;
+				else
+					region = 3;
+					normalizedRegionTime = ( modTime - 0.15) / 0.15;
+			end;
+		end;
+
+			switch(region)
+
+				case 1 do
+					dllInput = normalizedRegionTime;
+					dllOutput = dll('MotionProfiles.dll', 'ProfileFlat', dllInput);
+
+					localStrokeOffset = 1;
+					stroke = 0;
+					duration = 0.1;
+
+				case 2 do
+					dllInput = normalizedRegionTime;
+					dllOutput = dll('MotionProfiles.dll', 'ProfileRamp', dllInput);
+
+					localStrokeOffset = 1;
+					stroke = -2;
+					duration = 0.05;
+
+				case 3 do
+					dllInput = normalizedRegionTime;
+					dllOutput = dll('MotionProfiles.dll', 'ProfileFlat', dllInput);
+
+					localStrokeOffset = -1;
+					stroke = 0;
+					duration = 0.15;
+
+			end;
+
+			fu = dllOutput[1];
+
+			position = (globalStrokeOffset + localStrokeOffset) + stroke * fu;
+		end; //nrTimes
+implementation_end;
+   InversionDeMarchaNoLoadStepProfile 448 304
+    description '<Information><Description><Version>4.0</Version><IsMainModel>1</IsMainModel><KeepParameterValues>False</KeepParameterValues><LibraryPath>Signal\Sources\MotionProfileWizard.emx</LibraryPath><TimeStamp>2007-12-19 14:33:18</TimeStamp><AllowLibraryUpdate>False</AllowLibraryUpdate><Configuration><struct><member><name>DocumentationMask</name><value><struct></struct></value></member></struct></Configuration><Description>Condiciones Iniciales:
+J.state = 0.052176
+La.state = 47.144u
+
+Regimen Inicial:
+Tc = 0
+Ua = Un</Description></Description></Information>';
+    type 'MotionProfile-Wizard'
+     ports
+      signal out position;
+    end;
+    icon bg bottom
+     figures
+      group
+       rectangle 432 288 464 320 fill 15132390;
+       group
+        group
+         rectangle 443.3 297.1 456.8 314.5 color -1 fill 8454143;
+         line 443.1 297.2 443.1 314.6;
+         line 456.2 297.1 456.2 314.5;
+         spline 443.5 313.7 446.4 311.5 450.2 304.5 452.7 300.3 456.2 298.7 color 16711680;
+         line 456 298.7 462.1 298.7 color 16711680;
+         line 437.2 313.8 444.1 313.8 color 16711680;
+        end;
+       end;
+       line 437.1 293.8 437.1 318;
+       line 433.7 314.5 462.6 314.5;
+      end;
+    end;
+    implementation eq
+// 20-sim User Editor
+// MotionProfileWizard.dll
+parameters
+	real hidden period = 0.3;	// the total period of all regions
+	real hidden totalStroke = -2;
+	integer nrTimes = 1;
+
+variables
+	real hidden fu;
+	real hidden offsetTime, modTime, divTime;
+	real hidden stroke;
+	real hidden duration;
+	real hidden normalizedRegionTime;
+	real hidden runningTime;
+	integer hidden localProfileCounter;
+	integer hidden region;
+	integer hidden ProfileCounter;
+
+	real hidden globalStrokeOffset;
+	real hidden localStrokeOffset;
+
+	// dll-variables
+	real hidden dllInput;
+
+	real hidden dllOutput[3];
+
+initialequations
+
+	fu = 0.0;
+	offsetTime = 0.0;
+	modTime = 0.0;
+	region = 0;
+	stroke = 1.0;
+	duration = 1.0;
+
+	dllInput = 0.0;
+
+	dllOutput = 0.0;
+
+	modTime = 0.0;
+	divTime = 0.0;
+	offsetTime = 0.0;	
+
+	globalStrokeOffset = 0.0;
+	localStrokeOffset = 0.0;
+	normalizedRegionTime = 1.0;
+
+	runningTime = 0.0;
+	ProfileCounter = 1;
+	localProfileCounter = 1;
+	
+code
+
+		runningTime = time - offsetTime;
+		modTime = runningTime mod period;
+		divTime = runningTime div period;
+		localProfileCounter = 1 + round(divTime);
+
+		if localProfileCounter <= nrTimes then
+			ProfileCounter = localProfileCounter;
+			globalStrokeOffset = divTime * totalStroke;
+			// determine in which region we are
+			if modTime < 0.1 then
+				region = 1;
+				normalizedRegionTime = modTime / 0.1;
+			else
+				if modTime < 0.1 then
+					region = 2;
+					normalizedRegionTime = ( modTime - 0.1) / 0;
+				else
+					region = 3;
+					normalizedRegionTime = ( modTime - 0.1) / 0.2;
+			end;
+		end;
+
+			switch(region)
+
+				case 1 do
+					dllInput = normalizedRegionTime;
+					dllOutput = dll('MotionProfiles.dll', 'ProfileFlat', dllInput);
+
+					localStrokeOffset = 1;
+					stroke = 0;
+					duration = 0.1;
+
+				case 2 do
+					dllInput = normalizedRegionTime;
+					dllOutput = dll('MotionProfiles.dll', 'ProfileRamp', dllInput);
+
+					localStrokeOffset = 1;
+					stroke = -2;
+					duration = 0;
+
+				case 3 do
+					dllInput = normalizedRegionTime;
+					dllOutput = dll('MotionProfiles.dll', 'ProfileFlat', dllInput);
+
+					localStrokeOffset = -1;
+					stroke = 0;
+					duration = 0.2;
+
+			end;
+
+			fu = dllOutput[1];
+
+			position = (globalStrokeOffset + localStrokeOffset) + stroke * fu;
+		end; //nrTimes
+implementation_end;
+   MCC_IP 488 136
+    description '<Information><Description><Version>4.4</Version><IsMainModel>1</IsMainModel><KeepParameterValues>False</KeepParameterValues><LibraryPath>MCC_IP.emx</LibraryPath><TimeStamp>2021-1-7 02:11:11</TimeStamp><AllowLibraryUpdate>True</AllowLibraryUpdate><Configuration><struct><member><name>DocumentationMask</name><value><struct></struct></value></member></struct></Configuration></Description><Attributes><GlobalRelations>parameters
+	real La = 0.161m {H};			//Inductancia de armadura
+	real Ra = 0.365 {ohm};			//Impedancia de armadura
+	real J  = 0.134m {kg.m2};		//Inercia rotorica
+	real b  = 0.0000925 {N.m.s/rad};	//Coef. friccion rotacional
+	real Km = 0.123 {N.m/A};		//Constante del motor</GlobalRelations></Attributes></Information>';
+    type MCC_IP
+     ports
+      electric in U;
+      rotation out T;
+      signal out Ia {A} ; "Corriente de armadura"
+      signal out Omega {rad/s} ;
+    end;
+    icon bg bottom shadow 11776947
+     figures
+      rectangle 416 112 560 160 fill 15132390;
+      group
+       ellipse 423.7 119.8 455.7 151.8 fill 16777215 width 2;
+       line 434 143.8 445.4 143.8;
+       text 'M' 439.7 135.8 21 bold;
+      end;
+      text 'MCC' 484.3 129.3 'Noto Sans Cond' 25 bold;
+      text 'Imán Permanente' 512 147 'Noto Sans Cond' 18 italic;
+     terminals
+      U 408 136 fixed;
+      T 568 136 fixed;
+    end;
+    implementation bg
+     submodels
+      b 480 224
+       description '<Information><Description><Version>4.2</Version><IsMainModel>1</IsMainModel><KeepParameterValues>False</KeepParameterValues><LibraryPath>Bond Graph\R.emx</LibraryPath><TimeStamp>2011-11-29 16:35:37</TimeStamp><AllowLibraryUpdate>True</AllowLibraryUpdate><Configuration><struct><member><name>DocumentationMask</name><value><struct></struct></value></member></struct></Configuration></Description></Information>';
+       type R
+        ports
+         rotation in p;
+       end;
+       icon bg right
+        figures
+         text 'R' 480 224 18 bold;
+       end;
+       implementation eq
+parameters
+	real global b {N.m.s/rad};
+equations
+	p.e = b * p.f;
+implementation_end;
+      J 480 64
+       description '<Information><Description><Version>4.2</Version><IsMainModel>1</IsMainModel><KeepParameterValues>False</KeepParameterValues><LibraryPath>Bond Graph\I.emx</LibraryPath><TimeStamp>2011-11-29 15:55:55</TimeStamp><AllowLibraryUpdate>True</AllowLibraryUpdate><Configuration><struct><member><name>DocumentationMask</name><value><struct></struct></value></member></struct></Configuration></Description></Information>';
+       type I
+        ports
+         rotation in p;
+         signal out state;
+        restrictions
+         causality preferred in p;
+       end;
+       icon bg right
+        figures
+         text 'I' 480 64 18 bold;
+       end;
+       implementation eq
+parameters
+	real global J {kg.m2};
+equations
+    state = int(p.e);
+    p.f = state / J;
+implementation_end;
+      Km 368 144
+       description '<Information><Description><Version>4.2</Version><IsMainModel>1</IsMainModel><KeepParameterValues>False</KeepParameterValues><LibraryPath>Bond Graph\GY.emx</LibraryPath><TimeStamp>2011-11-29 15:53:45</TimeStamp><AllowLibraryUpdate>True</AllowLibraryUpdate><Configuration><struct><member><name>DocumentationMask</name><value><struct></struct></value></member></struct></Configuration></Description></Information>';
+       type GY
+        ports
+         electric in p1;
+         rotation out p2;
+        restrictions
+         causality constraint equal p1 p2;
+       end;
+       icon bg bottom
+        figures
+         text 'GY' 368 144 18 bold;
+       end;
+       implementation eq
+parameters
+	real global Km {N.m/A};
+equations
+	p1.e = Km * p2.f;
+	p2.e = Km * p1.f;
+implementation_end;
+      La 256 64
+       description '<Information><Description><Version>4.2</Version><IsMainModel>1</IsMainModel><KeepParameterValues>False</KeepParameterValues><LibraryPath>Bond Graph\I.emx</LibraryPath><TimeStamp>2011-11-29 15:55:55</TimeStamp><AllowLibraryUpdate>True</AllowLibraryUpdate><Configuration><struct><member><name>DocumentationMask</name><value><struct></struct></value></member></struct></Configuration></Description></Information>';
+       type I
+        ports
+         electric in p;
+         signal out state;
+        restrictions
+         causality preferred in p;
+       end;
+       icon bg right
+        figures
+         text 'I' 256 64 18 bold;
+       end;
+       implementation eq
+parameters
+	real global La {H};
+equations
+    state = int(p.e);
+    p.f = state / La;
+implementation_end;
+      plug T 647.8 143.9;
+      plug Ia 336 64.1;
+      plug Omega 576 72.1;
+      plug U 87.9 143.9;
+      OneJunction 256 144
+       description '<Information>
+ <Description>
+    <Version>4.2</Version>
+<IsMainModel>1</IsMainModel>
+  <KeepParameterValues>False</KeepParameterValues>
+    <LibraryPath>Bond Graph\OneJunction.emx</LibraryPath>
+  <TimeStamp>2011-11-29 16:17:51</TimeStamp>
+</Description>
+</Information>';
+       knot OneJunction
+        ports
+         electric knot duplicatable none p [1];
+         signal knot out flow [1];
+        restrictions
+         causality constraint one_out p;
+       end;
+       icon bg
+        figures
+         text '1' 256 144 18 bold;
+       end;
+       implementation eq
+equations
+	sum (direct (p.e)) = 0;
+	equal (collect (p.f));
+	flow = first (p.f);
+implementation_end;
+      OneJunction2 480 144
+       description '<Information>
+ <Description>
+    <Version>4.2</Version>
+<IsMainModel>1</IsMainModel>
+  <KeepParameterValues>False</KeepParameterValues>
+    <LibraryPath>Bond Graph\OneJunction.emx</LibraryPath>
+  <TimeStamp>2011-11-29 16:17:51</TimeStamp>
+</Description>
+</Information>';
+       knot OneJunction
+        ports
+         rotation knot duplicatable none p [1];
+         signal knot out flow [1];
+        restrictions
+         causality constraint one_out p;
+       end;
+       icon bg
+        figures
+         text '1' 480 144 18 bold;
+       end;
+       implementation eq
+equations
+	sum (direct (p.e)) = 0;
+	equal (collect (p.f));
+	flow = first (p.f);
+implementation_end;
+      Ra 256 224
+       description '<Information><Description><Version>4.2</Version><IsMainModel>1</IsMainModel><KeepParameterValues>False</KeepParameterValues><LibraryPath>Bond Graph\R.emx</LibraryPath><TimeStamp>2011-11-29 16:35:37</TimeStamp><AllowLibraryUpdate>True</AllowLibraryUpdate><Configuration><struct><member><name>DocumentationMask</name><value><struct></struct></value></member></struct></Configuration></Description></Information>';
+       type R
+        ports
+         electric in p;
+       end;
+       icon bg right
+        figures
+         text 'R' 256 224 18 bold;
+       end;
+       implementation eq
+parameters
+	real global Ra {ohm};
+equations
+	p.e = Ra * p.f;
+implementation_end;
+      ZeroJunction 160 144
+       description '<Information>
+ <Description>
+    <Version>4.2</Version>
+<IsMainModel>1</IsMainModel>
+  <KeepParameterValues>False</KeepParameterValues>
+    <LibraryPath>Bond Graph\ZeroJunction.emx</LibraryPath>
+  <TimeStamp>2011-11-29 16:45:16</TimeStamp>
+</Description>
+</Information>';
+       knot ZeroJunction
+        ports
+         electric knot duplicatable none p [1];
+         signal knot out effort [1];
+        restrictions
+         causality constraint one_in p;
+       end;
+       icon bg
+        figures
+         text '0' 160 144 18 bold;
+       end;
+       implementation eq
+equations
+	sum (direct (p.f)) = 0;
+	equal (collect (p.e));
+	effort = first (p.e);
+implementation_end;
+     end;
+     connections
+      ZeroJunction\p => OneJunction\p '1';
+      OneJunction\p => La\p '2';
+      OneJunction\p => Ra\p '3';
+      OneJunction\p => Km\p1 '4';
+      Km\p2 => OneJunction2\p '5';
+      OneJunction2\p => J\p '6';
+      OneJunction2\p => b\p '7';
+      OneJunction2\p => T;
+      U => ZeroJunction\p;
+      OneJunction\flow -> Ia;
+      OneJunction2\flow -> Omega;
+     end;
+    implementation_end;
+   Perfil_Tc 928 40
+    description '<Information><Description><Version>4.0</Version><IsMainModel>1</IsMainModel><KeepParameterValues>False</KeepParameterValues><LibraryPath>Signal\Block Diagram\SignalMonitor.emx</LibraryPath><TimeStamp>2007-9-26 12:14:4</TimeStamp><AllowLibraryUpdate>True</AllowLibraryUpdate><Configuration><struct><member><name>DocumentationMask</name><value><struct></struct></value></member></struct></Configuration></Description></Information>';
+    type SignalMonitor
+     ports
+      signal in input;
+    end;
+    icon bg bottom
+     figures
+      rectangle 912 24 944 56 fill 15132390;
+      rectangle 917.7 29.8 938.3 50.6 color 16711680 fill 11776947 width 2;
+      rectangle 919.8 32.4 935.9 48 color -1 fill 16777215;
+      line 921.9 34.7 921.9 46 fill 16777215;
+      line 920 44.4 932.5 44.4 fill 16777215;
+      line 921.5 44.1 934.4 37.7 color 255 fill 16777215;
+    end;
+    implementation eq
+variables
+	real interesting plot;
+equations
+	plot = input;
+   implementation_end;
+   Perfil_Ua 144 32
+    description '<Information><Description><Version>4.0</Version><IsMainModel>1</IsMainModel><KeepParameterValues>False</KeepParameterValues><LibraryPath>Signal\Block Diagram\SignalMonitor.emx</LibraryPath><TimeStamp>2007-9-26 12:14:4</TimeStamp><AllowLibraryUpdate>True</AllowLibraryUpdate><Configuration><struct><member><name>DocumentationMask</name><value><struct></struct></value></member></struct></Configuration></Description></Information>';
+    type SignalMonitor
+     ports
+      signal in input;
+    end;
+    icon bg bottom
+     figures
+      rectangle 128 16 160 48 fill 15132390;
+      rectangle 133.7 21.8 154.3 42.6 color 16711680 fill 11776947 width 2;
+      rectangle 135.8 24.4 151.9 40 color -1 fill 16777215;
+      line 137.9 26.7 137.9 38 fill 16777215;
+      line 136 36.4 148.5 36.4 fill 16777215;
+      line 137.5 36.1 150.4 29.7 color 255 fill 16777215;
+    end;
+    implementation eq
+variables
+	real interesting plot;
+equations
+	plot = input;
+   implementation_end;
+   Splitter1 296 136
+    description '<Description><Version>4.0</Version>
+   <LibraryPath>Signal\Block Diagram\Splitter.emx</LibraryPath>
+  <TimeStamp>2008-01-17 11:28:29</TimeStamp>
+<IsMainModel>1</IsMainModel>
+ <KeepParameterValues>False</KeepParameterValues>
+</Description>';
+    knot Splitter
+     ports
+      signal knot duplicatable out output [1];
+      signal knot in input [1];
+    end;
+    icon bg ellipse
+     figures
+      ellipse 292.8 132.8 299.2 139.2 color -1 fill 0;
+      ellipse 291.7 131.7 300.3 140.3 color -1;
+     terminals
+      input 296 136 fixed;
+    end;
+    implementation eq
+equations
+    collect (output) = input;
+implementation_end;
+   Splitter2 144 136
+    description '<Description><Version>4.0</Version>
+   <LibraryPath>Signal\Block Diagram\Splitter.emx</LibraryPath>
+  <TimeStamp>2008-01-17 11:28:29</TimeStamp>
+<IsMainModel>1</IsMainModel>
+ <KeepParameterValues>False</KeepParameterValues>
+</Description>';
+    knot Splitter
+     ports
+      signal knot duplicatable out output [1];
+      signal knot in input [1];
+    end;
+    icon bg ellipse
+     figures
+      ellipse 140.8 132.8 147.2 139.2 color -1 fill 0;
+      ellipse 139.7 131.7 148.3 140.3 color -1;
+     terminals
+      input 144 136 fixed;
+    end;
+    implementation eq
+equations
+    collect (output) = input;
+implementation_end;
+   Splitter3 808 136
+    description '<Description><Version>4.0</Version>
+   <LibraryPath>Signal\Block Diagram\Splitter.emx</LibraryPath>
+  <TimeStamp>2008-01-17 11:28:29</TimeStamp>
+<IsMainModel>1</IsMainModel>
+ <KeepParameterValues>False</KeepParameterValues>
+</Description>';
+    knot Splitter
+     ports
+      signal knot duplicatable out output [1];
+      signal knot in input [1];
+    end;
+    icon bg ellipse
+     figures
+      ellipse 804.8 132.8 811.2 139.2 color -1 fill 0;
+      ellipse 803.7 131.7 812.3 140.3 color -1;
+     terminals
+      input 808 136 fixed;
+    end;
+    implementation eq
+equations
+    collect (output) = input;
+implementation_end;
+   tau_c 776 32
+    description '<Information><Description><Version>4.0</Version><IsMainModel>1</IsMainModel><KeepParameterValues>False</KeepParameterValues><LibraryPath>Signal\Block Diagram\SignalMonitor.emx</LibraryPath><TimeStamp>2007-9-26 12:14:4</TimeStamp><AllowLibraryUpdate>True</AllowLibraryUpdate><Configuration><struct><member><name>DocumentationMask</name><value><struct></struct></value></member></struct></Configuration></Description></Information>';
+    type SignalMonitor
+     ports
+      signal in input;
+    end;
+    icon bg bottom
+     figures
+      rectangle 760 16 792 48 fill 15132390;
+      rectangle 765.7 21.8 786.3 42.6 color 16711680 fill 11776947 width 2;
+      rectangle 767.8 24.4 783.9 40 color -1 fill 16777215;
+      line 769.9 26.7 769.9 38 fill 16777215;
+      line 768 36.4 780.5 36.4 fill 16777215;
+      line 769.5 36.1 782.4 29.7 color 255 fill 16777215;
+    end;
+    implementation eq
+variables
+	real interesting plot;
+equations
+	plot = input;
+   implementation_end;
+   Tc 648 136
+    description '<Information><Description><Version>4.2</Version><IsMainModel>1</IsMainModel><KeepParameterValues>False</KeepParameterValues><LibraryPath>Bond Graph\MSe.emx</LibraryPath><TimeStamp>2011-11-29 16:12:33</TimeStamp><AllowLibraryUpdate>True</AllowLibraryUpdate><Configuration><struct><member><name>DocumentationMask</name><value><struct></struct></value></member></struct></Configuration></Description></Information>';
+    type MSe
+     ports
+      rotation out p;
+      signal in effort;
+     restrictions
+      causality fixed out p;
+    end;
+    icon bg bottom
+     figures
+      text 'MSe' 648 136 18 bold;
+    end;
+    implementation eq
+variables
+	real flow;
+equations
+	p.e = effort;
+	flow = p.f;
+implementation_end;
+   TcN 736 136
+    description '<Information><Description><Version>4.0</Version><IsMainModel>1</IsMainModel><KeepParameterValues>False</KeepParameterValues><LibraryPath>Signal\Block Diagram\Gain.emx</LibraryPath><TimeStamp>2007-9-26 12:15:12</TimeStamp><AllowLibraryUpdate>True</AllowLibraryUpdate><Configuration><struct><member><name>DocumentationMask</name><value><struct></struct></value></member></struct></Configuration></Description></Information>';
+    type Gain
+     ports
+      signal in input;
+      signal out output;
+    end;
+    icon bg bottom
+     figures
+      rectangle 720.1 120 751.9 152 fill 15132390;
+      text 'K' 736 136 color 16711680 16 bold;
+    end;
+    implementation eq
+parameters
+	real K = 0.8;		// gain
+equations
+	output = K * input;
+    implementation_end;
+   Ua 360 136
+    description '<Information><Description><Version>4.2</Version><IsMainModel>1</IsMainModel><KeepParameterValues>False</KeepParameterValues><LibraryPath>Bond Graph\MSe.emx</LibraryPath><TimeStamp>2011-11-29 16:12:33</TimeStamp><AllowLibraryUpdate>True</AllowLibraryUpdate><Configuration><struct><member><name>DocumentationMask</name><value><struct></struct></value></member></struct></Configuration></Description></Information>';
+    type MSe
+     ports
+      power out p;
+      signal in effort;
+     restrictions
+      causality fixed out p;
+    end;
+    icon bg bottom
+     figures
+      text 'MSe' 360 136 18 bold;
+    end;
+    implementation eq
+variables
+	real flow;
+equations
+	p.e = effort;
+	flow = p.f;
+implementation_end;
+   UaN 224 136
+    description '<Information><Description><Version>4.0</Version><IsMainModel>1</IsMainModel><KeepParameterValues>False</KeepParameterValues><LibraryPath>Signal\Block Diagram\Gain.emx</LibraryPath><TimeStamp>2007-9-26 12:15:12</TimeStamp><AllowLibraryUpdate>True</AllowLibraryUpdate><Configuration><struct><member><name>DocumentationMask</name><value><struct></struct></value></member></struct></Configuration></Description></Information>';
+    type Gain
+     ports
+      signal in input;
+      signal out output;
+    end;
+    icon bg bottom
+     figures
+      rectangle 208.1 120 239.9 152 fill 15132390;
+      text 'K' 224 136 color 16711680 16 bold;
+    end;
+    implementation eq
+parameters
+	real K = 48.0;		// gain
+equations
+	output = K * input;
+    implementation_end;
+   Va 296 32
+    description '<Information><Description><Version>4.0</Version><IsMainModel>1</IsMainModel><KeepParameterValues>False</KeepParameterValues><LibraryPath>Signal\Block Diagram\SignalMonitor.emx</LibraryPath><TimeStamp>2007-9-26 12:14:4</TimeStamp><AllowLibraryUpdate>True</AllowLibraryUpdate><Configuration><struct><member><name>DocumentationMask</name><value><struct></struct></value></member></struct></Configuration></Description></Information>';
+    type SignalMonitor
+     ports
+      signal in input;
+    end;
+    icon bg bottom
+     figures
+      rectangle 280 16 312 48 fill 15132390;
+      rectangle 285.7 21.8 306.3 42.6 color 16711680 fill 11776947 width 2;
+      rectangle 287.8 24.4 303.9 40 color -1 fill 16777215;
+      line 289.9 26.7 289.9 38 fill 16777215;
+      line 288 36.4 300.5 36.4 fill 16777215;
+      line 289.5 36.1 302.4 29.7 color 255 fill 16777215;
+    end;
+    implementation eq
+variables
+	real interesting plot;
+equations
+	plot = input;
+   implementation_end;
+   VariacionCargaProfile 976 176
+    description '<Information><Description><Version>4.0</Version><IsMainModel>1</IsMainModel><KeepParameterValues>False</KeepParameterValues><LibraryPath>Signal\Sources\MotionProfileWizard.emx</LibraryPath><TimeStamp>2007-12-19 14:33:18</TimeStamp><AllowLibraryUpdate>False</AllowLibraryUpdate><Configuration><struct><member><name>DocumentationMask</name><value><struct></struct></value></member></struct></Configuration></Description></Information>';
+    type 'MotionProfile-Wizard'
+     ports
+      signal out position;
+    end;
+    icon bg bottom
+     figures
+      group
+       rectangle 960 160 992 192 fill 15132390;
+       group
+        group
+         rectangle 971.3 169.1 984.8 186.5 color -1 fill 8454143;
+         line 971.1 169.2 971.1 186.6;
+         line 984.2 169.1 984.2 186.5;
+         spline 971.5 185.7 974.4 183.5 978.2 176.5 980.7 172.3 984.2 170.7 color 16711680;
+         line 984 170.7 990.1 170.7 color 16711680;
+         line 965.2 185.8 972.1 185.8 color 16711680;
+        end;
+       end;
+       line 965.1 165.8 965.1 190;
+       line 961.7 186.5 990.6 186.5;
+      end;
+    end;
+    implementation eq
+// 20-sim User Editor
+// MotionProfileWizard.dll
+parameters
+	real hidden period = 0.6;	// the total period of all regions
+	real hidden totalStroke = 0;
+	integer nrTimes = 1;
+
+variables
+	real hidden fu;
+	real hidden offsetTime, modTime, divTime;
+	real hidden stroke;
+	real hidden duration;
+	real hidden normalizedRegionTime;
+	real hidden runningTime;
+	integer hidden localProfileCounter;
+	integer hidden region;
+	integer hidden ProfileCounter;
+
+	real hidden globalStrokeOffset;
+	real hidden localStrokeOffset;
+
+	// dll-variables
+	real hidden dllInput;
+
+	real hidden dllOutput[3];
+
+initialequations
+
+	fu = 0.0;
+	offsetTime = 0.0;
+	modTime = 0.0;
+	region = 0;
+	stroke = 1.0;
+	duration = 1.0;
+
+	dllInput = 0.0;
+
+	dllOutput = 0.0;
+
+	modTime = 0.0;
+	divTime = 0.0;
+	offsetTime = 0.0;	
+
+	globalStrokeOffset = 0.0;
+	localStrokeOffset = 0.0;
+	normalizedRegionTime = 1.0;
+
+	runningTime = 0.0;
+	ProfileCounter = 1;
+	localProfileCounter = 1;
+	
+code
+
+		runningTime = time - offsetTime;
+		modTime = runningTime mod period;
+		divTime = runningTime div period;
+		localProfileCounter = 1 + round(divTime);
+
+		if localProfileCounter <= nrTimes then
+			ProfileCounter = localProfileCounter;
+			globalStrokeOffset = divTime * totalStroke;
+			// determine in which region we are
+			if modTime < 0.1 then
+				region = 1;
+				normalizedRegionTime = modTime / 0.1;
+			else
+				if modTime < 0.1 then
+					region = 2;
+					normalizedRegionTime = ( modTime - 0.1) / 0;
+				else
+					if modTime < 0.2 then
+						region = 3;
+						normalizedRegionTime = ( modTime - 0.1) / 0.1;
+					else
+						if modTime < 0.2 then
+							region = 4;
+							normalizedRegionTime = ( modTime - 0.2) / 0;
+						else
+							if modTime < 0.3 then
+								region = 5;
+								normalizedRegionTime = ( modTime - 0.2) / 0.1;
+							else
+								if modTime < 0.3 then
+									region = 6;
+									normalizedRegionTime = ( modTime - 0.3) / 0;
+								else
+									if modTime < 0.4 then
+										region = 7;
+										normalizedRegionTime = ( modTime - 0.3) / 0.1;
+									else
+										if modTime < 0.4 then
+											region = 8;
+											normalizedRegionTime = ( modTime - 0.4) / 0;
+										else
+											if modTime < 0.5 then
+												region = 9;
+												normalizedRegionTime = ( modTime - 0.4) / 0.1;
+											else
+												if modTime < 0.5 then
+													region = 10;
+													normalizedRegionTime = ( modTime - 0.5) / 0;
+												else
+													region = 11;
+													normalizedRegionTime = ( modTime - 0.5) / 0.1;
+											end;
+										end;
+									end;
+								end;
+							end;
+						end;
+					end;
+				end;
+			end;
+		end;
+
+			switch(region)
+
+				case 1 do
+					dllInput = normalizedRegionTime;
+					dllOutput = dll('MotionProfiles.dll', 'ProfileFlat', dllInput);
+
+					localStrokeOffset = 0;
+					stroke = 0;
+					duration = 0.1;
+
+				case 2 do
+					dllInput = normalizedRegionTime;
+					dllOutput = dll('MotionProfiles.dll', 'ProfileRamp', dllInput);
+
+					localStrokeOffset = 0;
+					stroke = 0.5;
+					duration = 0;
+
+				case 3 do
+					dllInput = normalizedRegionTime;
+					dllOutput = dll('MotionProfiles.dll', 'ProfileFlat', dllInput);
+
+					localStrokeOffset = 0.5;
+					stroke = 0;
+					duration = 0.1;
+
+				case 4 do
+					dllInput = normalizedRegionTime;
+					dllOutput = dll('MotionProfiles.dll', 'ProfileRamp', dllInput);
+
+					localStrokeOffset = 0.5;
+					stroke = 0.5;
+					duration = 0;
+
+				case 5 do
+					dllInput = normalizedRegionTime;
+					dllOutput = dll('MotionProfiles.dll', 'ProfileFlat', dllInput);
+
+					localStrokeOffset = 1;
+					stroke = 0;
+					duration = 0.1;
+
+				case 6 do
+					dllInput = normalizedRegionTime;
+					dllOutput = dll('MotionProfiles.dll', 'ProfileRamp', dllInput);
+
+					localStrokeOffset = 1;
+					stroke = -0.25;
+					duration = 0;
+
+				case 7 do
+					dllInput = normalizedRegionTime;
+					dllOutput = dll('MotionProfiles.dll', 'ProfileFlat', dllInput);
+
+					localStrokeOffset = 0.75;
+					stroke = 0;
+					duration = 0.1;
+
+				case 8 do
+					dllInput = normalizedRegionTime;
+					dllOutput = dll('MotionProfiles.dll', 'ProfileRamp', dllInput);
+
+					localStrokeOffset = 0.75;
+					stroke = -0.5;
+					duration = 0;
+
+				case 9 do
+					dllInput = normalizedRegionTime;
+					dllOutput = dll('MotionProfiles.dll', 'ProfileFlat', dllInput);
+
+					localStrokeOffset = 0.25;
+					stroke = 0;
+					duration = 0.1;
+
+				case 10 do
+					dllInput = normalizedRegionTime;
+					dllOutput = dll('MotionProfiles.dll', 'ProfileRamp', dllInput);
+
+					localStrokeOffset = 0.25;
+					stroke = -0.25;
+					duration = 0;
+
+				case 11 do
+					dllInput = normalizedRegionTime;
+					dllOutput = dll('MotionProfiles.dll', 'ProfileFlat', dllInput);
+
+					localStrokeOffset = 0;
+					stroke = 0;
+					duration = 0.1;
+
+			end;
+
+			fu = dllOutput[1];
+
+			position = (globalStrokeOffset + localStrokeOffset) + stroke * fu;
+		end; //nrTimes
+implementation_end;
+   VariacionTensionEntradaCIProfile 240 240
+    description '<Information><Description><Version>4.0</Version><IsMainModel>1</IsMainModel><KeepParameterValues>False</KeepParameterValues><LibraryPath>Signal\Sources\MotionProfileWizard.emx</LibraryPath><TimeStamp>2007-12-19 14:33:18</TimeStamp><AllowLibraryUpdate>False</AllowLibraryUpdate><Description>Se requiere inicializar los almacenadores de energia en base a las condiciones de borde del RPE
+
+Condiciones Iniciales:
+J.state = 0.050886
+La.state = 569.556u
+
+Regimen Inicial:
+Tc = 0.5 * Tn
+Ua = Un</Description><Configuration><struct><member><name>DocumentationMask</name><value><struct></struct></value></member></struct></Configuration></Description></Information>';
+    type 'MotionProfile-Wizard'
+     ports
+      signal out position;
+    end;
+    icon bg bottom
+     figures
+      group
+       rectangle 224 224 256 256 fill 15132390;
+       group
+        group
+         rectangle 235.3 233.1 248.8 250.5 color -1 fill 8454143;
+         line 235.1 233.2 235.1 250.6;
+         line 248.2 233.1 248.2 250.5;
+         spline 235.5 249.7 238.4 247.5 242.2 240.5 244.7 236.3 248.2 234.7 color 16711680;
+         line 248 234.7 254.1 234.7 color 16711680;
+         line 229.2 249.8 236.1 249.8 color 16711680;
+        end;
+       end;
+       line 229.1 229.8 229.1 254;
+       line 225.7 250.5 254.6 250.5;
+      end;
+    end;
+    implementation eq
+// 20-sim User Editor
+// MotionProfileWizard.dll
+parameters
+	real hidden period = 0.6;	// the total period of all regions
+	real hidden totalStroke = 0;
+	integer nrTimes = 1;
+
+variables
+	real hidden fu;
+	real hidden offsetTime, modTime, divTime;
+	real hidden stroke;
+	real hidden duration;
+	real hidden normalizedRegionTime;
+	real hidden runningTime;
+	integer hidden localProfileCounter;
+	integer hidden region;
+	integer hidden ProfileCounter;
+
+	real hidden globalStrokeOffset;
+	real hidden localStrokeOffset;
+
+	// dll-variables
+	real hidden dllInput;
+
+	real hidden dllOutput[3];
+
+initialequations
+
+	fu = 0.0;
+	offsetTime = 0.0;
+	modTime = 0.0;
+	region = 0;
+	stroke = 1.0;
+	duration = 1.0;
+
+	dllInput = 0.0;
+
+	dllOutput = 0.0;
+
+	modTime = 0.0;
+	divTime = 0.0;
+	offsetTime = 0.0;	
+
+	globalStrokeOffset = 0.0;
+	localStrokeOffset = 0.0;
+	normalizedRegionTime = 1.0;
+
+	runningTime = 0.0;
+	ProfileCounter = 1;
+	localProfileCounter = 1;
+	
+code
+
+		runningTime = time - offsetTime;
+		modTime = runningTime mod period;
+		divTime = runningTime div period;
+		localProfileCounter = 1 + round(divTime);
+
+		if localProfileCounter <= nrTimes then
+			ProfileCounter = localProfileCounter;
+			globalStrokeOffset = divTime * totalStroke;
+			// determine in which region we are
+			if modTime < 0 then
+				region = 1;
+				normalizedRegionTime = modTime / 0;
+			else
+				if modTime < 0.1 then
+					region = 2;
+					normalizedRegionTime = modTime / 0.1;
+				else
+					if modTime < 0.1 then
+						region = 3;
+						normalizedRegionTime = ( modTime - 0.1) / 0;
+					else
+						if modTime < 0.2 then
+							region = 4;
+							normalizedRegionTime = ( modTime - 0.1) / 0.1;
+						else
+							if modTime < 0.2 then
+								region = 5;
+								normalizedRegionTime = ( modTime - 0.2) / 0;
+							else
+								if modTime < 0.3 then
+									region = 6;
+									normalizedRegionTime = ( modTime - 0.2) / 0.1;
+								else
+									if modTime < 0.3 then
+										region = 7;
+										normalizedRegionTime = ( modTime - 0.3) / 0;
+									else
+										if modTime < 0.4 then
+											region = 8;
+											normalizedRegionTime = ( modTime - 0.3) / 0.1;
+										else
+											if modTime < 0.4 then
+												region = 9;
+												normalizedRegionTime = ( modTime - 0.4) / 0;
+											else
+												if modTime < 0.5 then
+													region = 10;
+													normalizedRegionTime = ( modTime - 0.4) / 0.1;
+												else
+													if modTime < 0.5 then
+														region = 11;
+														normalizedRegionTime = ( modTime - 0.5) / 0;
+													else
+														region = 12;
+														normalizedRegionTime = ( modTime - 0.5) / 0.1;
+												end;
+											end;
+										end;
+									end;
+								end;
+							end;
+						end;
+					end;
+				end;
+			end;
+		end;
+
+			switch(region)
+
+				case 1 do
+					dllInput = normalizedRegionTime;
+					dllOutput = dll('MotionProfiles.dll', 'ProfileFlat', dllInput);
+
+					localStrokeOffset = 1;
+					stroke = 0;
+					duration = 0;
+
+				case 2 do
+					dllInput = normalizedRegionTime;
+					dllOutput = dll('MotionProfiles.dll', 'ProfileFlat', dllInput);
+
+					localStrokeOffset = 1;
+					stroke = 0;
+					duration = 0.1;
+
+				case 3 do
+					dllInput = normalizedRegionTime;
+					dllOutput = dll('MotionProfiles.dll', 'ProfileRamp', dllInput);
+
+					localStrokeOffset = 1;
+					stroke = -0.25;
+					duration = 0;
+
+				case 4 do
+					dllInput = normalizedRegionTime;
+					dllOutput = dll('MotionProfiles.dll', 'ProfileFlat', dllInput);
+
+					localStrokeOffset = 0.75;
+					stroke = 0;
+					duration = 0.1;
+
+				case 5 do
+					dllInput = normalizedRegionTime;
+					dllOutput = dll('MotionProfiles.dll', 'ProfileRamp', dllInput);
+
+					localStrokeOffset = 0.75;
+					stroke = -0.25;
+					duration = 0;
+
+				case 6 do
+					dllInput = normalizedRegionTime;
+					dllOutput = dll('MotionProfiles.dll', 'ProfileFlat', dllInput);
+
+					localStrokeOffset = 0.5;
+					stroke = 0;
+					duration = 0.1;
+
+				case 7 do
+					dllInput = normalizedRegionTime;
+					dllOutput = dll('MotionProfiles.dll', 'ProfileRamp', dllInput);
+
+					localStrokeOffset = 0.5;
+					stroke = -0.4;
+					duration = 0;
+
+				case 8 do
+					dllInput = normalizedRegionTime;
+					dllOutput = dll('MotionProfiles.dll', 'ProfileFlat', dllInput);
+
+					localStrokeOffset = 0.1;
+					stroke = 0;
+					duration = 0.1;
+
+				case 9 do
+					dllInput = normalizedRegionTime;
+					dllOutput = dll('MotionProfiles.dll', 'ProfileRamp', dllInput);
+
+					localStrokeOffset = 0.1;
+					stroke = 1.15;
+					duration = 0;
+
+				case 10 do
+					dllInput = normalizedRegionTime;
+					dllOutput = dll('MotionProfiles.dll', 'ProfileFlat', dllInput);
+
+					localStrokeOffset = 1.25;
+					stroke = 0;
+					duration = 0.1;
+
+				case 11 do
+					dllInput = normalizedRegionTime;
+					dllOutput = dll('MotionProfiles.dll', 'ProfileRamp', dllInput);
+
+					localStrokeOffset = 1.25;
+					stroke = -0.25;
+					duration = 0;
+
+				case 12 do
+					dllInput = normalizedRegionTime;
+					dllOutput = dll('MotionProfiles.dll', 'ProfileFlat', dllInput);
+
+					localStrokeOffset = 1;
+					stroke = 0;
+					duration = 0.1;
+
+			end;
+
+			fu = dllOutput[1];
+
+			position = (globalStrokeOffset + localStrokeOffset) + stroke * fu;
+		end; //nrTimes
+implementation_end;
+   w 536 32
+    description '<Information><Description><Version>4.0</Version><IsMainModel>1</IsMainModel><KeepParameterValues>False</KeepParameterValues><LibraryPath>Signal\Block Diagram\SignalMonitor.emx</LibraryPath><TimeStamp>2007-9-26 12:14:4</TimeStamp><AllowLibraryUpdate>True</AllowLibraryUpdate><Configuration><struct><member><name>DocumentationMask</name><value><struct></struct></value></member></struct></Configuration></Description></Information>';
+    type SignalMonitor
+     ports
+      signal in input;
+    end;
+    icon bg bottom
+     figures
+      rectangle 520 16 552 48 fill 15132390;
+      rectangle 525.7 21.8 546.3 42.6 color 16711680 fill 11776947 width 2;
+      rectangle 527.8 24.4 543.9 40 color -1 fill 16777215;
+      line 529.9 26.7 529.9 38 fill 16777215;
+      line 528 36.4 540.5 36.4 fill 16777215;
+      line 529.5 36.1 542.4 29.7 color 255 fill 16777215;
+    end;
+    implementation eq
+variables
+	real interesting plot;
+equations
+	plot = input;
+   implementation_end;
+   ZeroJunction1 600 136
+    description '<Description><Version>4.0</Version><Version>4.0</Version><IsMainModel>1</IsMainModel><KeepParameterValues>False</KeepParameterValues>
+   <LibraryPath>Bond Graph\ZeroJunction.emx</LibraryPath>
+  <TimeStamp>2007-9-27 9:51:43</TimeStamp>
+</Description>';
+    knot ZeroJunction
+     ports
+      rotation knot duplicatable none p [1];
+      signal knot out effort [1];
+     restrictions
+      causality constraint one_in p;
+    end;
+    icon bg
+     figures
+      text '0' 600 136 18 bold;
+    end;
+    implementation eq
+equations
+	sum (direct (p.f)) = 0;
+	equal (collect (p.e));
+	effort = first (p.e);
+    implementation_end;
+  end;
+  connections
+   Ua\p => MCC_IP\U;
+   Tc\p => ZeroJunction1\p;
+   ZeroJunction1\p <= MCC_IP\T;
+   TcN\output -> Tc\effort;
+   tau_c\input <- ZeroJunction1\effort;
+   UaN\output -> Splitter1\input;
+   Splitter2\output -> UaN\input;
+   InversionDeMarchaHalfLoadStepProfile\position -> Splitter2\input;
+   Splitter2\output -> Perfil_Ua\input;
+   Splitter3\output -> TcN\input;
+   Splitter3\output -> Perfil_Tc\input;
+   MCC_IP\Ia -> Ia\input;
+   MCC_IP\Omega -> w\input;
+   Splitter1\output -> Ua\effort;
+   Splitter1\output -> Va\input;
+   Constant05\output -> Splitter3\input;
+  end;
+ implementation_end;
+]]>
+</Sidops>
+ </Model>
+ <Experiments>
+     <DefaultExperiment><![CDATA[Experiment 1]]>
+</DefaultExperiment>
+  <Experiment>
+    <Name>Experiment 1</Name>
+    <CreatedBy></CreatedBy>
+    <Info></Info>
+<ExpData>
+  <VersionNumber>4.4</VersionNumber>
+  <ModelProperties>
+    <ModelProperty section="MatlabCodeDialog" entry="SubmodelName" value="MCC_IP\J"/>
+  </ModelProperties>
+  <Variables>
+   <Parameters>
+    <Variable>
+     <Name>b</Name>
+     <Value>0</Value>
+    </Variable>
+    <Variable>
+     <Name>J</Name>
+     <Value>0</Value>
+    </Variable>
+    <Variable>
+     <Name>Km</Name>
+     <Value>0</Value>
+    </Variable>
+    <Variable>
+     <Name>La</Name>
+     <Value>0</Value>
+    </Variable>
+    <Variable>
+     <Name>Ra</Name>
+     <Unit>ohm</Unit>
+     <Value>0</Value>
+    </Variable>
+   </Parameters>
+   <Initials>
+    <Variable>
+     <Name>MCC_IP\J\state_initial</Name>
+     <Value>0.052176</Value>
+    </Variable>
+    <Variable>
+     <Name>MCC_IP\La\state_initial</Name>
+     <Value>4.7144e-005</Value>
+    </Variable>
+   </Initials>
+   <OutputProbes>
+    <Variable>
+     <Name>Constant1\output</Name>
+    </Variable>
+   </OutputProbes>
+  </Variables>
+  <PlotSpecs>
+   <VarNames>
+    <VarName>time</VarName>
+    <VarName>Ia\plot</VarName>
+    <VarName>Perfil_Tc\plot</VarName>
+    <VarName>Perfil_Ua\plot</VarName>
+    <VarName>tau_c\plot</VarName>
+    <VarName>Va\plot</VarName>
+    <VarName>w\plot</VarName>
+    <VarName>MCC_IP\J\state</VarName>
+    <VarName>MCC_IP\La\state</VarName>
+    <VarName>MCC_IP\Km\p1.u</VarName>
+    <VarName>MCC_IP\Km\p2.T</VarName>
+   </VarNames>
+   <Plots>
+    <Plot>
+     <PlotType>GraphPlot</PlotType>
+     <BasePlot>
+       <PlotId>1</PlotId>
+       <UseWindowsBGColor>true</UseWindowsBGColor>
+       <BGColor>15790320</BGColor>
+       <PlotIsVisible>true</PlotIsVisible>
+     </BasePlot>
+     <Grid>
+      <DrawGrid>true</DrawGrid>
+      <GridColor>15780518</GridColor>
+      <XTicks>10</XTicks>
+      <YTicks>10</YTicks>
+      <ZTicks>10</ZTicks>
+      <Use3DLook>false</Use3DLook>
+     </Grid>
+     <PlotBGColor>16777215</PlotBGColor>
+     <ShowPlotTitle>false</ShowPlotTitle>
+     <TitlePosition>1</TitlePosition>
+     <PlotTitle>Ua</PlotTitle>
+     <ShowXValues>true</ShowXValues>
+     <Fonts>
+      <TitleFont>
+       <Name>Arial</Name>
+       <Height>12</Height>
+       <PitchFamily>34</PitchFamily>
+       <Weight>400</Weight>
+       <Italic>0</Italic>
+       <UnderLine>0</UnderLine>
+       <StrikeOut>0</StrikeOut>
+       <Color>0</Color>
+      </TitleFont>
+      <LabelFont>
+       <Name>Arial</Name>
+       <Height>12</Height>
+       <PitchFamily>34</PitchFamily>
+       <Weight>400</Weight>
+       <Italic>0</Italic>
+       <UnderLine>0</UnderLine>
+       <StrikeOut>0</StrikeOut>
+       <Color>0</Color>
+      </LabelFont>
+      <ValuesFont>
+       <Name>Arial</Name>
+       <Height>10</Height>
+       <PitchFamily>34</PitchFamily>
+       <Weight>400</Weight>
+       <Italic>0</Italic>
+       <UnderLine>0</UnderLine>
+       <StrikeOut>0</StrikeOut>
+       <Color>0</Color>
+      </ValuesFont>
+     </Fonts>
+     <SharedXAxis>true</SharedXAxis>
+     <SharedYAxis>true</SharedYAxis>
+     <SharedZAxis>false</SharedZAxis>
+     <XAxes>
+      <Axis>
+       <Minimum>0</Minimum>
+       <Maximum>0.7</Maximum>
+       <Linear>true</Linear>
+       <Scaling>0</Scaling>
+       <Label>time</Label>
+      </Axis>
+     </XAxes>
+     <YAxes>
+      <Axis>
+       <Minimum>-50</Minimum>
+       <Maximum>50</Maximum>
+       <Linear>true</Linear>
+       <Scaling>1</Scaling>
+       <Label>Ua</Label>
+      </Axis>
+     </YAxes>
+     <ZAxes>
+     </ZAxes>
+     <Curves>
+      <Curve>
+       <LineColor>255</LineColor>
+       <LineStyle>1</LineStyle>
+       <TickColor>255</TickColor>
+       <TickStyle>0</TickStyle>
+       <CurveVisible>true</CurveVisible>
+       <PixelThresshold>1</PixelThresshold>
+       <LineThickness>1</LineThickness>
+       <LineOrder>1</LineOrder>
+       <ShowYValues>true</ShowYValues>
+       <XCurveData>
+        <ShowUnit>true</ShowUnit>
+        <VarName>time</VarName>
+       </XCurveData>
+       <YCurveData>
+        <ShowUnit>true</ShowUnit>
+        <VarName>Va\plot</VarName>
+       </YCurveData>
+      </Curve>
+     </Curves>
+     <Legenda>
+      <ShowLegenda>true</ShowLegenda>
+     </Legenda>
+    </Plot>
+    <Plot>
+     <PlotType>GraphPlot</PlotType>
+     <BasePlot>
+       <PlotId>2</PlotId>
+       <UseWindowsBGColor>true</UseWindowsBGColor>
+       <BGColor>15790320</BGColor>
+       <PlotIsVisible>true</PlotIsVisible>
+     </BasePlot>
+     <Grid>
+      <DrawGrid>true</DrawGrid>
+      <GridColor>15780518</GridColor>
+      <XTicks>10</XTicks>
+      <YTicks>10</YTicks>
+      <ZTicks>10</ZTicks>
+      <Use3DLook>false</Use3DLook>
+     </Grid>
+     <PlotBGColor>16777215</PlotBGColor>
+     <ShowPlotTitle>false</ShowPlotTitle>
+     <TitlePosition>1</TitlePosition>
+     <PlotTitle>Ia</PlotTitle>
+     <ShowXValues>true</ShowXValues>
+     <Fonts>
+      <TitleFont>
+       <Name>Arial</Name>
+       <Height>12</Height>
+       <PitchFamily>34</PitchFamily>
+       <Weight>400</Weight>
+       <Italic>0</Italic>
+       <UnderLine>0</UnderLine>
+       <StrikeOut>0</StrikeOut>
+       <Color>0</Color>
+      </TitleFont>
+      <LabelFont>
+       <Name>Arial</Name>
+       <Height>12</Height>
+       <PitchFamily>34</PitchFamily>
+       <Weight>400</Weight>
+       <Italic>0</Italic>
+       <UnderLine>0</UnderLine>
+       <StrikeOut>0</StrikeOut>
+       <Color>0</Color>
+      </LabelFont>
+      <ValuesFont>
+       <Name>Arial</Name>
+       <Height>10</Height>
+       <PitchFamily>34</PitchFamily>
+       <Weight>400</Weight>
+       <Italic>0</Italic>
+       <UnderLine>0</UnderLine>
+       <StrikeOut>0</StrikeOut>
+       <Color>0</Color>
+      </ValuesFont>
+     </Fonts>
+     <SharedXAxis>true</SharedXAxis>
+     <SharedYAxis>true</SharedYAxis>
+     <SharedZAxis>false</SharedZAxis>
+     <XAxes>
+      <Axis>
+       <Minimum>0</Minimum>
+       <Maximum>0.7</Maximum>
+       <Linear>true</Linear>
+       <Scaling>0</Scaling>
+       <Label>time</Label>
+      </Axis>
+     </XAxes>
+     <YAxes>
+      <Axis>
+       <Minimum>-350</Minimum>
+       <Maximum>150</Maximum>
+       <Linear>true</Linear>
+       <Scaling>1</Scaling>
+       <Label>Ia</Label>
+      </Axis>
+     </YAxes>
+     <ZAxes>
+     </ZAxes>
+     <Curves>
+      <Curve>
+       <LineColor>16711680</LineColor>
+       <LineStyle>1</LineStyle>
+       <TickColor>16711680</TickColor>
+       <TickStyle>0</TickStyle>
+       <CurveVisible>true</CurveVisible>
+       <PixelThresshold>1</PixelThresshold>
+       <LineThickness>1</LineThickness>
+       <LineOrder>1</LineOrder>
+       <ShowYValues>true</ShowYValues>
+       <XCurveData>
+        <ShowUnit>true</ShowUnit>
+        <VarName>time</VarName>
+       </XCurveData>
+       <YCurveData>
+        <ShowUnit>true</ShowUnit>
+        <VarName>Ia\plot</VarName>
+       </YCurveData>
+      </Curve>
+     </Curves>
+     <Legenda>
+      <ShowLegenda>true</ShowLegenda>
+     </Legenda>
+    </Plot>
+    <Plot>
+     <PlotType>GraphPlot</PlotType>
+     <BasePlot>
+       <PlotId>3</PlotId>
+       <UseWindowsBGColor>true</UseWindowsBGColor>
+       <BGColor>15790320</BGColor>
+       <PlotIsVisible>true</PlotIsVisible>
+     </BasePlot>
+     <Grid>
+      <DrawGrid>true</DrawGrid>
+      <GridColor>15780518</GridColor>
+      <XTicks>10</XTicks>
+      <YTicks>10</YTicks>
+      <ZTicks>10</ZTicks>
+      <Use3DLook>false</Use3DLook>
+     </Grid>
+     <PlotBGColor>16777215</PlotBGColor>
+     <ShowPlotTitle>false</ShowPlotTitle>
+     <TitlePosition>1</TitlePosition>
+     <PlotTitle>w</PlotTitle>
+     <ShowXValues>true</ShowXValues>
+     <Fonts>
+      <TitleFont>
+       <Name>Arial</Name>
+       <Height>12</Height>
+       <PitchFamily>34</PitchFamily>
+       <Weight>400</Weight>
+       <Italic>0</Italic>
+       <UnderLine>0</UnderLine>
+       <StrikeOut>0</StrikeOut>
+       <Color>0</Color>
+      </TitleFont>
+      <LabelFont>
+       <Name>Arial</Name>
+       <Height>12</Height>
+       <PitchFamily>34</PitchFamily>
+       <Weight>400</Weight>
+       <Italic>0</Italic>
+       <UnderLine>0</UnderLine>
+       <StrikeOut>0</StrikeOut>
+       <Color>0</Color>
+      </LabelFont>
+      <ValuesFont>
+       <Name>Arial</Name>
+       <Height>10</Height>
+       <PitchFamily>34</PitchFamily>
+       <Weight>400</Weight>
+       <Italic>0</Italic>
+       <UnderLine>0</UnderLine>
+       <StrikeOut>0</StrikeOut>
+       <Color>0</Color>
+      </ValuesFont>
+     </Fonts>
+     <SharedXAxis>true</SharedXAxis>
+     <SharedYAxis>true</SharedYAxis>
+     <SharedZAxis>false</SharedZAxis>
+     <XAxes>
+      <Axis>
+       <Minimum>0</Minimum>
+       <Maximum>0.7</Maximum>
+       <Linear>true</Linear>
+       <Scaling>0</Scaling>
+       <Label>time</Label>
+      </Axis>
+     </XAxes>
+     <YAxes>
+      <Axis>
+       <Minimum>-500</Minimum>
+       <Maximum>500</Maximum>
+       <Linear>true</Linear>
+       <Scaling>1</Scaling>
+       <Label>w</Label>
+      </Axis>
+     </YAxes>
+     <ZAxes>
+     </ZAxes>
+     <Curves>
+      <Curve>
+       <LineColor>255</LineColor>
+       <LineStyle>1</LineStyle>
+       <TickColor>255</TickColor>
+       <TickStyle>0</TickStyle>
+       <CurveVisible>true</CurveVisible>
+       <PixelThresshold>1</PixelThresshold>
+       <LineThickness>1</LineThickness>
+       <LineOrder>1</LineOrder>
+       <ShowYValues>true</ShowYValues>
+       <XCurveData>
+        <ShowUnit>true</ShowUnit>
+        <VarName>time</VarName>
+       </XCurveData>
+       <YCurveData>
+        <ShowUnit>true</ShowUnit>
+        <VarName>w\plot</VarName>
+       </YCurveData>
+      </Curve>
+     </Curves>
+     <Legenda>
+      <ShowLegenda>true</ShowLegenda>
+     </Legenda>
+    </Plot>
+    <Plot>
+     <PlotType>GraphPlot</PlotType>
+     <BasePlot>
+       <PlotId>4</PlotId>
+       <UseWindowsBGColor>true</UseWindowsBGColor>
+       <BGColor>15790320</BGColor>
+       <PlotIsVisible>true</PlotIsVisible>
+     </BasePlot>
+     <Grid>
+      <DrawGrid>true</DrawGrid>
+      <GridColor>15780518</GridColor>
+      <XTicks>10</XTicks>
+      <YTicks>10</YTicks>
+      <ZTicks>10</ZTicks>
+      <Use3DLook>false</Use3DLook>
+     </Grid>
+     <PlotBGColor>16777215</PlotBGColor>
+     <ShowPlotTitle>false</ShowPlotTitle>
+     <TitlePosition>1</TitlePosition>
+     <PlotTitle>time</PlotTitle>
+     <ShowXValues>true</ShowXValues>
+     <Fonts>
+      <TitleFont>
+       <Name>Arial</Name>
+       <Height>12</Height>
+       <PitchFamily>34</PitchFamily>
+       <Weight>400</Weight>
+       <Italic>0</Italic>
+       <UnderLine>0</UnderLine>
+       <StrikeOut>0</StrikeOut>
+       <Color>0</Color>
+      </TitleFont>
+      <LabelFont>
+       <Name>Arial</Name>
+       <Height>12</Height>
+       <PitchFamily>34</PitchFamily>
+       <Weight>400</Weight>
+       <Italic>0</Italic>
+       <UnderLine>0</UnderLine>
+       <StrikeOut>0</StrikeOut>
+       <Color>0</Color>
+      </LabelFont>
+      <ValuesFont>
+       <Name>Arial</Name>
+       <Height>10</Height>
+       <PitchFamily>34</PitchFamily>
+       <Weight>400</Weight>
+       <Italic>0</Italic>
+       <UnderLine>0</UnderLine>
+       <StrikeOut>0</StrikeOut>
+       <Color>0</Color>
+      </ValuesFont>
+     </Fonts>
+     <SharedXAxis>true</SharedXAxis>
+     <SharedYAxis>true</SharedYAxis>
+     <SharedZAxis>false</SharedZAxis>
+     <XAxes>
+      <Axis>
+       <Minimum>0</Minimum>
+       <Maximum>0.7</Maximum>
+       <Linear>true</Linear>
+       <Scaling>0</Scaling>
+       <Label>time</Label>
+      </Axis>
+     </XAxes>
+     <YAxes>
+      <Axis>
+       <Minimum>-0.1</Minimum>
+       <Maximum>0.4</Maximum>
+       <Linear>true</Linear>
+       <Scaling>1</Scaling>
+       <Label>time</Label>
+      </Axis>
+     </YAxes>
+     <ZAxes>
+     </ZAxes>
+     <Curves>
+      <Curve>
+       <LineColor>16711680</LineColor>
+       <LineStyle>1</LineStyle>
+       <TickColor>16711680</TickColor>
+       <TickStyle>0</TickStyle>
+       <CurveVisible>true</CurveVisible>
+       <PixelThresshold>1</PixelThresshold>
+       <LineThickness>1</LineThickness>
+       <LineOrder>1</LineOrder>
+       <ShowYValues>true</ShowYValues>
+       <XCurveData>
+        <ShowUnit>true</ShowUnit>
+        <VarName>time</VarName>
+       </XCurveData>
+       <YCurveData>
+        <ShowUnit>true</ShowUnit>
+        <VarName>time</VarName>
+       </YCurveData>
+      </Curve>
+     </Curves>
+     <Legenda>
+      <ShowLegenda>true</ShowLegenda>
+     </Legenda>
+    </Plot>
+    <Plot>
+     <PlotType>GraphPlot</PlotType>
+     <BasePlot>
+       <PlotId>5</PlotId>
+       <UseWindowsBGColor>true</UseWindowsBGColor>
+       <BGColor>15790320</BGColor>
+       <PlotIsVisible>true</PlotIsVisible>
+     </BasePlot>
+     <Grid>
+      <DrawGrid>true</DrawGrid>
+      <GridColor>15780518</GridColor>
+      <XTicks>10</XTicks>
+      <YTicks>10</YTicks>
+      <ZTicks>10</ZTicks>
+      <Use3DLook>false</Use3DLook>
+     </Grid>
+     <PlotBGColor>16777215</PlotBGColor>
+     <ShowPlotTitle>false</ShowPlotTitle>
+     <TitlePosition>1</TitlePosition>
+     <PlotTitle>J.state</PlotTitle>
+     <ShowXValues>true</ShowXValues>
+     <Fonts>
+      <TitleFont>
+       <Name>Arial</Name>
+       <Height>12</Height>
+       <PitchFamily>34</PitchFamily>
+       <Weight>400</Weight>
+       <Italic>0</Italic>
+       <UnderLine>0</UnderLine>
+       <StrikeOut>0</StrikeOut>
+       <Color>0</Color>
+      </TitleFont>
+      <LabelFont>
+       <Name>Arial</Name>
+       <Height>12</Height>
+       <PitchFamily>34</PitchFamily>
+       <Weight>400</Weight>
+       <Italic>0</Italic>
+       <UnderLine>0</UnderLine>
+       <StrikeOut>0</StrikeOut>
+       <Color>0</Color>
+      </LabelFont>
+      <ValuesFont>
+       <Name>Arial</Name>
+       <Height>10</Height>
+       <PitchFamily>34</PitchFamily>
+       <Weight>400</Weight>
+       <Italic>0</Italic>
+       <UnderLine>0</UnderLine>
+       <StrikeOut>0</StrikeOut>
+       <Color>0</Color>
+      </ValuesFont>
+     </Fonts>
+     <SharedXAxis>true</SharedXAxis>
+     <SharedYAxis>true</SharedYAxis>
+     <SharedZAxis>false</SharedZAxis>
+     <XAxes>
+      <Axis>
+       <Minimum>0</Minimum>
+       <Maximum>0.7</Maximum>
+       <Linear>true</Linear>
+       <Scaling>0</Scaling>
+       <Label>time</Label>
+      </Axis>
+     </XAxes>
+     <YAxes>
+      <Axis>
+       <Minimum>-0.1</Minimum>
+       <Maximum>0.1</Maximum>
+       <Linear>true</Linear>
+       <Scaling>1</Scaling>
+       <Label>J.state</Label>
+      </Axis>
+     </YAxes>
+     <ZAxes>
+     </ZAxes>
+     <Curves>
+      <Curve>
+       <LineColor>16711935</LineColor>
+       <LineStyle>1</LineStyle>
+       <TickColor>16711935</TickColor>
+       <TickStyle>0</TickStyle>
+       <CurveVisible>true</CurveVisible>
+       <PixelThresshold>1</PixelThresshold>
+       <LineThickness>1</LineThickness>
+       <LineOrder>1</LineOrder>
+       <ShowYValues>true</ShowYValues>
+       <XCurveData>
+        <ShowUnit>true</ShowUnit>
+        <VarName>time</VarName>
+       </XCurveData>
+       <YCurveData>
+        <ShowUnit>true</ShowUnit>
+        <VarName>MCC_IP\J\state</VarName>
+       </YCurveData>
+      </Curve>
+     </Curves>
+     <Legenda>
+      <ShowLegenda>true</ShowLegenda>
+     </Legenda>
+    </Plot>
+    <Plot>
+     <PlotType>GraphPlot</PlotType>
+     <BasePlot>
+       <PlotId>6</PlotId>
+       <UseWindowsBGColor>true</UseWindowsBGColor>
+       <BGColor>15790320</BGColor>
+       <PlotIsVisible>true</PlotIsVisible>
+     </BasePlot>
+     <Grid>
+      <DrawGrid>true</DrawGrid>
+      <GridColor>15780518</GridColor>
+      <XTicks>10</XTicks>
+      <YTicks>10</YTicks>
+      <ZTicks>10</ZTicks>
+      <Use3DLook>false</Use3DLook>
+     </Grid>
+     <PlotBGColor>16777215</PlotBGColor>
+     <ShowPlotTitle>true</ShowPlotTitle>
+     <TitlePosition>1</TitlePosition>
+     <PlotTitle>Tc</PlotTitle>
+     <ShowXValues>true</ShowXValues>
+     <Fonts>
+      <TitleFont>
+       <Name>Arial</Name>
+       <Height>12</Height>
+       <PitchFamily>34</PitchFamily>
+       <Weight>400</Weight>
+       <Italic>0</Italic>
+       <UnderLine>0</UnderLine>
+       <StrikeOut>0</StrikeOut>
+       <Color>0</Color>
+      </TitleFont>
+      <LabelFont>
+       <Name>Arial</Name>
+       <Height>12</Height>
+       <PitchFamily>34</PitchFamily>
+       <Weight>400</Weight>
+       <Italic>0</Italic>
+       <UnderLine>0</UnderLine>
+       <StrikeOut>0</StrikeOut>
+       <Color>0</Color>
+      </LabelFont>
+      <ValuesFont>
+       <Name>Arial</Name>
+       <Height>10</Height>
+       <PitchFamily>34</PitchFamily>
+       <Weight>400</Weight>
+       <Italic>0</Italic>
+       <UnderLine>0</UnderLine>
+       <StrikeOut>0</StrikeOut>
+       <Color>0</Color>
+      </ValuesFont>
+     </Fonts>
+     <SharedXAxis>true</SharedXAxis>
+     <SharedYAxis>true</SharedYAxis>
+     <SharedZAxis>false</SharedZAxis>
+     <XAxes>
+      <Axis>
+       <Minimum>0</Minimum>
+       <Maximum>0.7</Maximum>
+       <Linear>true</Linear>
+       <Scaling>0</Scaling>
+       <Label>time</Label>
+      </Axis>
+     </XAxes>
+     <YAxes>
+      <Axis>
+       <Minimum>-0.1</Minimum>
+       <Maximum>0.9</Maximum>
+       <Linear>true</Linear>
+       <Scaling>1</Scaling>
+       <Label>tau_c</Label>
+      </Axis>
+     </YAxes>
+     <ZAxes>
+     </ZAxes>
+     <Curves>
+      <Curve>
+       <LineColor>16711680</LineColor>
+       <LineStyle>1</LineStyle>
+       <TickColor>16711680</TickColor>
+       <TickStyle>0</TickStyle>
+       <CurveVisible>true</CurveVisible>
+       <PixelThresshold>1</PixelThresshold>
+       <LineThickness>1</LineThickness>
+       <LineOrder>1</LineOrder>
+       <ShowYValues>true</ShowYValues>
+       <XCurveData>
+        <ShowUnit>true</ShowUnit>
+        <VarName>time</VarName>
+       </XCurveData>
+       <YCurveData>
+        <ShowUnit>false</ShowUnit>
+        <VarName>tau_c\plot</VarName>
+       </YCurveData>
+      </Curve>
+     </Curves>
+     <Legenda>
+      <ShowLegenda>true</ShowLegenda>
+     </Legenda>
+    </Plot>
+    <Plot>
+     <PlotType>GraphPlot</PlotType>
+     <BasePlot>
+       <PlotId>7</PlotId>
+       <UseWindowsBGColor>true</UseWindowsBGColor>
+       <BGColor>15790320</BGColor>
+       <PlotIsVisible>true</PlotIsVisible>
+     </BasePlot>
+     <Grid>
+      <DrawGrid>true</DrawGrid>
+      <GridColor>15780518</GridColor>
+      <XTicks>10</XTicks>
+      <YTicks>10</YTicks>
+      <ZTicks>10</ZTicks>
+      <Use3DLook>false</Use3DLook>
+     </Grid>
+     <PlotBGColor>16777215</PlotBGColor>
+     <ShowPlotTitle>true</ShowPlotTitle>
+     <TitlePosition>1</TitlePosition>
+     <PlotTitle>La.state</PlotTitle>
+     <ShowXValues>true</ShowXValues>
+     <Fonts>
+      <TitleFont>
+       <Name>Arial</Name>
+       <Height>12</Height>
+       <PitchFamily>34</PitchFamily>
+       <Weight>400</Weight>
+       <Italic>0</Italic>
+       <UnderLine>0</UnderLine>
+       <StrikeOut>0</StrikeOut>
+       <Color>0</Color>
+      </TitleFont>
+      <LabelFont>
+       <Name>Arial</Name>
+       <Height>12</Height>
+       <PitchFamily>34</PitchFamily>
+       <Weight>400</Weight>
+       <Italic>0</Italic>
+       <UnderLine>0</UnderLine>
+       <StrikeOut>0</StrikeOut>
+       <Color>0</Color>
+      </LabelFont>
+      <ValuesFont>
+       <Name>Arial</Name>
+       <Height>10</Height>
+       <PitchFamily>34</PitchFamily>
+       <Weight>400</Weight>
+       <Italic>0</Italic>
+       <UnderLine>0</UnderLine>
+       <StrikeOut>0</StrikeOut>
+       <Color>0</Color>
+      </ValuesFont>
+     </Fonts>
+     <SharedXAxis>true</SharedXAxis>
+     <SharedYAxis>true</SharedYAxis>
+     <SharedZAxis>false</SharedZAxis>
+     <XAxes>
+      <Axis>
+       <Minimum>0</Minimum>
+       <Maximum>0.7</Maximum>
+       <Linear>true</Linear>
+       <Scaling>0</Scaling>
+       <Label>time</Label>
+      </Axis>
+     </XAxes>
+     <YAxes>
+      <Axis>
+       <Minimum>-0.04</Minimum>
+       <Maximum>0.01</Maximum>
+       <Linear>true</Linear>
+       <Scaling>1</Scaling>
+       <Label>La.state</Label>
+      </Axis>
+     </YAxes>
+     <ZAxes>
+     </ZAxes>
+     <Curves>
+      <Curve>
+       <LineColor>16711680</LineColor>
+       <LineStyle>1</LineStyle>
+       <TickColor>16711680</TickColor>
+       <TickStyle>0</TickStyle>
+       <CurveVisible>true</CurveVisible>
+       <PixelThresshold>1</PixelThresshold>
+       <LineThickness>1</LineThickness>
+       <LineOrder>1</LineOrder>
+       <ShowYValues>true</ShowYValues>
+       <XCurveData>
+        <ShowUnit>true</ShowUnit>
+        <VarName>time</VarName>
+       </XCurveData>
+       <YCurveData>
+        <ShowUnit>true</ShowUnit>
+        <VarName>MCC_IP\La\state</VarName>
+       </YCurveData>
+      </Curve>
+     </Curves>
+     <Legenda>
+      <ShowLegenda>true</ShowLegenda>
+     </Legenda>
+    </Plot>
+    <Plot>
+     <PlotType>GraphPlot</PlotType>
+     <BasePlot>
+       <PlotId>8</PlotId>
+       <UseWindowsBGColor>true</UseWindowsBGColor>
+       <BGColor>15790320</BGColor>
+       <PlotIsVisible>true</PlotIsVisible>
+     </BasePlot>
+     <Grid>
+      <DrawGrid>true</DrawGrid>
+      <GridColor>15780518</GridColor>
+      <XTicks>10</XTicks>
+      <YTicks>10</YTicks>
+      <ZTicks>10</ZTicks>
+      <Use3DLook>false</Use3DLook>
+     </Grid>
+     <PlotBGColor>16777215</PlotBGColor>
+     <ShowPlotTitle>true</ShowPlotTitle>
+     <TitlePosition>1</TitlePosition>
+     <PlotTitle>Perfil_Tc</PlotTitle>
+     <ShowXValues>true</ShowXValues>
+     <Fonts>
+      <TitleFont>
+       <Name>Arial</Name>
+       <Height>12</Height>
+       <PitchFamily>34</PitchFamily>
+       <Weight>400</Weight>
+       <Italic>0</Italic>
+       <UnderLine>0</UnderLine>
+       <StrikeOut>0</StrikeOut>
+       <Color>0</Color>
+      </TitleFont>
+      <LabelFont>
+       <Name>Arial</Name>
+       <Height>12</Height>
+       <PitchFamily>34</PitchFamily>
+       <Weight>400</Weight>
+       <Italic>0</Italic>
+       <UnderLine>0</UnderLine>
+       <StrikeOut>0</StrikeOut>
+       <Color>0</Color>
+      </LabelFont>
+      <ValuesFont>
+       <Name>Arial</Name>
+       <Height>10</Height>
+       <PitchFamily>34</PitchFamily>
+       <Weight>400</Weight>
+       <Italic>0</Italic>
+       <UnderLine>0</UnderLine>
+       <StrikeOut>0</StrikeOut>
+       <Color>0</Color>
+      </ValuesFont>
+     </Fonts>
+     <SharedXAxis>true</SharedXAxis>
+     <SharedYAxis>true</SharedYAxis>
+     <SharedZAxis>false</SharedZAxis>
+     <XAxes>
+      <Axis>
+       <Minimum>0</Minimum>
+       <Maximum>0.7</Maximum>
+       <Linear>true</Linear>
+       <Scaling>0</Scaling>
+       <Label>time</Label>
+      </Axis>
+     </XAxes>
+     <YAxes>
+      <Axis>
+       <Minimum>-2.77555756156289e-017</Minimum>
+       <Maximum>1</Maximum>
+       <Linear>true</Linear>
+       <Scaling>1</Scaling>
+       <Label>Perfil_Tc</Label>
+      </Axis>
+     </YAxes>
+     <ZAxes>
+     </ZAxes>
+     <Curves>
+      <Curve>
+       <LineColor>16711680</LineColor>
+       <LineStyle>1</LineStyle>
+       <TickColor>16711680</TickColor>
+       <TickStyle>0</TickStyle>
+       <CurveVisible>true</CurveVisible>
+       <PixelThresshold>1</PixelThresshold>
+       <LineThickness>1</LineThickness>
+       <LineOrder>1</LineOrder>
+       <ShowYValues>true</ShowYValues>
+       <XCurveData>
+        <ShowUnit>true</ShowUnit>
+        <VarName>time</VarName>
+       </XCurveData>
+       <YCurveData>
+        <ShowUnit>true</ShowUnit>
+        <VarName>Perfil_Tc\plot</VarName>
+       </YCurveData>
+      </Curve>
+     </Curves>
+     <Legenda>
+      <ShowLegenda>true</ShowLegenda>
+     </Legenda>
+    </Plot>
+    <Plot>
+     <PlotType>GraphPlot</PlotType>
+     <BasePlot>
+       <PlotId>9</PlotId>
+       <UseWindowsBGColor>true</UseWindowsBGColor>
+       <BGColor>15790320</BGColor>
+       <PlotIsVisible>true</PlotIsVisible>
+     </BasePlot>
+     <Grid>
+      <DrawGrid>true</DrawGrid>
+      <GridColor>15780518</GridColor>
+      <XTicks>10</XTicks>
+      <YTicks>10</YTicks>
+      <ZTicks>10</ZTicks>
+      <Use3DLook>false</Use3DLook>
+     </Grid>
+     <PlotBGColor>16777215</PlotBGColor>
+     <ShowPlotTitle>true</ShowPlotTitle>
+     <TitlePosition>1</TitlePosition>
+     <PlotTitle>Perfil_Ua</PlotTitle>
+     <ShowXValues>true</ShowXValues>
+     <Fonts>
+      <TitleFont>
+       <Name>Arial</Name>
+       <Height>12</Height>
+       <PitchFamily>34</PitchFamily>
+       <Weight>400</Weight>
+       <Italic>0</Italic>
+       <UnderLine>0</UnderLine>
+       <StrikeOut>0</StrikeOut>
+       <Color>0</Color>
+      </TitleFont>
+      <LabelFont>
+       <Name>Arial</Name>
+       <Height>12</Height>
+       <PitchFamily>34</PitchFamily>
+       <Weight>400</Weight>
+       <Italic>0</Italic>
+       <UnderLine>0</UnderLine>
+       <StrikeOut>0</StrikeOut>
+       <Color>0</Color>
+      </LabelFont>
+      <ValuesFont>
+       <Name>Arial</Name>
+       <Height>10</Height>
+       <PitchFamily>34</PitchFamily>
+       <Weight>400</Weight>
+       <Italic>0</Italic>
+       <UnderLine>0</UnderLine>
+       <StrikeOut>0</StrikeOut>
+       <Color>0</Color>
+      </ValuesFont>
+     </Fonts>
+     <SharedXAxis>true</SharedXAxis>
+     <SharedYAxis>true</SharedYAxis>
+     <SharedZAxis>false</SharedZAxis>
+     <XAxes>
+      <Axis>
+       <Minimum>0</Minimum>
+       <Maximum>0.7</Maximum>
+       <Linear>true</Linear>
+       <Scaling>0</Scaling>
+       <Label>time</Label>
+      </Axis>
+     </XAxes>
+     <YAxes>
+      <Axis>
+       <Minimum>-2.5</Minimum>
+       <Maximum>2.5</Maximum>
+       <Linear>true</Linear>
+       <Scaling>1</Scaling>
+       <Label>Perfil_Ua</Label>
+      </Axis>
+     </YAxes>
+     <ZAxes>
+     </ZAxes>
+     <Curves>
+      <Curve>
+       <LineColor>16711680</LineColor>
+       <LineStyle>1</LineStyle>
+       <TickColor>16711680</TickColor>
+       <TickStyle>0</TickStyle>
+       <CurveVisible>true</CurveVisible>
+       <PixelThresshold>1</PixelThresshold>
+       <LineThickness>1</LineThickness>
+       <LineOrder>1</LineOrder>
+       <ShowYValues>true</ShowYValues>
+       <XCurveData>
+        <ShowUnit>true</ShowUnit>
+        <VarName>time</VarName>
+       </XCurveData>
+       <YCurveData>
+        <ShowUnit>true</ShowUnit>
+        <VarName>Perfil_Ua\plot</VarName>
+       </YCurveData>
+      </Curve>
+     </Curves>
+     <Legenda>
+      <ShowLegenda>true</ShowLegenda>
+     </Legenda>
+    </Plot>
+    <Plot>
+     <PlotType>GraphPlot</PlotType>
+     <BasePlot>
+       <PlotId>10</PlotId>
+       <UseWindowsBGColor>true</UseWindowsBGColor>
+       <BGColor>15790320</BGColor>
+       <PlotIsVisible>true</PlotIsVisible>
+     </BasePlot>
+     <Grid>
+      <DrawGrid>true</DrawGrid>
+      <GridColor>15780518</GridColor>
+      <XTicks>10</XTicks>
+      <YTicks>10</YTicks>
+      <ZTicks>10</ZTicks>
+      <Use3DLook>false</Use3DLook>
+     </Grid>
+     <PlotBGColor>16777215</PlotBGColor>
+     <ShowPlotTitle>true</ShowPlotTitle>
+     <TitlePosition>1</TitlePosition>
+     <PlotTitle>e</PlotTitle>
+     <ShowXValues>true</ShowXValues>
+     <Fonts>
+      <TitleFont>
+       <Name>Arial</Name>
+       <Height>12</Height>
+       <PitchFamily>34</PitchFamily>
+       <Weight>400</Weight>
+       <Italic>0</Italic>
+       <UnderLine>0</UnderLine>
+       <StrikeOut>0</StrikeOut>
+       <Color>0</Color>
+      </TitleFont>
+      <LabelFont>
+       <Name>Arial</Name>
+       <Height>12</Height>
+       <PitchFamily>34</PitchFamily>
+       <Weight>400</Weight>
+       <Italic>0</Italic>
+       <UnderLine>0</UnderLine>
+       <StrikeOut>0</StrikeOut>
+       <Color>0</Color>
+      </LabelFont>
+      <ValuesFont>
+       <Name>Arial</Name>
+       <Height>10</Height>
+       <PitchFamily>34</PitchFamily>
+       <Weight>400</Weight>
+       <Italic>0</Italic>
+       <UnderLine>0</UnderLine>
+       <StrikeOut>0</StrikeOut>
+       <Color>0</Color>
+      </ValuesFont>
+     </Fonts>
+     <SharedXAxis>true</SharedXAxis>
+     <SharedYAxis>true</SharedYAxis>
+     <SharedZAxis>false</SharedZAxis>
+     <XAxes>
+      <Axis>
+       <Minimum>0</Minimum>
+       <Maximum>0.7</Maximum>
+       <Linear>true</Linear>
+       <Scaling>0</Scaling>
+       <Label>time</Label>
+      </Axis>
+     </XAxes>
+     <YAxes>
+      <Axis>
+       <Minimum>-50</Minimum>
+       <Maximum>50</Maximum>
+       <Linear>true</Linear>
+       <Scaling>1</Scaling>
+       <Label>p1.u</Label>
+      </Axis>
+     </YAxes>
+     <ZAxes>
+     </ZAxes>
+     <Curves>
+      <Curve>
+       <LineColor>16711680</LineColor>
+       <LineStyle>1</LineStyle>
+       <TickColor>16711680</TickColor>
+       <TickStyle>0</TickStyle>
+       <CurveVisible>true</CurveVisible>
+       <PixelThresshold>1</PixelThresshold>
+       <LineThickness>1</LineThickness>
+       <LineOrder>1</LineOrder>
+       <ShowYValues>true</ShowYValues>
+       <XCurveData>
+        <ShowUnit>true</ShowUnit>
+        <VarName>time</VarName>
+       </XCurveData>
+       <YCurveData>
+        <ShowUnit>true</ShowUnit>
+        <VarName>MCC_IP\Km\p1.u</VarName>
+       </YCurveData>
+      </Curve>
+     </Curves>
+     <Legenda>
+      <ShowLegenda>true</ShowLegenda>
+     </Legenda>
+    </Plot>
+    <Plot>
+     <PlotType>GraphPlot</PlotType>
+     <BasePlot>
+       <PlotId>11</PlotId>
+       <UseWindowsBGColor>true</UseWindowsBGColor>
+       <BGColor>15790320</BGColor>
+       <PlotIsVisible>true</PlotIsVisible>
+     </BasePlot>
+     <Grid>
+      <DrawGrid>true</DrawGrid>
+      <GridColor>15780518</GridColor>
+      <XTicks>10</XTicks>
+      <YTicks>10</YTicks>
+      <ZTicks>10</ZTicks>
+      <Use3DLook>false</Use3DLook>
+     </Grid>
+     <PlotBGColor>16777215</PlotBGColor>
+     <ShowPlotTitle>true</ShowPlotTitle>
+     <TitlePosition>1</TitlePosition>
+     <PlotTitle>Tem</PlotTitle>
+     <ShowXValues>true</ShowXValues>
+     <Fonts>
+      <TitleFont>
+       <Name>Arial</Name>
+       <Height>12</Height>
+       <PitchFamily>34</PitchFamily>
+       <Weight>400</Weight>
+       <Italic>0</Italic>
+       <UnderLine>0</UnderLine>
+       <StrikeOut>0</StrikeOut>
+       <Color>0</Color>
+      </TitleFont>
+      <LabelFont>
+       <Name>Arial</Name>
+       <Height>12</Height>
+       <PitchFamily>34</PitchFamily>
+       <Weight>400</Weight>
+       <Italic>0</Italic>
+       <UnderLine>0</UnderLine>
+       <StrikeOut>0</StrikeOut>
+       <Color>0</Color>
+      </LabelFont>
+      <ValuesFont>
+       <Name>Arial</Name>
+       <Height>10</Height>
+       <PitchFamily>34</PitchFamily>
+       <Weight>400</Weight>
+       <Italic>0</Italic>
+       <UnderLine>0</UnderLine>
+       <StrikeOut>0</StrikeOut>
+       <Color>0</Color>
+      </ValuesFont>
+     </Fonts>
+     <SharedXAxis>true</SharedXAxis>
+     <SharedYAxis>true</SharedYAxis>
+     <SharedZAxis>false</SharedZAxis>
+     <XAxes>
+      <Axis>
+       <Minimum>0</Minimum>
+       <Maximum>0.7</Maximum>
+       <Linear>true</Linear>
+       <Scaling>0</Scaling>
+       <Label>time</Label>
+      </Axis>
+     </XAxes>
+     <YAxes>
+      <Axis>
+       <Minimum>-40</Minimum>
+       <Maximum>10</Maximum>
+       <Linear>true</Linear>
+       <Scaling>1</Scaling>
+       <Label>p2.T</Label>
+      </Axis>
+     </YAxes>
+     <ZAxes>
+     </ZAxes>
+     <Curves>
+      <Curve>
+       <LineColor>16711680</LineColor>
+       <LineStyle>1</LineStyle>
+       <TickColor>16711680</TickColor>
+       <TickStyle>0</TickStyle>
+       <CurveVisible>true</CurveVisible>
+       <PixelThresshold>1</PixelThresshold>
+       <LineThickness>1</LineThickness>
+       <LineOrder>1</LineOrder>
+       <ShowYValues>true</ShowYValues>
+       <XCurveData>
+        <ShowUnit>true</ShowUnit>
+        <VarName>time</VarName>
+       </XCurveData>
+       <YCurveData>
+        <ShowUnit>true</ShowUnit>
+        <VarName>MCC_IP\Km\p2.T</VarName>
+       </YCurveData>
+      </Curve>
+     </Curves>
+     <Legenda>
+      <ShowLegenda>true</ShowLegenda>
+     </Legenda>
+    </Plot>
+   </Plots>
+   <PlotPanels>
+    <PlotPanel>
+     <PlotPanelId>1</PlotPanelId>
+     <PlotPanelVisible>true</PlotPanelVisible>
+     <Name>Window 1</Name>
+     <Tiling>2</Tiling>
+     <PlotIds>
+       <PlotId>1</PlotId>
+       <PlotId>6</PlotId>
+       <PlotId>2</PlotId>
+       <PlotId>3</PlotId>
+       <PlotId>7</PlotId>
+       <PlotId>5</PlotId>
+       <PlotId>9</PlotId>
+       <PlotId>8</PlotId>
+       <PlotId>10</PlotId>
+       <PlotId>11</PlotId>
+       <PlotId>4</PlotId>
+     </PlotIds>
+     <ToggleState>Base</ToggleState>
+    </PlotPanel>
+   </PlotPanels>
+   <WindowRectangles virtualDesktopWidth="2646" virtualDesktopHeight="1073">
+     <WindowRectangle monitor="0" left="0" top="0" right="1280" bottom="720" plotpanelid="1">
+-0.00625 -0.0111111 1.00625 0.955556
+     </WindowRectangle>
+   </WindowRectangles>
+  </PlotSpecs>
+  <RunSpecs>
+   <SimulatorSettings>
+    <StartTime>0</StartTime>
+    <FinishTime>0.3</FinishTime>
+    <Warp>false</Warp>
+    <UseOutputAfterEach>false</UseOutputAfterEach>
+    <OutputAfterEach>0.1</OutputAfterEach>
+    <EventEpsilon>1e-006</EventEpsilon>
+    <AlgebraicTolerance>1e-007</AlgebraicTolerance>
+    <SteadyStateAnalysis>false</SteadyStateAnalysis>
+    <UpdateHoldInstructions>true</UpdateHoldInstructions>
+   </SimulatorSettings>
+   <IntegrationMethods>
+    <IntegrationMethod>
+     <Name>Euler</Name>
+     <StepSize>0.01</StepSize>
+     <AutoStepSize>false</AutoStepSize>
+    </IntegrationMethod>
+    <IntegrationMethod>
+     <Name>BackwardEuler</Name>
+     <AbsoluteTolerance>1e-005</AbsoluteTolerance>
+     <RelativeTolerance>1e-005</RelativeTolerance>
+     <AlgebraicAbsoluteTolerance>1e-005</AlgebraicAbsoluteTolerance>
+     <AlgebraicRelativeTolerance>1e-005</AlgebraicRelativeTolerance>
+     <StepSize>0.01</StepSize>
+     <Alpha>1</Alpha>
+    </IntegrationMethod>
+    <IntegrationMethod>
+     <Name>AdamsBashforth</Name>
+     <StepSize>0.01</StepSize>
+     <AutoStepSize>false</AutoStepSize>
+    </IntegrationMethod>
+    <IntegrationMethod>
+     <Name>RungeKutta2</Name>
+     <StepSize>0.01</StepSize>
+     <AutoStepSize>false</AutoStepSize>
+    </IntegrationMethod>
+    <IntegrationMethod>
+     <Name>RungeKutta4</Name>
+     <StepSize>0.01</StepSize>
+     <AutoStepSize>false</AutoStepSize>
+    </IntegrationMethod>
+    <IntegrationMethod>
+     <Name>RungeKutta8</Name>
+     <UseInitialStepSize>false</UseInitialStepSize>
+     <InitialStepSize>0</InitialStepSize>
+     <UseMaximumStepSize>false</UseMaximumStepSize>
+     <MaximumStepSize>0</MaximumStepSize>
+     <AbsoluteTolerance>1e-006</AbsoluteTolerance>
+     <RelativeTolerance>1e-006</RelativeTolerance>
+     <SafetyFactor>0.9</SafetyFactor>
+     <Factor1>0.33</Factor1>
+     <Factor2>6</Factor2>
+     <Beta>0</Beta>
+     <UseMaxNrSteps>false</UseMaxNrSteps>
+     <MaxNrSteps>100000</MaxNrSteps>
+     <UseStiffDetection>false</UseStiffDetection>
+     <MaxNrStiffnessSteps>1000</MaxNrStiffnessSteps>
+    </IntegrationMethod>
+    <IntegrationMethod>
+     <Name>RungeKuttaFehlberg</Name>
+     <UseInitialStepSize>false</UseInitialStepSize>
+     <InitialStepSize>0</InitialStepSize>
+     <UseMaximumStepSize>false</UseMaximumStepSize>
+     <MaximumStepSize>0</MaximumStepSize>
+     <AbsoluteTolerance>1e-006</AbsoluteTolerance>
+     <RelativeTolerance>1e-006</RelativeTolerance>
+    </IntegrationMethod>
+    <IntegrationMethod>
+     <Name>VodeAdams</Name>
+     <UseInitialStepSize>false</UseInitialStepSize>
+     <InitialStepSize>0</InitialStepSize>
+     <UseMaximumStepSize>false</UseMaximumStepSize>
+     <MaximumStepSize>0</MaximumStepSize>
+     <AbsoluteTolerance>1e-006</AbsoluteTolerance>
+     <RelativeTolerance>1e-006</RelativeTolerance>
+     <VodeUseBDF>true</VodeUseBDF>
+     <VodeUseNewton>true</VodeUseNewton>
+    </IntegrationMethod>
+    <IntegrationMethod>
+     <Name>BDFMethod</Name>
+     <AbsoluteTolerance>1e-005</AbsoluteTolerance>
+     <RelativeTolerance>1e-005</RelativeTolerance>
+     <AlgebraicAbsoluteTolerance>1e-005</AlgebraicAbsoluteTolerance>
+     <AlgebraicRelativeTolerance>1e-005</AlgebraicRelativeTolerance>
+     <UseInitialStepSize>false</UseInitialStepSize>
+     <InitialStepSize>0</InitialStepSize>
+     <UseMaximumStepSize>false</UseMaximumStepSize>
+     <MaximumStepSize>0</MaximumStepSize>
+     <UseFixedStepSize>false</UseFixedStepSize>
+     <FixedStepSize>0</FixedStepSize>
+    </IntegrationMethod>
+    <IntegrationMethod>
+     <Name>MeBDFiMethod</Name>
+     <AbsoluteTolerance>1e-005</AbsoluteTolerance>
+     <RelativeTolerance>1e-005</RelativeTolerance>
+     <AlgebraicAbsoluteTolerance>1e-005</AlgebraicAbsoluteTolerance>
+     <AlgebraicRelativeTolerance>1e-005</AlgebraicRelativeTolerance>
+     <UseInitialStepSize>false</UseInitialStepSize>
+     <InitialStepSize>0</InitialStepSize>
+     <UseMaximumStepSize>false</UseMaximumStepSize>
+     <MaximumStepSize>0</MaximumStepSize>
+     <UseFixedStepSize>false</UseFixedStepSize>
+     <FixedStepSize>0</FixedStepSize>
+    </IntegrationMethod>
+    <SelectedIntegrationMethod>8</SelectedIntegrationMethod>
+   </IntegrationMethods>
+  </RunSpecs>
+  <MultipleRun>
+   <NrSteps>10</NrSteps>
+   <CopyFromStates>false</CopyFromStates>
+   <JoinParameterVariation>true</JoinParameterVariation>
+   <ClearAfterRun>true</ClearAfterRun>
+   <RedrawAfterRun>false</RedrawAfterRun>
+   <DrawDuringSimulation>true</DrawDuringSimulation>
+   <ActionBeforeOptimization>0</ActionBeforeOptimization>
+   <CompareValue>0</CompareValue>
+   <UseCompareValue>true</UseCompareValue>
+   <MultipleRunType>MultipleRun</MultipleRunType>
+   <Minimize>true</Minimize>
+   <OptimizationVariable></OptimizationVariable>
+   <ResulVarUsage>UseEndValue</ResulVarUsage>
+   <Tolerance>0.001</Tolerance>
+   <OptimizationMethod>BroydonFletcherGoldfarbShanno</OptimizationMethod>
+   <MultipleRunVariables>
+   </MultipleRunVariables>
+  </MultipleRun>
+  <ExportData>
+   <WriteAsText>true</WriteAsText>
+   <ReadAsText>true</ReadAsText>
+   <WriteHeader>true</WriteHeader>
+   <ReadHeader>true</ReadHeader>
+   <ReadFilename></ReadFilename>
+   <WriteFilename></WriteFilename>
+   <DoWrite>false</DoWrite>
+   <ExportVariables>
+   </ExportVariables>
+   <ImportVariables>
+   </ImportVariables>
+  </ExportData>
+  <BreakPoints>
+  </BreakPoints>
+  <AnimationPlayback>
+   <PlaybackSpeed>1</PlaybackSpeed>
+  </AnimationPlayback>
+</ExpData>
+  </Experiment>
+</Experiments>
+</Document>
